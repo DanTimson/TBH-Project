@@ -626,8 +626,6 @@ paths:
                 $ref: '#/components/schemas/Order'
         '400':
           description: Invalid input
-        '422':
-          description: Validation exception
         default:
           description: Unexpected error
           content:
