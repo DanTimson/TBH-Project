@@ -965,9 +965,6 @@ paths:
                 arrivalCity:
                   type: string
                   description: The city where the trip ends.
-                notes:
-                  type: string
-                  description: Additional notes or remarks about the trip.
       responses:
         '201':
           description: Trip created successfully.
@@ -993,9 +990,6 @@ paths:
                   arrivalCity:
                     type: string
                     description: The city where the trip ends.
-                  notes:
-                    type: string
-                    description: Additional notes or remarks about the trip.
         '400':
           description: Invalid input data.
           content:
@@ -1007,7 +1001,105 @@ paths:
                     type: string
                     description: Error message describing the issue.
       security:
-        - ApiKeyAuth: []              
+        - ApiKeyAuth: []
+  /trip/{tripID}:
+    patch:
+      tags:
+        - trip
+      summary: Partially update an existing trip.
+      description: Update specific fields of an existing trip by ID.
+      operationId: partialUpdateTrip
+      parameters:
+        - name: tripID
+          in: path
+          description: The ID of the trip to update.
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Fields to update in the trip.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                departureDate:
+                  type: string
+                  format: date
+                  description: The new departure date for the trip.
+                returnDate:
+                  type: string
+                  format: date
+                  description: The new return date for the trip.
+                departureCity:
+                  type: string
+                  description: The new departure city.
+                arrivalCity:
+                  type: string
+                  description: The new arrival city.
+                notes:
+                  type: string
+                  description: Additional notes or remarks about the trip.
+      responses:
+        '200':
+          description: Trip updated successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  tripID:
+                    type: string
+                    description: Unique identifier for the updated trip.
+                  departureDate:
+                    type: string
+                    format: date
+                    description: Updated departure date.
+                  returnDate:
+                    type: string
+                    format: date
+                    description: Updated return date.
+                  departureCity:
+                    type: string
+                    description: Updated departure city.
+                  arrivalCity:
+                    type: string
+                    description: Updated arrival city.
+                  notes:
+                    type: string
+                    description: Updated notes.
+        '400':
+          description: Invalid input data.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error message describing the issue.
+        '404':
+          description: Trip not found.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error message indicating the trip was not found.
+        default:
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error message describing the issue.
+      security:
+        - ApiKeyAuth: []                    
 components:
   schemas:
     Order:
