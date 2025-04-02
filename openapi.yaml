@@ -931,6 +931,83 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
+  /trip:
+    post:
+      tags:
+        - trip
+      summary: Create a new trip.
+      description: Allows the user to create a new trip with specified details.
+      operationId: createTrip
+      requestBody:
+        description: Details of the trip to be created.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - departureDate
+                - returnDate
+                - departureCity
+                - arrivalCity
+              properties:
+                departureDate:
+                  type: string
+                  format: date
+                  description: The date of departure for the trip.
+                returnDate:
+                  type: string
+                  format: date
+                  description: The date of return for the trip.
+                departureCity:
+                  type: string
+                  description: The city from which the trip starts.
+                arrivalCity:
+                  type: string
+                  description: The city where the trip ends.
+                notes:
+                  type: string
+                  description: Additional notes or remarks about the trip.
+      responses:
+        '201':
+          description: Trip created successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  tripID:
+                    type: string
+                    description: Unique identifier for the created trip.
+                  departureDate:
+                    type: string
+                    format: date
+                    description: The date of departure for the trip.
+                  returnDate:
+                    type: string
+                    format: date
+                    description: The date of return for the trip.
+                  departureCity:
+                    type: string
+                    description: The city from which the trip starts.
+                  arrivalCity:
+                    type: string
+                    description: The city where the trip ends.
+                  notes:
+                    type: string
+                    description: Additional notes or remarks about the trip.
+        '400':
+          description: Invalid input data.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error message describing the issue.
+      security:
+        - ApiKeyAuth: []              
 components:
   schemas:
     Order:
