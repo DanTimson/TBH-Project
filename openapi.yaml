@@ -1103,7 +1103,146 @@ paths:
                     type: string
                     description: Error message describing the issue.
       security:
-        - ApiKeyAuth: []                    
+        - ApiKeyAuth: []   
+  /trains_search:
+    get:
+      tags:
+        - trains_search
+      summary: Search trains by parameters.
+      description: Search for trains based on departure city, arrival city, and dates.
+      operationId: searchTrains
+      parameters:
+        - name: departureCity
+          in: query
+          required: true
+          schema:
+            type: string
+          description: City of departure.
+        - name: arrivalCity
+          in: query
+          required: true
+          schema:
+            type: string
+          description: City of arrival.
+        - name: departureDate
+          in: query
+          required: true
+          schema:
+            type: string
+            format: date
+          description: Departure date in YYYY-MM-DD format.
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    trainNumber:
+                      type: string
+                      description: Train number.
+                    route:
+                      type: string
+                      description: Route of the train (departure → arrival).
+                    departureTime:
+                      type: string
+                      format: date-time
+                      description: Departure time.
+                    arrivalTime:
+                      type: string
+                      format: date-time
+                      description: Arrival time.
+                    duration:
+                      type: string
+                      description: Duration of the trip.
+                    price:
+                      type: number
+                      format: float
+                      description: Minimum ticket price.
+        '400':
+          description: Invalid input parameters
+        '404':
+          description: No tickets found for the given parameters
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"  
+      security:
+        - ApiKeyAuth: []
+  /hotels_search:
+    get:
+      tags:
+        - hotels_search
+      summary: Search hotels by parameters.
+      description: Search for hotels based on location and dates.
+      operationId: searchHotels
+      parameters:
+        - name: city
+          in: query
+          required: true
+          schema:
+            type: string
+          description: City or location where the hotel is located.
+        - name: checkInDate
+          in: query
+          required: true
+          schema:
+            type: string
+            format: date
+          description: Check-in date in YYYY-MM-DD format.
+        - name: checkOutDate
+          in: query
+          required: true
+          schema:
+            type: string
+            format: date
+          description: Check-out date in YYYY-MM-DD format.
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    hotelName:
+                      type: string
+                      description: Name of the hotel.
+                    address:
+                      type: string
+                      description: Address of the hotel.
+                    rating:
+                      type: number
+                      format: float
+                      description: Hotel rating (e.g., 4.5).
+                    minPrice:
+                      type: number
+                      format: float
+                      description: Minimum price for the stay.
+                    photos:
+                      type: array
+                      items:
+                        type: string
+                      description: URLs of hotel photos.
+        '400':
+          description: Invalid input parameters
+        '404':
+          description: No hotels found for the given parameters
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"  
+      security:
+        - ApiKeyAuth: []                                            
 components:
   schemas:
     Order:
