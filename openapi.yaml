@@ -24,6 +24,10 @@ tags:
     description: Cart management functions  
   - name: user
     description: Operations about user
+  - name: hotels_search
+    description: Hotel search function
+  - name: trains_search
+    description: Train search function
 paths:
   /ticket:
     put:
