@@ -1,3 +1,5 @@
+const forms = require("@tailwindcss/forms");
+const typography = require("@tailwindcss/typography");
 
 
 /** @type {import('tailwindcss').Config} */
@@ -9,6 +11,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      borderColor: {
+        border: 'hsl(var(--border) / <alpha-value>)',
+      },
       colors: {
         "base-0": "var(--base-0)",
         "base-10": "var(--base-10)",
@@ -33,7 +38,7 @@ module.exports = {
         "red-90-duplicate": "var(--red-90-duplicate)",
         "red-base-duplicate": "var(--red-base-duplicate)",
         "yellow-base": "var(--yellow-base)",
-        border: "hsl(var(--border))",
+        border: "hsl(var(--border) / <alpha-value>)",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
@@ -119,7 +124,12 @@ module.exports = {
     },
     container: { center: true, padding: "2rem", screens: { "2xl": "1400px" } },
   },
-  plugins: [],
+  safelist: [
+    {
+      pattern: /border-(.*)/,
+    }
+  ],
+  plugins: [forms, typography],
   darkMode: ["class"],
 };
   

@@ -1,6 +1,6 @@
 
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/Button2";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Select, SelectTrigger, SelectValue } from "@/components/ui/select";
 import {
