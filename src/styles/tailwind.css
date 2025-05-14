@@ -195,6 +195,127 @@
     --radius: 0.5rem;
   }
 
+/* NewsCardContent.css */
+.news-card-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 2px 16px;
+
+  position: relative;
+  width: 556px;
+  height: 21px;
+}
+
+.news-card-text {
+  width: 524px;
+  height: 17px;
+
+  /* Body S/Regular */
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  /* identical to box height */
+  display: flex;
+  align-items: center;
+
+  color: #5E5E5E;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 0;
+  flex-grow: 1;
+}
+
+
+/* NewsCard.css */
+/* Минимальная версия изменений */
+.news-card {
+  width: 572px;
+  height: 332px;
+  position: relative;
+  background-color: rgb(var(--base-0));
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 12;
+  padding: 0px;
+}
+
+.news-card-header {
+  position: static;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 16;
+  padding: 0px;
+  flex: none;
+  order: 0;
+  flex-grow: 1;
+  margin: 0px;
+
+}
+
+.news-card-title-wrapper {
+  position: static;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10; 
+  padding: 8px 12px 8px 12px;
+  flex: none;
+  order: 0;
+  flex-grow: 1;
+  margin: 0px;
+}
+
+.news-card-title {
+  position: static;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10;
+  padding: 8px 12px 8px 12px;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  margin: 0px;
+  font-family: var(--h4-font-family);
+  font-weight: var(--h4-font-weight);
+  color: rgb(var(--base-90));
+  font-size: var(--h4-font-size);
+  letter-spacing: var(--h4-letter-spacing);
+  line-height: var(--h4-line-height);
+  font-style: var(--h4-font-style);
+}
+
+.icon-chevron {
+  width: 32px;
+  height: 32px;
+}
+
+.news-card-content-wrapper {
+  position: static;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 4px 8px 4px 8px;
+  flex: none;
+  order: 1;
+  align-self: stretch;
+  flex-grow: 1;
+  margin: 12px 0px;
+}
+
+
   * {
     @apply border-border;
   }

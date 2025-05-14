@@ -30,7 +30,7 @@ const getBackgroundColor = (state) => {
   return state === "disabled" ? "bg-base-5" : "bg-base-0";
 };
 
-const InputField = ({
+export function InputField({
   state = "enabled", // 'enabled' | 'active' | 'disabled' | 'error'
   type = "filled",   // 'placeholder' | 'filled'
   size = "S",        // 'S' | 'M'
@@ -42,41 +42,27 @@ const InputField = ({
   showRightIcon = false,
   showClearIcon = false,
   showHelperText = true,
-}) => {
+}) {
   const isFilled = type === "filled" && value !== "";
-  const isPlaceholder = type === "placeholder";
-
   const padding = size === "S" ? "px-3 py-2 h-[50px]" : "px-4 py-3 h-[64px]";
   const iconSize = size === "S" ? "w-4 h-4" : "w-6 h-6";
   const textSize = size === "S" ? "text-sm" : "text-base";
 
   return (
     <div className="flex flex-col w-[260px] gap-1">
-      {/* Field Container */}
       <div
-        className={`flex items-center gap-2 w-full rounded border ${getBorderColor(
-          state
-        )} ${getBackgroundColor(state)} ${padding}`}
+        className={`flex items-center gap-2 w-full rounded border ${getBorderColor(state)} ${getBackgroundColor(state)} ${padding}`}
       >
-        {/* Left Icon */}
         {showLeftIcon && (
           <div className={`relative ${iconSize}`}>
             <div className="w-full h-full bg-base-40 rounded-full" />
           </div>
         )}
 
-        {/* Text Container */}
         <div className="flex flex-col flex-1">
-          {/* Label */}
-          <label
-            className={`text-xs ${getTextColor(state)} ${
-              size === "M" ? "text-sm" : ""
-            }`}
-          >
+          <label className={`text-xs ${getTextColor(state)} ${size === "M" ? "text-sm" : ""}`}>
             {label}
           </label>
-
-          {/* Text */}
           {isFilled ? (
             <span className={`${getTextColor(state)} ${textSize}`}>
               {value}
@@ -86,12 +72,10 @@ const InputField = ({
           )}
         </div>
 
-        {/* Clear Icon */}
         {showClearIcon && state !== "disabled" && (
           <Trash2 className={`${iconSize} text-base-40 cursor-pointer`} />
         )}
 
-        {/* Right Icon */}
         {showRightIcon && (
           <div className={`relative ${iconSize}`}>
             <div className="w-full h-full bg-base-40 rounded-full" />
@@ -99,12 +83,11 @@ const InputField = ({
         )}
       </div>
 
-      {/* Helper Text */}
       {showHelperText && (
         <p className={`text-xs ${getHelperTextColor(state)}`}>{helperText}</p>
       )}
     </div>
   );
-};
+}
 
 export default InputField;
