@@ -1,51 +1,192 @@
-import React from "react";
+import React, { useState } from "react";
+import PropTypes from "prop-types";
 import clsx from "clsx";
 
-export function Button({
-  size = "medium",
-  variant = "filled",
-  color = "gray",
-  children,
-  className = "",
-}) {
-  const baseClasses = "flex items-center justify-center gap-2 rounded overflow-hidden";
+const Button = ({
+  // Content
+  label,
+  leftIcon,
+  rightIcon,
+  
+  // Variants
+  variant = "primary",
+  color = "blue",
+  size = "m",
+  initialState = "enabled",
+  
+  // Options
+  showLeftIcon = false,
+  showRightIcon = false,
+  isIconButton = false,
+  
+  // Handlers
+  onClick,
+  className,
+  ...props
+}) => {
+  const [internalState, setInternalState] = useState(initialState);
+  const isDisabled = internalState === "disabled";
 
-  const sizeClasses = size === "small" ? "h-10 px-4 py-2" : "h-[52px] px-6 py-2";
-
-  const variantColorClasses = {
-    filled: {
-      "blue-light": "bg-[#6d81d8] text-base-0",
-      "blue-dark": "bg-[#415aa9] text-base-0",
-      "green-light": "bg-[#369672] text-base-0",
-      "green-dark": "bg-[#006c4c] text-base-0",
-      gray: "bg-base-20 text-base-0",
+  // Style configuration
+  const styles = {
+    size: {
+      s: { button: "h-8 px-3 text-xs", icon: 16, spacing: "gap-1" },
+      m: { button: "h-10 px-4 text-sm", icon: 20, spacing: "gap-2" },
+      l: { button: "h-12 px-6 text-base", icon: 24, spacing: "gap-3" }
     },
-    outline: {
-      "blue-light": "border border-solid border-[#6d81d8] text-[#6d81d8]",
-      "blue-dark": "border border-solid border-[#415aa9] text-[#415aa9]",
-      "green-light": "border border-solid border-[#369672] text-[#369672]",
-      "green-dark": "border border-solid border-[#006c4c] text-[#006c4c]",
-      gray: "border border-solid border-base-20 text-base-20",
+    color: {
+      blue: {
+        primary: {
+          enabled: "bg-blue-600 hover:bg-blue-700 text-white",
+          pressed: "bg-blue-800 text-white",
+          disabled: "bg-gray-300 text-gray-500"
+        },
+        secondary: {
+          enabled: "border border-blue-600 text-blue-600 hover:bg-blue-50",
+          pressed: "border border-blue-800 bg-blue-100 text-blue-800",
+          disabled: "border border-gray-300 text-gray-400"
+        }
+      },
+      green: {
+        primary: {
+          enabled: "bg-green-600 hover:bg-green-700 text-white",
+          pressed: "bg-green-800 text-white",
+          disabled: "bg-gray-300 text-gray-500"
+        },
+        secondary: {
+          enabled: "border border-green-600 text-green-600 hover:bg-green-50",
+          pressed: "border border-green-800 bg-green-100 text-green-800",
+          disabled: "border border-gray-300 text-gray-400"
+        }
+      }
     },
-    ghost: {
-      "blue-light": "text-[#6d81d8]",
-      "blue-light-bg": "bg-[#f2f3ff] text-[#415aa9]",
-      "green-light": "text-[#369672]",
-      "green-light-bg": "bg-[#ebf6f1] text-[#006c4c]",
-      gray: "text-base-20",
-    },
+    iconColor: {
+      primary: "text-white",
+      secondary: {
+        blue: {
+          enabled: "text-blue-600",
+          pressed: "text-blue-800",
+          disabled: "text-gray-400"
+        },
+        green: {
+          enabled: "text-green-600",
+          pressed: "text-green-800",
+          disabled: "text-gray-400"
+        }
+      }
+    }
   };
 
-  const buttonClass = clsx(
-    baseClasses,
-    sizeClasses,
-    variantColorClasses[variant]?.[color] || "",
-    className
+  const handleClick = (e) => {
+    if (!isDisabled) {
+      if (variant === "primary") {
+        setInternalState(prev => (prev === "pressed" ? "enabled" : "pressed"));
+      }
+      onClick?.(e);
+    }
+  };
+
+  // Get current styles
+  const sizeStyles = styles.size[size] || styles.size.m;
+  const variantStyles = styles.color[color]?.[variant] || styles.color.blue.primary;
+  const stateStyle = variantStyles[internalState] || variantStyles.enabled;
+  
+  const iconColor = variant === "primary" 
+    ? styles.iconColor.primary
+    : styles.iconColor.secondary[color]?.[internalState] || styles.iconColor.secondary.blue.enabled;
+
+  // Default icons if none provided
+  const defaultIcon = (
+    <svg 
+      width={sizeStyles.icon} 
+      height={sizeStyles.icon} 
+      viewBox={`0 0 ${sizeStyles.icon} ${sizeStyles.icon}`}
+      className={iconColor}
+    >
+      <circle 
+        cx={sizeStyles.icon / 2} 
+        cy={sizeStyles.icon / 2} 
+        r={sizeStyles.icon / 4} 
+        fill="currentColor" 
+      />
+    </svg>
+  );
+
+  const renderedLeftIcon = leftIcon || defaultIcon;
+  const renderedRightIcon = rightIcon || defaultIcon;
+
+  // Button classes
+  const buttonClasses = clsx(
+    "rounded font-medium flex items-center justify-center transition-colors",
+    "focus:outline-none focus:ring-2 focus:ring-offset-2",
+    variant === "primary" 
+      ? `focus:ring-${color}-500` 
+      : `focus:ring-${color}-200`,
+    sizeStyles.button,
+    sizeStyles.spacing,
+    stateStyle,
+    className,
+    {
+      "opacity-75 cursor-not-allowed": isDisabled,
+      "px-2": isIconButton, // Less horizontal padding for icon-only buttons
+      "justify-between": showLeftIcon && showRightIcon
+    }
   );
 
   return (
-    <button className={buttonClass}>
-      {children}
+    <button
+      className={buttonClasses}
+      onClick={handleClick}
+      disabled={isDisabled}
+      aria-pressed={variant === "primary" ? internalState === "pressed" : undefined}
+      {...props}
+    >
+      {(showLeftIcon || isIconButton) && (
+        <span className="flex items-center">
+          {React.cloneElement(renderedLeftIcon, {
+            width: sizeStyles.icon,
+            height: sizeStyles.icon,
+            className: clsx(
+              renderedLeftIcon.props.className,
+              iconColor
+            )
+          })}
+        </span>
+      )}
+
+      {!isIconButton && label && (
+        <span>{label}</span>
+      )}
+
+      {(showRightIcon || isIconButton) && (
+        <span className="flex items-center">
+          {React.cloneElement(renderedRightIcon, {
+            width: sizeStyles.icon,
+            height: sizeStyles.icon,
+            className: clsx(
+              renderedRightIcon.props.className,
+              iconColor
+            )
+          })}
+        </span>
+      )}
     </button>
   );
-}
+};
+
+Button.propTypes = {
+  label: PropTypes.string,
+  leftIcon: PropTypes.element,
+  rightIcon: PropTypes.element,
+  variant: PropTypes.oneOf(["primary", "secondary"]),
+  color: PropTypes.oneOf(["blue", "green"]),
+  size: PropTypes.oneOf(["s", "m", "l"]),
+  initialState: PropTypes.oneOf(["enabled", "pressed", "disabled"]),
+  showLeftIcon: PropTypes.bool,
+  showRightIcon: PropTypes.bool,
+  isIconButton: PropTypes.bool,
+  onClick: PropTypes.func,
+  className: PropTypes.string
+};
+
+export default Button;
