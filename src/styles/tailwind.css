@@ -11,17 +11,39 @@
 @layer base {
   :root {
     /* Color palette */
-    --base-0: rgba(255, 255, 255, 1);
-    --base-5: rgba(243, 243, 243, 1);
-    --base-10: rgba(221, 221, 221, 1);
-    --base-20: rgba(198, 198, 198, 1);
-    --base-30: rgba(176, 176, 176, 1);
-    --base-40: rgba(155, 155, 155, 1);
-    --base-50: rgba(134, 134, 134, 1);
-    --base-60: rgba(114, 114, 114, 1);
-    --base-70: rgba(94, 94, 94, 1);
-    --base-80: rgba(75, 75, 75, 1);
-    --base-90: rgba(57, 57, 57, 1);
+    --base-0: #FFFFFF;
+    --base-5: #F3F3F3;
+    --base-10: #DDDDDD;
+    --base-20: #C6C6C6;
+    --base-30: #B0B0B0;
+    --base-40: #9B9B9B;
+    --base-50: #868686;
+    --base-60: #727272;
+    --base-70: #5E5E5E;
+    --base-80: #4B4B4B;
+    --base-90: #393939;
+
+    --blue-5: #F2F3FF;
+    --blue-10: #D8DAFE;
+    --blue-20: #BDC3FB;
+    --blue-30: #A2ACF4;
+    --blue-40: #8796E8;
+    --blue-50: #6D81D8;
+    --blue-60: #556DC3;
+    --blue-70: #415AA9;
+    --blue-80: #31478B;
+    --blue-90: #25366A;
+
+    --green-5: #EBF6F1;
+    --green-10: #C3E4D4;
+    --green-20: #9DD2B9;
+    --green-30: #78BFA0;
+    --green-40: #56AB88;
+    --green-50: #369672;
+    --green-60: #17815E;
+    --green-70: #006C4C;
+    --green-80: #00573C;
+    --green-90: #00422D;    
 
     --red-5-duplicate: rgba(255, 237, 233, 1);
     --red-10-duplicate: rgba(255, 202, 190, 1);
@@ -34,7 +56,6 @@
     --red-80-duplicate: rgba(160, 0, 18, 1);
     --red-90-duplicate: rgba(123, 0, 12, 1);
     --red-base-duplicate: rgba(218, 11, 37, 1);
-    --yellow-base: rgba(255, 200, 0, 1);
 
     /* Font styles */
     --body-m-italic-font-family: "Lato", Helvetica;
@@ -195,6 +216,130 @@
     --radius: 0.5rem;
   }
 
+
+
+/* Icon button */
+
+/* Base Button Styles */
+.icon-button {
+  border-radius: 0.3125rem; /* 5px */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* Size Variants */
+.icon-button--size-s {
+  width: 2.5rem;  /* 40px */
+  height: 2.5rem;
+  padding: 0.5rem 0.75rem;
+}
+
+.icon-button--size-m {
+  width: 3rem;  /* 48px */
+  height: 3rem;
+  padding: 0.5rem 0.75rem;
+}
+
+.icon-button--size-l {
+  width: 4rem;  /* 64px */
+  height: 4rem;
+  padding: 0.5rem 0.75rem;
+}
+
+/* Type Variants */
+.icon-button--primary {
+  border: none;
+}
+
+.icon-button--secondary {
+  background: transparent;
+  outline: 1px solid;
+  outline-offset: -1px;
+}
+
+.icon-button--tertiary {
+  background: transparent;
+  border: none;
+}
+
+/* Color States - Blue */
+.icon-button--blue-primary-enabled {
+  background-color: var(--blue-50);
+}
+
+.icon-button--blue-primary-pressed {
+  background-color: var(--blue-70);
+}
+
+.icon-button--blue-primary-disabled {
+  background-color: var(--base-20);
+}
+
+.icon-button--blue-secondary-enabled {
+  outline-color: var(--blue-50);
+}
+
+.icon-button--blue-secondary-pressed {
+  outline-color: var(--blue-70);
+}
+
+.icon-button--blue-secondary-disabled {
+  outline-color: var(--base-20);
+}
+
+.icon-button--blue-tertiary-pressed {
+  background-color: var(--blue-5);
+}
+
+/* Color States - Green */
+.icon-button--green-primary-enabled {
+  background-color: var(--green-50);
+}
+
+.icon-button--green-primary-pressed {
+  background-color: var(--green-70);
+}
+
+.icon-button--green-primary-disabled {
+  background-color: var(--base-20);
+}
+
+.icon-button--green-secondary-enabled {
+  outline-color: var(--green-50);
+}
+
+.icon-button--green-secondary-pressed {
+  outline-color: var(--green-70);
+}
+
+.icon-button--green-secondary-disabled {
+  outline-color: var(--base-20);
+}
+
+.icon-button--green-tertiary-pressed {
+  background-color: var(--green-5);
+}
+
+/* Black/Transparent States */
+.icon-button--black-primary-enabled {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.icon-button--black-primary-pressed {
+  background-color: rgba(0, 0, 0, 0.75);
+}
+
+.icon-button--black-primary-disabled {
+  background-color: rgba(0, 0, 0, 0.25);
+}
+
+
+
+
+
+
 /* NewsCardContent.css */
 .news-card-content {
   display: flex;
@@ -229,6 +374,373 @@
   order: 0;
   flex-grow: 1;
 }
+
+
+
+/* Base Styles */
+.input-container {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 280px; /* Default for medium size */
+}
+
+/* Size Variants */
+.input-container.s {
+  max-width: 240px;
+}
+
+.input-container.m {
+  max-width: 280px;
+}
+
+/* Input Wrapper */
+.input-wrapper {
+  position: relative;
+  border-radius: 4px;
+  border: 1px solid;
+  background-color: white;
+  overflow: hidden;
+}
+
+/* Visual Decoration Layer */
+.input-decoration {
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  pointer-events: none; /* Allows clicks to pass through to input */
+}
+
+/* Actual Input Field */
+.input-field {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.01; /* Nearly invisible but clickable */
+  border: none;
+  outline: none;
+  padding: 0 12px;
+  font-size: inherit;
+}
+
+/* Visual Elements */
+.input-visual-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 8px 0;
+}
+
+.input-visual-label {
+  font-size: 12px;
+  color: var(--base-60);
+}
+
+.input-visual-text,
+.input-visual-placeholder {
+  font-size: 14px;
+  height: 20px;
+  line-height: 20px;
+}
+
+.input-visual-placeholder {
+  color: var(--base-40);
+  font-style: italic;
+}
+
+/* Icons */
+.input-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 8px;
+}
+
+.input-icon.left {
+  margin-left: 0;
+}
+
+.input-icon.right {
+  margin-right: 0;
+}
+
+.icon-placeholder {
+  width: 16px;
+  height: 16px;
+  background-color: var(--base-40);
+  border-radius: 50%;
+}
+
+/* Clear Button */
+.input-clear {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  margin-left: 8px;
+  pointer-events: auto; /* Override parent's pointer-events */
+}
+
+/* Helper Text */
+.input-helper {
+  padding: 4px 0 0 4px;
+  font-size: 12px;
+  color: var(--base-40);
+}
+
+/* State Variants */
+.input-wrapper.enabled {
+  border-color: var(--blue-40);
+}
+
+.input-wrapper.active {
+  border-color: var(--blue-60);
+}
+
+.input-wrapper.disabled {
+  background-color: var(--base-5);
+  border-color: var(--base-10);
+}
+
+.input-wrapper.disabled .input-visual-label,
+.input-wrapper.disabled .input-visual-text {
+  color: var(--base-60);
+}
+
+.input-wrapper.error {
+  border-color: var(--red-500);
+}
+
+.input-wrapper.error .input-visual-label {
+  color: var(--red-500);
+}
+
+.input-helper.error {
+  color: var(--red-500);
+}
+
+/* Size Variants */
+.input-container.s .input-visual-label {
+  font-size: 11px;
+}
+
+.input-container.s .input-visual-text,
+.input-container.s .input-visual-placeholder {
+  font-size: 13px;
+}
+
+.input-container.s .input-decoration {
+  padding: 0 8px;
+}
+
+.input-container.s .input-icon {
+  margin: 0 6px;
+}
+
+
+
+/* Base Button Styles */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  font-family: inherit;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+  outline: none;
+}
+
+/* Size Variants */
+.button-s {
+  padding: 8px 12px;
+  font-size: 14px;
+  min-height: 32px;
+}
+
+.button-m {
+  padding: 12px 16px;
+  font-size: 16px;
+  min-height: 40px;
+}
+
+.button-l {
+  padding: 16px 24px;
+  font-size: 18px;
+  min-height: 48px;
+}
+
+/* Type Variants */
+.button-primary {
+  /* Primary button styles */
+}
+
+.button-secondary {
+  background: transparent;
+  border: 1px solid;
+}
+
+.button-tertiary {
+  background: transparent;
+  border: none;
+}
+
+/* Color and State Variants - Blue */
+.button-blue-primary-enabled {
+  background-color: var(--blue-50);
+  color: white;
+}
+
+.button-blue-primary-pressed {
+  background-color: var(--blue-70);
+  color: white;
+}
+
+.button-blue-primary-disabled {
+  background-color: var(--base-20);
+  color: var(--base-60);
+}
+
+.button-blue-secondary-enabled {
+  border-color: var(--blue-50);
+  color: var(--blue-50);
+}
+
+.button-blue-secondary-pressed {
+  border-color: var(--blue-70);
+  color: var(--blue-70);
+}
+
+.button-blue-secondary-disabled {
+  border-color: var(--base-20);
+  color: var(--base-40);
+}
+
+.button-blue-tertiary-enabled {
+  color: var(--blue-50);
+}
+
+.button-blue-tertiary-pressed {
+  background-color: var(--blue-5);
+  color: var(--blue-70);
+}
+
+/* Color and State Variants - Green */
+.button-green-primary-enabled {
+  background-color: var(--green-50);
+  color: white;
+}
+
+.button-green-primary-pressed {
+  background-color: var(--green-70);
+  color: white;
+}
+
+.button-green-primary-disabled {
+  background-color: var(--base-20);
+  color: var(--base-60);
+}
+
+/* Add similar variants for green and black colors */
+
+/* Icon Styles */
+.button-icon-left,
+.button-icon-right {
+  display: flex;
+  align-items: center;
+}
+
+.button-icon-left {
+  margin-right: 8px;
+}
+
+.button-icon-right {
+  margin-left: 8px;
+}
+
+/* Disabled State */
+.button:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* Focus State */
+.button:focus {
+  box-shadow: 0 0 0 2px var(--blue-20);
+}
+
+
+
+/* Base cell styling */
+.navbar-cell {
+  width: 96px;
+  padding: 20px;
+  border-radius: 5px;
+  border: 1px dashed #9747FF;
+  display: inline-flex;
+  justify-content: center;
+  align-items: flex-start;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* State containers */
+.state-dormant,
+.state-active,
+.state-disabled {
+  flex: 1;
+  padding: 24px;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* Dormant state */
+.state-dormant {
+  background: white;
+  outline: 4px solid #6D81D8;
+  outline-offset: -4px;
+}
+
+/* Active state */
+.state-active {
+  background: #6D81D8;
+}
+
+/* Disabled state */
+.state-disabled {
+  background: white;
+  outline: 4px solid #C6C6C6;
+  outline-offset: -4px;
+  cursor: not-allowed;
+}
+
+/* Icon container */
+.icon-template {
+  position: relative;
+}
+
+/* Disabled interaction */
+.navbar-cell.disabled {
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+/* Focus states */
+.navbar-cell:focus {
+  outline: 2px solid #6D81D8;
+  outline-offset: 2px;
+}
+
+
 
 
 /* NewsCard.css */
@@ -313,6 +825,26 @@
   align-self: stretch;
   flex-grow: 1;
   margin: 12px 0px;
+}
+
+
+.bottom-gradient {
+  /* Gradient */
+
+  position: absolute;
+  width: 1440px;
+  height: 104px;
+  left: calc(50% - 1440px/2);
+  bottom: 0px;
+
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.35) 100%);
+
+  /* Inside auto layout */
+  flex: none;
+  order: 2;
+  flex-grow: 0;
+  z-index: 2;
+
 }
 
 

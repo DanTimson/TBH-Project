@@ -19,12 +19,11 @@ export default function NewsCard({ headerText = "Заголовок", itemsCount
         </div>
 
         <IconButton
-          size="medium"
-          variant="ghost"
-          colorSet={0}       
-          styleIndex={0}
+          type="secondary"
+          color="blue"
+          size="m"
+          icon={<ChevronRight className="icon-chevron" />}
         >
-          <ChevronRight className="icon-chevron" />
         </IconButton>
       </div>
 
