@@ -1,0 +1,286 @@
+openapi: 3.0.4
+info:
+  title: Travel Booking Platform API
+  description: API for managing travel bookings, hotels, and trains
+  version: 1.0.0
+  contact:
+    email: support@travel-platform.com
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+servers:
+  - url: https://api.travel-platform.com/v1
+    description: Production server
+
+# 🔄 Simplified security schemes
+securitySchemes:
+  bearer_auth:
+    type: http
+    scheme: bearer
+    bearerFormat: JWT
+
+# 🔄 Normalized tags
+tags:
+  - name: Authentication
+    description: User registration and login
+  - name: Bookings
+    description: Manage hotel and train bookings
+  - name: Search
+    description: Search for hotels and trains
+  - name: Cart
+    description: Temporary booking storage
+  - name: Trips
+    description: Multi-day trip management
+
+paths:
+  # 🔄 Authentication endpoints
+  /auth/register:
+    post:
+      tags: [Authentication]
+      summary: Register new user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserCreate"
+      responses:
+        '201':
+          description: User created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserResponse"
+
+  /auth/login:
+    post:
+      tags: [Authentication]
+      summary: User login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoginRequest"
+      responses:
+        '200':
+          description: Login successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LoginResponse"
+
+  # 🔄 Unified booking structure
+  /bookings/trains:
+    post:
+      tags: [Bookings]
+      summary: Create train booking
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TrainBookingCreate"
+      responses:
+        '201':
+          description: Booking created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TrainBookingResponse"
+
+  /bookings/hotels:
+    post:
+      tags: [Bookings]
+      summary: Create hotel booking
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HotelBookingCreate"
+      responses:
+        '201':
+          description: Booking created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HotelBookingResponse"
+
+  # 🔄 Enhanced search with filters
+  /search/trains:
+    get:
+      tags: [Search]
+      parameters:
+        - name: departureCity
+          in: query
+          schema:
+            type: string
+        - name: arrivalCity
+          in: query
+          schema:
+            type: string
+        - name: departureDate
+          in: query
+          schema:
+            type: string
+            format: date
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/TrainSearchResult"
+
+  /search/hotels:
+    get:
+      tags: [Search]
+      parameters:
+        - name: city
+          in: query
+          schema:
+            type: string
+        - name: checkInDate
+          in: query
+          schema:
+            type: string
+            format: date
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/HotelSearchResult"
+
+components:
+  schemas:
+    # 🔄 Unified ID formats
+    UserResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        email:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+
+    UserCreate:
+      type: object
+      required: [email, password]
+      properties:
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          minLength: 8
+
+    LoginRequest:
+      type: object
+      required: [email, password]
+      properties:
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+
+    LoginResponse:
+      type: object
+      properties:
+        access_token:
+          type: string
+        token_type:
+          type: string
+          default: bearer
+
+    # 🔄 Structured booking schemas
+    TrainBookingCreate:
+      type: object
+      required: [train_id, departure_station_id, arrival_station_id]
+      properties:
+        train_id:
+          type: integer
+        departure_station_id:
+          type: integer
+        arrival_station_id:
+          type: integer
+        departure_time:
+          type: string
+          format: date-time
+        seat_class:
+          type: string
+          enum: [economy, business]
+
+    HotelBookingCreate:
+      type: object
+      required: [hotel_id, room_type_id]
+      properties:
+        hotel_id:
+          type: integer
+        room_type_id:
+          type: integer
+        check_in_date:
+          type: string
+          format: date
+        check_out_date:
+          type: string
+          format: date
+
+    # 🔄 Search result schemas
+    TrainSearchResult:
+      type: object
+      properties:
+        id:
+          type: integer
+        departure_station:
+          $ref: "#/components/schemas/Station"
+        arrival_station:
+          $ref: "#/components/schemas/Station"
+        departure_time:
+          type: string
+          format: date-time
+        duration_minutes:
+          type: integer
+
+    HotelSearchResult:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        rating:
+          type: number
+          format: float
+        min_price:
+          type: number
+          format: float
+
+    # 🔄 Normalized station schema
+    Station:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        city:
+          type: string
+
+    # 🔄 Enhanced error handling
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        details:
+          type: array
+          items:
+            type: object
+      required: [code, message]

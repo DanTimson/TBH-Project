@@ -59,8 +59,8 @@ CREATE TABLE hotel_properties (
     PRIMARY KEY (hotel_id, property_id)
 );
 
--- 8. Guests (Users)
-CREATE TABLE guests (
+-- 8. Users
+CREATE TABLE users (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     email TEXT NOT NULL UNIQUE,
     password_hash TEXT NOT NULL,

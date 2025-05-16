@@ -1,23 +1,24 @@
 openapi: 3.0.4
 info:
   title: Swagger Business Travel Automation 0.1
-  description: |-
-    This is a sample Server for our project based on the OpenAPI 3.0 specification.  
-  termsOfService: https://swagger.io/terms/
-  contact:
-    email: apiteam@swagger.io
+  description: API for managing travel bookings, hotels, and trains 
+  version: 0.0.1
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
-  version: 1.0.12
-externalDocs:
-  description: Find out more about Swagger
-  url: https://swagger.io
 servers:
   - url: https://placeholder.tbank-hotel-project.com
+    description: Production server
+
+securitySchemes:
+  bearer_auth:
+    type: http
+    scheme: bearer
+    bearerFormat: JWT
+
 tags:
-  - name: ticket
-    description: Ticket functions
+  - name: train_booking
+    description: Train booking functions
   - name: hotel_booking
     description: Hotel booking functions
   - name: cart
@@ -29,38 +30,50 @@ tags:
   - name: trains_search
     description: Train search function
 paths:
-  /ticket:
+  /train_booking:
     put:
       tags:
-        - ticket
-      summary: Update an existing ticket.
-      description: Update an existing ticket by Id.
-      operationId: updateTicket
+        - train_booking
+      summary: Update an existing train booking.
+      description: Update an existing train booking by Id.
+      operationId: updateTrainBooking
       requestBody:
-        description: Update an existent ticket booked by a user
+        description: Update an existent train booking booked by a user
         content:
           application/json:
             schema:
               type: object
               required:
-                - status
+                - train_booking_id
               properties:
-                ownerID:
+                user_id:
                   type: integer
-                ticketID:
+                train_booking_id:
                   type: integer
-                addressTo:
+                train_number:
                   type: string
-                addressFrom:
+                purchase_id:
+                  type: integer
+                arrival_station:
                   type: string
-                datetimeTo:
+                arrival_time:
                   type: string
                   format: "date-time"
-                datetimeFrom:
+                departure_station:
+                  type: string
+                departure_time:
                   type: string
                   format: "date-time"
-                status:
+                car_number:
                   type: string
+                car_class:
+                  type: string
+                seat_number:
+                  type: integer
+                seat_class:
+                  type: integer
+                price:           
+                  type: integer     
         required: true
       responses:
         '200':
@@ -74,7 +87,7 @@ paths:
                 properties:
                   ownerID:
                     type: integer
-                  ticketID:
+                  train_booking_id:
                     type: integer
                   addressTo:
                     type: string
@@ -91,7 +104,7 @@ paths:
         '400':
           description: Invalid ID supplied
         '404':
-          description: Ticket not found
+          description: Train booking not found
         '422':
           description: Validation exception
         default:
@@ -102,16 +115,16 @@ paths:
                 $ref: "#/components/schemas/Error"
       security:
         - store_auth:
-            - write:ticket
-            - read:ticket
+            - write:train_booking
+            - read:train_booking
     post:
       tags:
-        - ticket
-      summary: Add a new ticket to the user's tickets.
-      description: Add a new ticket to the user's tickets.
-      operationId: addTicket
+        - train_booking
+      summary: Add a new train booking to the user's train bookings.
+      description: Add a new train booking to the user's train bookings.
+      operationId: addTrainBooking
       requestBody:
-        description: Create a new ticket 
+        description: Create a new train booking 
         content:
           application/json:
             schema:
@@ -119,9 +132,10 @@ paths:
               required:
                 - status
               properties:
-                ownerID:
-                  type: integer
-                ticketID:
+                user_id:
+                  type: string
+                  format: uuid
+                train_booking_id:
                   type: integer
                 addressTo:
                   type: string
@@ -148,7 +162,7 @@ paths:
                 properties:
                   ownerID:
                     type: integer
-                  ticketID:
+                  train_booking_id:
                     type: integer
                   addressTo:
                     type: string
@@ -174,17 +188,17 @@ paths:
                 $ref: "#/components/schemas/Error"
       security:
         - store_auth:
-            - write:ticket
-            - read:ticket
-  /ticket/findByUser:
+            - write:train_booking
+            - read:train_booking
+  /train_booking/findByUser:
     get:
       tags:
-        - ticket
-      summary: Finds tickets by user.
+        - train_booking
+      summary: Finds train bookings by user.
       description: Multiple user IDs can be provided with comma separated strings.
-      operationId: findTicketsByStatus
+      operationId: findTrainBookingsByUser
       parameters:
-        - name: ownerIDs
+        - name: user_ids
           in: query
           description: User IDs that need to be considered for filter
           required: false
@@ -215,19 +229,19 @@ paths:
                 $ref: "#/components/schemas/Error"
       security:
         - store_auth:
-            - write:ticket
-            - read:ticket
-  /ticket/{ticketID}:
+            - write:train_booking
+            - read:train_booking
+  /train_booking/{train_booking_id}:
     get:
       tags:
-        - ticket
-      summary: Find ticket by ID.
-      description: Returns a single ticket.
-      operationId: getTicketById
+        - train_booking
+      summary: Find train booking by ID.
+      description: Returns a single train_booking.
+      operationId: getTrainBookingById
       parameters:
-        - name: ticketID
+        - name: train_booking_id
           in: path
-          description: ID of ticket to return
+          description: ID of train booking to return
           required: true
           schema:
             type: integer
@@ -244,7 +258,7 @@ paths:
                 properties:
                   ownerID:
                     type: integer
-                  ticketID:
+                  train_booking_id:
                     type: integer
                   addressTo:
                     type: string
@@ -261,7 +275,7 @@ paths:
         '400':
           description: Invalid ID supplied
         '404':
-          description: Ticket not found
+          description: Train booking not found
         default:
           description: Unexpected error
           content:
@@ -271,27 +285,27 @@ paths:
       security:
         - api_key: []
         - store_auth:
-            - write:ticket
-            - read:ticket
+            - write:train_booking
+            - read:train_booking
     delete:
       tags:
-        - ticket
-      summary: Deletes a ticket.
-      description: Delete a ticket.
-      operationId: deleteTicket
+        - train_booking
+      summary: Deletes a train booking.
+      description: Delete a train booking.
+      operationId: deleteTrainBooking
       parameters:
-        - name: ticketID
+        - name: train_booking_id
           in: path
-          description: Ticket ID to delete
+          description: train booking ID to delete
           required: true
           schema:
             type: integer
             format: int64
       responses:
         '200':
-          description: Ticket deleted
+          description: Train booking deleted
         '400':
-          description: Invalid ticket value
+          description: Invalid train booking value
         default:
           description: Unexpected error
           content:
@@ -300,8 +314,8 @@ paths:
                 $ref: "#/components/schemas/Error"
       security:
         - store_auth:
-            - write:ticket
-            - read:ticket
+            - write:train_booking
+            - read:train_booking
   /hotel_booking:
     put:
       tags:
@@ -390,24 +404,22 @@ paths:
             schema:
               type: object
               required:
-                - status
+                - hotel_booking_id
               properties:
-                ownerID:
-                  type: integer
-                bookingID:
-                  type: integer
-                addressTo:
+                user_id:
                   type: string
-                addressFrom:
-                  type: string
-                datetimeTo:
+                  format: uuid
+                hotel_id:
+                  type: integer
+                hotel_booking_id:
+                  type: integer
+                check_in_date:
                   type: string
                   format: "date-time"
-                datetimeFrom:
+                check_out_date:
                   type: string
                   format: "date-time"
-                status:
-                  type: string
+
         required: true
       responses:
         '200':
@@ -419,22 +431,24 @@ paths:
                 required:
                   - status
                 properties:
-                  ownerID:
+                  user_id:
                     type: integer
-                  bookingID:
+                  hotel_id:
                     type: integer
-                  addressTo:
-                    type: string
-                  addressFrom:
-                    type: string
-                  datetimeTo:
+                  hotel_booking_id:
+                    type: integer
+                  purchase_id:
+                    type: integer
+                  check_in_date:
                     type: string
                     format: "date-time"
-                  datetimeFrom:
+                  check_out_date:
                     type: string
                     format: "date-time"
-                  status:
+                  room_type_id:
                     type: string
+                  total_price:
+                    type: integer
         '400':
           description: Invalid input
         '422':
@@ -447,8 +461,8 @@ paths:
                 $ref: "#/components/schemas/Error"
       security:
         - store_auth:
-            - write:booking
-            - read:booking
+            - write:hotel_booking
+            - read:hotel_booking
   /hotel_booking/findByUser:
     get:
       tags:
@@ -457,7 +471,7 @@ paths:
       description: Multiple user IDs can be provided with comma separated strings.
       operationId: findBookingsByStatus
       parameters:
-        - name: ownerIDs
+        - name: user_ids
           in: query
           description: User IDs that need to be considered for filter
           required: false
@@ -488,19 +502,19 @@ paths:
                 $ref: "#/components/schemas/Error"
       security:
         - store_auth:
-            - write:booking
-            - read:booking
-  /hotel_booking/{bookingID}:
+            - write:hotel_booking
+            - read:hotel_booking
+  /hotel_booking/{hotel_booking_od}:
     get:
       tags:
         - hotel_booking
-      summary: Find booking by ID.
-      description: Returns a single booking.
-      operationId: getBookingByID
+      summary: Find hotel booking by ID.
+      description: Returns a single hotel booking.
+      operationId: getHotelBookingByID
       parameters:
-        - name: bookingID
+        - name: hotel_booking_id
           in: path
-          description: ID of booking to return
+          description: ID of hotel booking to return
           required: true
           schema:
             type: integer
@@ -513,28 +527,29 @@ paths:
               schema:
                 type: object
                 required:
-                  - status
+                  - hotel_booking_id
                 properties:
-                  ownerID:
-                    type: integer
-                  bookingID:
-                    type: integer
-                  addressTo:
+                  user_id:
                     type: string
-                  addressFrom:
-                    type: string
-                  datetimeTo:
+                    format: uuid
+                  hotel_id:
+                    type: integer
+                  hotel_booking_id:
+                    type: integer
+                  check_in_date:
                     type: string
                     format: "date-time"
-                  datetimeFrom:
+                  check_out_date:
                     type: string
                     format: "date-time"
-                  status:
-                    type: string
+                  room_type_id:
+                    type: integer
+                  total_price:
+                    type: integer
         '400':
           description: Invalid ID supplied
         '404':
-          description: Ticket not found
+          description: Hotel booking not found
         default:
           description: Unexpected error
           content:
@@ -544,27 +559,27 @@ paths:
       security:
         - api_key: []
         - store_auth:
-            - write:booking
-            - read:booking
+            - write:hotel_booking
+            - read:hotel_booking
     delete:
       tags:
         - hotel_booking
-      summary: Deletes a booking.
-      description: Delete a booking.
-      operationId: deleteBooking
+      summary: Deletes a hotel booking.
+      description: Delete a hotel booking.
+      operationId: deleteHotelBooking
       parameters:
-        - name: bookingID
+        - name: hotel_booking_id
           in: path
-          description: Ticket ID to delete
+          description: Hotel booking ID to delete
           required: true
           schema:
             type: integer
             format: int64
       responses:
         '200':
-          description: Ticket deleted
+          description: Hotel booking deleted
         '400':
-          description: Invalid ticket value
+          description: Invalid hotel booking value
         default:
           description: Unexpected error
           content:
@@ -573,8 +588,8 @@ paths:
                 $ref: "#/components/schemas/Error"
       security:
         - store_auth:
-            - write:booking
-            - read:booking
+            - write:hotel_booking
+            - read:hotel_booking
   /cart:
     get:
       tags:
@@ -1291,27 +1306,14 @@ components:
       type: object
       properties:
         id:
-          type: integer
-          format: int64
-          example: 10
-        username:
           type: string
-          example: theUser
-        firstName:
-          type: string
-          example: John
-        lastName:
-          type: string
-          example: James
+          format: uuid
         email:
           type: string
           example: john@email.com
-        password:
+        created_at:
           type: string
-          example: '12345'
-        phone:
-          type: string
-          example: '12345'
+          format: date-time
         userStatus:
           type: integer
           description: User Status
