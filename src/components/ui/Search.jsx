@@ -1,6 +1,6 @@
 import React from "react";
-import InputField from "./InputField";
 import { Button } from "./Button";
+import InputField from "./InputField"; // Adjust path if needed
 import { ChevronRight } from "lucide-react";
 
 const Search = ({ mode = "search" }) => {
@@ -32,7 +32,7 @@ const Search = ({ mode = "search" }) => {
   const buttons = buttonsConfig[mode];
 
   return (
-    <section className="w-full max-w-[1147px] rounded-[5px] border border-dashed border-[#9747ff] p-5">
+    <section className="w-full max-w-[1440px] rounded-[5px] border border-dashed border-[#9747ff] p-5">
       <div className="flex flex-wrap items-center gap-3 mb-5">
         {/* Render input fields */}
         <div className="flex flex-wrap items-center gap-3">
@@ -40,11 +40,9 @@ const Search = ({ mode = "search" }) => {
             <InputField
               key={index}
               label={input.label}
-              size="small"
-              state="default"
-              style="italic"
-              hasText={false}
-              hasDelete={false}
+              size="m"
+              state="enabled"
+              className="italic"
             />
           ))}
         </div>

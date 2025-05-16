@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "./components/ui/Button";
+import Button from "./components/ui/Button";
 import { ChevronLeft, Search as SearchIcon, Calendar, ChevronDown } from "lucide-react";
 
 import Search from "./components/ui/Search";
@@ -62,8 +62,10 @@ export default function InputPageExample() {
         </div>
 
         {/* Gradient Overlay */}
-        <div className="absolute w-[1440px] h-[104px] top-[640px] left-0 bg-gradient-to-b from-transparent to-black/35" />
+        <div className="bottom-gradient" />
       </main>
+
+
 
       {/* Footer Navigation */}
       <NavbarDesktop />
