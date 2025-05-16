@@ -1,6 +1,6 @@
 import React from "react";
 import { ChevronRight } from "lucide-react";
-import { IconButton } from "../IconButton";
+import IconButton from "../IconButton";
 import NewsCardContent from "./NewsCardContent"; 
 
 export default function NewsCard({ headerText = "Заголовок", itemsCount = 6, newsItems }) {

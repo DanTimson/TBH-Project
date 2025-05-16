@@ -1,5 +1,5 @@
 import React from "react";
-import { InputField} from "./InputField"; // Adjust path if needed
+import InputField from "./InputField";
 import { Button } from "./Button";
 import { ChevronRight } from "lucide-react";
 
