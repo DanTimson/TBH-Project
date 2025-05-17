@@ -18,12 +18,20 @@ const IconButton = ({
 
   const handleClick = (e) => {
     if (internalState !== 'disabled') {
-      setInternalState(prevState => 
-        prevState === 'pressed' ? 'enabled' : 'pressed'
-      );
+      if (internalState === 'pressed') {
+        setInternalState('enabled');
+      } else {
+        setInternalState('pressed');
+        
+        setTimeout(() => {
+          setInternalState('enabled');
+        }, 500);
+      }
     }
+
     if (onClick) onClick(e);
   };
+
 
   const getButtonClasses = () => {
     return [

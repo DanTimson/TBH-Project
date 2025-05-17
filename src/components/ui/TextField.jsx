@@ -1,40 +1,34 @@
 import React from "react";
-import { cn } from "@/lib/utils"; // optional: utility to merge Tailwind classes
+import PropTypes from "prop-types";
+import clsx from "clsx";
 
-export default function TextFieldDisplay({
-  variant = "default",
-  size = "small",
-  leftIcon = null,
-  rightIcon = null,
-  value = "",
-  className = "",
-}) {
-  const baseStyles = "flex items-center gap-2 px-3 rounded-md w-full";
+const TextField = ({ text, variant = "filled" }) => {
+  const baseClasses = "h-9 px-3 py-2 rounded-sm flex justify-center items-center gap-2.5 overflow-hidden";
 
-  const variantStyles = {
-    default: "bg-[#369672] text-white",
-    outline: "border border-[#369672] text-base-80 bg-transparent",
-    ghost: "bg-transparent text-base-80",
-  };
-
-  const sizeStyles = {
-    small: "h-10 text-sm",
-    large: "h-12 text-base",
+  const variantClasses = {
+    filled: "bg-var(--green-50) text-var(--base-0)",
+    outlined: "outline outline-1 outline -offset-[-1px] outline-var(--green-50) text-var(--base-80)",
+    transparent: "text-var(--base-80)",
   };
 
   return (
     <div
-      className={cn(
-        baseStyles,
-        variantStyles[variant],
-        sizeStyles[size],
-        className
+      className={clsx(
+        baseClasses,
+        variantClasses[variant]
       )}
     >
-      {leftIcon && <span className="text-inherit">{leftIcon}</span>}
-      <span className="flex-1 truncate font-body-m-regular">{value}</span>
-      {rightIcon && <span className="text-inherit">{rightIcon}</span>}
+      <div className="text-center justify-center text-base font-normal font-['Lato']">
+        {text}
+      </div>
     </div>
   );
-}
+};
+
+TextField.propTypes = {
+  text: PropTypes.string.isRequired,
+  variant: PropTypes.oneOf(["filled", "outlined", "transparent"]),
+};
+
+export default TextField;
 
