@@ -33,7 +33,7 @@ export default function InputPageExample() {
           }}
           text="Назад"
         > 
-          <ChevronLeft className="w-8 h-8" />
+          <ChevronLeft className="w-8 h-8 text-[#6D81D8]" />
         </Button>
 
         <div className="flex flex-col items-start gap-1 relative flex-1 grow">
