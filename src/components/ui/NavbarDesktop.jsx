@@ -7,6 +7,7 @@ import {
 } from "lucide-react";
 import React from "react";
 import NavbarCell from "./NavbarCell";
+import { useNavigate } from 'react-router-dom';
 
 const navigationOptions = [
   { id: "calendar", Icon: Calendar, label: "Calendar" },
@@ -17,6 +18,12 @@ const navigationOptions = [
 ];
 
 export default function NavbarDesktop({ activeItem = "calendar" }) {
+  const navigate = useNavigate();
+  const handleNavigation = (path) => {
+    console.log('Attempting to navigate to:', path);
+    navigate(path);
+  };
+
   return (
     <div className="w-full max-w-[1480px] p-5 rounded-[5px] overflow-hidden border border-dashed border-[#9747ff]">
       <nav className="flex items-center justify-center w-full bg-base-0">
@@ -32,24 +39,35 @@ export default function NavbarDesktop({ activeItem = "calendar" }) {
 
         {/* Middle - Transportation Options */}
         <div className="flex items-center justify-center gap-6 px-[180px] flex-1">
-          <NavbarCell
-            Icon={Train}
-            isActive={activeItem === "train1"}
-            label="Outbound Train"
-            inactiveColor={activeItem === "calendar" ? "#C6C6C6" : "#6D81D8"}
-          />
-          <NavbarCell
-            Icon={Bed}
-            isActive={activeItem === "bed"}
-            label="Hotel Stay"
-            inactiveColor={activeItem === "calendar" ? "#C6C6C6" : "#6D81D8"}
-          />
-          <NavbarCell
-            Icon={Plane}
-            isActive={activeItem === "train2"}
-            label="Return Flight"
-            inactiveColor={activeItem === "calendar" ? "#C6C6C6" : "#6D81D8"}
-          />
+          <button onClick={() => handleNavigation("/train1")}
+            className="relative z-10"
+            >
+            <NavbarCell
+              Icon={Train}
+              isActive={activeItem === "train1"}
+              label="Outbound Train"
+              inactiveColor={activeItem === "calendar" ? "#C6C6C6" : "#6D81D8"}
+            />
+          </button>
+          <button onClick={() => handleNavigation("/hotel")}
+            className="relative z-10"
+            >
+            <NavbarCell
+              Icon={Bed}
+              isActive={activeItem === "bed"}
+              label="Hotel Stay"
+              inactiveColor={activeItem === "calendar" ? "#C6C6C6" : "#6D81D8"}
+            />
+          </button>
+          <button onClick={() => handleNavigation("/train2")}
+            className="relative z-10">
+            <NavbarCell
+              Icon={Plane}
+              isActive={activeItem === "train2"}
+              label="Return Flight"
+              inactiveColor={activeItem === "calendar" ? "#C6C6C6" : "#6D81D8"}
+            />
+          </button>
         </div>
 
         {/* Right Side - Cart */}

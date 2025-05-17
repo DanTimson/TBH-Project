@@ -9,7 +9,7 @@ import { NavbarDesktop } from "./NavbarDesktop";
 import { Search } from "./Search";
 import { Topbar } from "./Topbar";
 import { Train } from "./Train";
-import "./TrainDetails.css";
+import "./tailwind.css";
 
 export const TrainDetailsPage = () => {
   return (
