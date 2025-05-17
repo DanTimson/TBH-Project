@@ -19,7 +19,7 @@ import { Train } from "./Train";
 import { Train1 } from "./Train1";
 import { TrainCard } from "./TrainCard";
 import { Wheelchair } from "./Wheelchair";
-import "./trainPage.css";
+import "./tailwind.css";
 
 export const TrainPage = () => {
   return (

@@ -12,9 +12,9 @@ import { Search } from "./Search";
 import { Topbar } from "./Topbar";
 import { Train } from "./Train";
 import { TrainCard } from "./TrainCard";
-import "./trainPage.css";
+import "./tailwind.css";
 
-export const TrainPageExample = () => {
+export const TrainPage2 = () => {
   return (
     <div className="train-page-example">
       <Topbar
