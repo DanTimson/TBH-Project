@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import NavbarDesktop from "../components/ui/NavbarDesktop";
 
 export default function HotelPage() {
   return (
@@ -24,6 +25,7 @@ export default function HotelPage() {
       >
         ← На главную
       </Link>
+      <NavbarDesktop />
     </div>
   );
 }

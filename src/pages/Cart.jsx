@@ -1,6 +1,9 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ShoppingCart, ChevronLeft, CreditCard, Package } from 'lucide-react';
+import NavbarDesktop from "../components/ui/NavbarDesktop";
+import Button from "../components/ui/Button";
+import { Search as SearchIcon} from "lucide-react";
 
 const CartPage = () => {
   const navigate = useNavigate();
@@ -16,20 +19,37 @@ const CartPage = () => {
   return (
     <div className="min-h-screen bg-gray-50 p-6">
       {/* Шапка */}
-      <header className="max-w-6xl mx-auto flex items-center justify-between mb-8">
-        <button 
-          onClick={() => navigate(-1)}
-          className="flex items-center text-[#6D81D8] hover:text-[#5A6DC2] transition-colors"
-        >
-          <ChevronLeft className="w-6 h-6 mr-2" />
-          Назад
-        </button>
-        <h1 className="text-2xl font-bold text-gray-800 flex items-center">
-          <ShoppingCart className="w-6 h-6 mr-2 text-[#6D81D8]" />
-          Корзина
-        </h1>
-        <div className="w-6"></div> {/* Для выравнивания */}
-      </header>
+        <header className="flex w-full h-[140px] items-center justify-center gap-5 p-5 relative bg-base-0">
+            <Button 
+                variant="ghost"
+                className="w-[52px] h-[52px] p-0"
+                onClick={() => {
+                console.log('Navigating back'); 
+                navigate(-1);
+                }}
+                text="Назад"
+                > 
+                <ChevronLeft className="w-8 h-8 text-[#6D81D8]" />
+            </Button>
+
+            <div className="flex flex-col items-start gap-1 relative flex-1 grow">
+              <div className="flex h-16 items-center gap-2 px-3 py-1.5 relative self-stretch w-full bg-base-0 rounded overflow-hidden border border-solid border-[#8796e8]">
+                <div className="flex-col items-start gap-0.5 flex-1 grow flex relative">
+                  <span className="relative w-fit mt-[-1.00px] font-body-m-italic text-base-40 italic">
+                    Поиск
+                  </span>
+                </div>
+                <SearchIcon className="relative w-6 h-6" />
+              </div>
+            </div>
+
+            <div className="relative w-[72px] h-[72px] bg-base-5 rounded-full overflow-hidden">
+              <div className="inline-flex flex-col items-center gap-[3px] relative top-[18px] left-3">
+                <div className="w-6 h-6 rounded-xl bg-base-30" />
+                <div className="w-12 h-12 rounded-3xl bg-base-30" />
+              </div>
+            </div>
+        </header>
 
       {/* Основное содержимое */}
       <main className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -103,6 +123,7 @@ const CartPage = () => {
           </p>
         </div>
       </main>
+      <NavbarDesktop />
     </div>
   );
 };

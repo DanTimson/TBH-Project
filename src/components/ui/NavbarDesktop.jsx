@@ -58,9 +58,9 @@ export default function NavbarDesktop({ activeItem = "calendar" }) {
           <button onClick={() => handleNavigation("/train2")}
             className="relative z-10">
             <NavbarCell
-              Icon={Plane}
+              Icon={Train}
               isActive={activeItem === "train2"}
-              label="Return Flight"
+              label="Outbound Train"
               inactiveColor={activeItem === "calendar" ? "#C6C6C6" : "#6D81D8"}
             />
           </button>
@@ -71,11 +71,11 @@ export default function NavbarDesktop({ activeItem = "calendar" }) {
           <button onClick={() => handleNavigation("/cart")}
             className="relative z-10">
               <NavbarCell
-            Icon={ShoppingCart}
-            isActive={activeItem === "cart"}
-            label="Booking Summary"
-            inactiveColor={activeItem === "calendar" ? "#C6C6C6" : "#6D81D8"}
-          />
+              Icon={ShoppingCart}
+              isActive={activeItem === "cart"}
+              label="Booking Summary"
+              inactiveColor={activeItem === "calendar" ? "#C6C6C6" : "#6D81D8"}
+              />
           </button>
         </div>
       </nav>
