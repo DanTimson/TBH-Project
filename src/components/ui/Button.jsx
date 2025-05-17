@@ -5,6 +5,7 @@ import clsx from "clsx";
 const Button = ({
   // Content
   label,
+  text = "Button", // New text attribute
   leftIcon,
   rightIcon,
   
@@ -115,6 +116,9 @@ const Button = ({
   const renderedLeftIcon = leftIcon || defaultIcon;
   const renderedRightIcon = rightIcon || defaultIcon;
 
+  // Determine displayed text
+  const displayedText = text || label;
+
   // Button classes
   const buttonClasses = clsx(
     "rounded font-medium flex items-center justify-center transition-colors",
@@ -154,8 +158,8 @@ const Button = ({
         </span>
       )}
 
-      {!isIconButton && label && (
-        <span>{label}</span>
+      {!isIconButton && displayedText && (
+        <span>{displayedText}</span>
       )}
 
       {(showRightIcon || isIconButton) && (
@@ -175,7 +179,8 @@ const Button = ({
 };
 
 Button.propTypes = {
-  label: PropTypes.string,
+  label: PropTypes.string, // Legacy prop (still supported)
+  text: PropTypes.string, // New text content prop
   leftIcon: PropTypes.element,
   rightIcon: PropTypes.element,
   variant: PropTypes.oneOf(["primary", "secondary"]),
@@ -187,6 +192,17 @@ Button.propTypes = {
   isIconButton: PropTypes.bool,
   onClick: PropTypes.func,
   className: PropTypes.string
+};
+
+Button.defaultProps = {
+  text: "Button",
+  variant: "primary",
+  color: "blue",
+  size: "m",
+  initialState: "enabled",
+  showLeftIcon: false,
+  showRightIcon: false,
+  isIconButton: false
 };
 
 export default Button;

@@ -255,7 +255,7 @@
 
 .icon-button--secondary {
   background: transparent;
-  outline: 1px solid;
+  outline: 2px solid;
   outline-offset: -1px;
 }
 
@@ -393,6 +393,7 @@
 
 .input-container.m {
   max-width: 280px;
+
 }
 
 /* Input Wrapper */
@@ -847,6 +848,9 @@
   z-index: 2;
 
 }
+
+
+
 
 
   * {

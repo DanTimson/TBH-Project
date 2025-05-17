@@ -6,7 +6,9 @@ import Search from "./components/ui/Search";
 import NewsCard from "./components/ui/NewsCard/NewsCard";
 import NewsCardContent from "./components/ui/NewsCard/NewsCardContent";
 import NavbarDesktop from "./components/ui/NavbarDesktop";
-import NavbarCell from "./components/ui/NavbarCell";
+import RadioBox from "./components/ui/RadioBox";
+import CheckBox from "./components/ui/CheckBox";
+import TextField from "./components/ui/TextField";
 
 export default function InputPageExample() {
   const cardData = [
