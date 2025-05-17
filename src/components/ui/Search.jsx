@@ -1,6 +1,6 @@
 import React from "react";
-import InputField from "./InputField"; // Adjust path if needed
 import Button from "./Button";
+import InputField from "./InputField"; // Adjust path if needed
 import { ChevronRight } from "lucide-react";
 
 const Search = ({ mode = "search" }) => {
