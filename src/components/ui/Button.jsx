@@ -5,13 +5,13 @@ import clsx from "clsx";
 const Button = ({
   // Content
   label,
-  text = "Button", // New text attribute
+  text = "Найти", 
   leftIcon,
   rightIcon,
   
   // Variants
   variant = "primary",
-  color = "blue",
+  color = "lilac",
   size = "m",
   initialState = "enabled",
   
@@ -45,6 +45,18 @@ const Button = ({
         secondary: {
           enabled: "border border-blue-600 text-blue-600 hover:bg-blue-50",
           pressed: "border border-blue-800 bg-blue-100 text-blue-800",
+          disabled: "border border-gray-300 text-gray-400"
+        }
+      },
+      lilac: {
+        primary: {
+          enabled: "bg-[#6D81D8] hover:bg-[#5A6DC2] text-white",
+          pressed: "bg-[#5A6DC2] text-white",
+          disabled: "bg-gray-300 text-gray-500"
+        },
+        secondary: {
+          enabled: "border border-[#6D81D8] text-[#6D81D8] hover:bg-[#E6ECFA]",
+          pressed: "border border-[#5A6DC2] bg-[#E6ECFA] text-[#5A6DC2]",
           disabled: "border border-gray-300 text-gray-400"
         }
       },
@@ -184,7 +196,7 @@ Button.propTypes = {
   leftIcon: PropTypes.element,
   rightIcon: PropTypes.element,
   variant: PropTypes.oneOf(["primary", "secondary"]),
-  color: PropTypes.oneOf(["blue", "green"]),
+  color: PropTypes.oneOf(["blue", "green", "lilac"]),
   size: PropTypes.oneOf(["s", "m", "l"]),
   initialState: PropTypes.oneOf(["enabled", "pressed", "disabled"]),
   showLeftIcon: PropTypes.bool,
@@ -197,7 +209,7 @@ Button.propTypes = {
 Button.defaultProps = {
   text: "Button",
   variant: "primary",
-  color: "blue",
+  color: "lilac",
   size: "m",
   initialState: "enabled",
   showLeftIcon: false,

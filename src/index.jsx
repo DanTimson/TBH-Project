@@ -6,11 +6,13 @@ import Search from "./components/ui/Search";
 import NewsCard from "./components/ui/NewsCard/NewsCard";
 import NewsCardContent from "./components/ui/NewsCard/NewsCardContent";
 import NavbarDesktop from "./components/ui/NavbarDesktop";
+import { useNavigate } from 'react-router-dom';
 import RadioBox from "./components/ui/RadioBox";
 import CheckBox from "./components/ui/CheckBox";
 import TextField from "./components/ui/TextField";
 
 export default function InputPageExample() {
+  const navigate = useNavigate();
   const cardData = [
     { id: 1, text: "Новость 1: Lorem ipsum dolor sit amet" },
     { id: 2, text: "Новость 2: Consectetur adipiscing elit" },
@@ -22,7 +24,15 @@ export default function InputPageExample() {
     <div className="flex flex-col min-h-screen items-center justify-center relative bg-red-5-duplicate">
       {/* Header */}
       <header className="flex w-full h-[140px] items-center justify-center gap-5 p-5 relative bg-base-0">
-        <Button variant="ghost" className="w-[52px] h-[52px] p-0">
+        <Button 
+          variant="ghost"
+          className="w-[52px] h-[52px] p-0"
+          onClick={() => {
+          console.log('Navigating back'); 
+          navigate(-1);
+          }}
+          text="Назад"
+        > 
           <ChevronLeft className="w-8 h-8" />
         </Button>
 

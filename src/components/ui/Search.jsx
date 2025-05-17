@@ -2,9 +2,17 @@ import React from "react";
 import Button from "./Button";
 import InputField from "./InputField"; // Adjust path if needed
 import { ChevronRight } from "lucide-react";
+import { useNavigate } from 'react-router-dom';
 
 const Search = ({ mode = "search" }) => {
   // Define input configs for each state
+  const navigate = useNavigate();
+
+  const handleNavigation = (path) => {
+    console.log('Navigating to:', path);
+    navigate(path);
+  };
+
   const inputsConfig = {
     search: [
       { label: "Departure" },
@@ -21,9 +29,9 @@ const Search = ({ mode = "search" }) => {
 
   // Define button configs for each state
   const buttonsConfig = {
-    search: [{ text: "Найти", color: "bg-[#6d81d8]" }],
+    search: [{ text: "Find", color: "bg-[#6d81d8]", path: "/train1"}],
     skip: [
-      { text: "Найти", color: "bg-[#6d81d8]" },
+      { text: "Найти", color: "bg-[#6d81d8]", path: "/train1"},
       { text: "Пропустить", color: "bg-[#369672]", icon: true },
     ],
   };
@@ -52,6 +60,7 @@ const Search = ({ mode = "search" }) => {
           {buttons.map((button, index) => (
             <Button
               key={index}
+              onClick={() => handleNavigation(button.path)}
               className={`h-[52px] px-6 py-2 ${button.color} text-base-0 font-body-m-regular`}
             >
               {button.text}

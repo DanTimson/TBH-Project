@@ -9,14 +9,6 @@ import React from "react";
 import NavbarCell from "./NavbarCell";
 import { useNavigate } from 'react-router-dom';
 
-const navigationOptions = [
-  { id: "calendar", Icon: Calendar, label: "Calendar" },
-  { id: "train1", Icon: Train, label: "Outbound Train" },
-  { id: "bed", Icon: Bed, label: "Hotel" },
-  { id: "train2", Icon: Plane, label: "Return Flight" }, // Changed from Train to Plane for variety
-  { id: "cart", Icon: ShoppingCart, label: "Cart" },
-];
-
 export default function NavbarDesktop({ activeItem = "calendar" }) {
   const navigate = useNavigate();
   const handleNavigation = (path) => {
@@ -29,12 +21,16 @@ export default function NavbarDesktop({ activeItem = "calendar" }) {
       <nav className="flex items-center justify-center w-full bg-base-0">
         {/* Left Side - Calendar */}
         <div className="flex w-60 items-center justify-center p-5">
-          <NavbarCell
+          <button onClick={() => handleNavigation("/ ")}
+            className="relative z-10"
+            >
+            <NavbarCell
             Icon={Calendar}
             isActive={activeItem === "calendar"}
             label="Date Selection"
             inactiveColor="#6D81D8"
           />
+          </button>
         </div>
 
         {/* Middle - Transportation Options */}
@@ -72,12 +68,15 @@ export default function NavbarDesktop({ activeItem = "calendar" }) {
 
         {/* Right Side - Cart */}
         <div className="flex w-60 items-center justify-center p-5">
-          <NavbarCell
+          <button onClick={() => handleNavigation("/cart")}
+            className="relative z-10">
+              <NavbarCell
             Icon={ShoppingCart}
             isActive={activeItem === "cart"}
             label="Booking Summary"
             inactiveColor={activeItem === "calendar" ? "#C6C6C6" : "#6D81D8"}
           />
+          </button>
         </div>
       </nav>
     </div>

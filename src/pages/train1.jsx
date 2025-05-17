@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+//import NavbarDesktop from "../../components/ui/NavbarDesktop";
 
 export default function TrainPage() {
   return (
@@ -21,6 +22,7 @@ export default function TrainPage() {
       >
         ← На главную
       </Link>
+      
     </div>
   );
 }
