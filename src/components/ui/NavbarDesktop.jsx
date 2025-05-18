@@ -6,13 +6,25 @@ import {
 } from "lucide-react";
 import React from "react";
 import NavbarCell from "./NavbarCell";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
-export default function NavbarDesktop({ activeItem = "calendar" }) {
+export default function NavbarDesktop() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const currentPath = location.pathname;
+
   const handleNavigation = (path) => {
     console.log('Attempting to navigate to:', path);
     navigate(path);
+  };
+
+  const getActiveItem = () => {
+    if (currentPath === "/") return "calendar";
+    if (currentPath === "/train1") return "train1";
+    if (currentPath === "/hotel") return "hotel";
+    if (currentPath === "/train2") return "train2";
+    if (currentPath === "/cart") return "cart";
+    return "calendar";
   };
 
   return (
@@ -25,7 +37,7 @@ export default function NavbarDesktop({ activeItem = "calendar" }) {
             >
             <NavbarCell
             Icon={Calendar}
-            isActive={activeItem === "calendar"}
+            isActive={getActiveItem() === "calendar"}
             label="Date Selection"
             inactiveColor="#6D81D8"
           />
@@ -39,9 +51,9 @@ export default function NavbarDesktop({ activeItem = "calendar" }) {
             >
             <NavbarCell
               Icon={Train}
-              isActive={activeItem === "train1"}
+              isActive={getActiveItem() === "train1"}
               label="Outbound Train"
-              inactiveColor={activeItem === "calendar" ? "#C6C6C6" : "#6D81D8"}
+              inactiveColor="#6D81D8"
             />
           </button>
           <button onClick={() => handleNavigation("/hotel")}
@@ -49,18 +61,18 @@ export default function NavbarDesktop({ activeItem = "calendar" }) {
             >
             <NavbarCell
               Icon={Bed}
-              isActive={activeItem === "bed"}
+              isActive={getActiveItem() == "hotel"}
               label="Hotel Stay"
-              inactiveColor={activeItem === "calendar" ? "#C6C6C6" : "#6D81D8"}
+              inactiveColor="#6D81D8"
             />
           </button>
           <button onClick={() => handleNavigation("/train2")}
             className="relative z-10">
             <NavbarCell
               Icon={Train}
-              isActive={activeItem === "train2"}
+              isActive={getActiveItem() === "train2"}
               label="Outbound Train"
-              inactiveColor={activeItem === "calendar" ? "#C6C6C6" : "#6D81D8"}
+              inactiveColor="#6D81D8"
             />
           </button>
         </div>
@@ -71,13 +83,13 @@ export default function NavbarDesktop({ activeItem = "calendar" }) {
             className="relative z-10">
               <NavbarCell
               Icon={ShoppingCart}
-              isActive={activeItem === "cart"}
+              isActive={getActiveItem() === "cart"}
               label="Booking Summary"
-              inactiveColor={activeItem === "calendar" ? "#C6C6C6" : "#6D81D8"}
+              inactiveColor="#6D81D8"
               />
           </button>
         </div>
       </nav>
-    </div>
+    </div> 
   );
 }

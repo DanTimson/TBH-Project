@@ -9,7 +9,7 @@ export default function HotelPage() {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-blue-50 p-8">
+    <div className="min-h-screen bg-white p-8">
       <header className="flex w-full h-[140px] items-center justify-center gap-5 p-5 relative bg-base-0">
         <Button 
             variant="ghost"
@@ -19,18 +19,22 @@ export default function HotelPage() {
             navigate(-1);
             }}
             text="Назад"
-            > 
-            <ChevronLeft className="w-8 h-8 text-[#6D81D8]" />
+        >
         </Button>
 
-        <div className="flex flex-col items-start gap-1 relative flex-1 grow">
-          <div className="flex h-16 items-center gap-2 px-3 py-1.5 relative self-stretch w-full bg-base-0 rounded overflow-hidden border border-solid border-[#8796e8]">
-            <div className="flex-col items-start gap-0.5 flex-1 grow flex relative">
-              <span className="relative w-fit mt-[-1.00px] font-body-m-italic text-base-40 italic">
-                Поиск
-              </span>
-            </div>
-            <SearchIcon className="relative w-6 h-6" />
+        <div className="flex h-16 items-center gap-2 px-3 py-1.5 relative self-stretch w-full bg-base-0 rounded overflow-hidden border border-solid border-[#8796e8] mt-5">
+          <div className="flex items-center gap-2 w-full">
+            <input
+              type="text"
+              placeholder="Поиск"
+              className="w-full px-2 py-1.5 border-none focus:outline-none bg-transparent italic"
+            />
+            <button
+              type="button"
+              className="bg-transparent hover:bg-[#8796e8] p-1 rounded"
+            >
+              <SearchIcon className="relative w-6 h-6" />
+            </button>
           </div>
         </div>
 
@@ -41,25 +45,34 @@ export default function HotelPage() {
           </div>
         </div>
       </header>
-      <div className="bg-white p-6 rounded-lg shadow-md">
-        <h2 className="text-xl font-semibold mb-4">Отель "Премиум"</h2>
-        <ul className="space-y-2 mb-6">
-          <li>📍 Адрес: ул. Центральная, 15</li>
-          <li>🚶 500 м до центра</li>
-          <li>🛏️ Люкс с видом на море</li>
-          <li>🍳 Завтрак включён</li>
-        </ul>
-        <div className="bg-blue-100 p-4 rounded-md">
-          <p className="font-bold text-lg">Цена: 5 000 ₽ / ночь</p>
-          <p>2 ночи, 2 гостя</p>
+      <main className="mt-8">
+        {/* Карточка отеля */}
+        <div className="bg-white p-6 rounded-lg shadow-md mb-6">
+          <div className="flex items-start justify-between">
+            <div>
+              <h2 className="text-xl font-semibold mb-4">Отель "Премиум"</h2>
+              <p className="text-gray-500">ул. Центральная, 15</p>
+              <p className="text-gray-500">500 м до центра</p>
+            </div>
+            <div>
+              <button className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition">
+                Выбрать номер
+              </button>
+            </div>
+          </div>
+          <div className="mt-4">
+            <p>Бесплатная отмена</p>
+            <p>Оплата на месте</p>
+          </div>
+          <div className="mt-4 flex justify-between">
+            <p className="font-bold text-lg">Цена: 5 000 ₽ / ночь</p>
+            <p>2 ночи, 2 гостя</p>
+          </div>
         </div>
-      </div>
-      <Link 
-        to="/" 
-        className="mt-6 inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
-      >
-        ← На главную
-      </Link>
+
+        {/* Другие карточки */}
+        {/* ... */}
+      </main>
       <NavbarDesktop />
     </div>
   );
