@@ -101,7 +101,7 @@ const Button = ({
 
   // Get current styles
   const sizeStyles = styles.size[size] || styles.size.m;
-  const variantStyles = styles.color[color]?.[variant] || styles.color.blue.primary;
+  const variantStyles = styles.color[color]?.[variant] || styles.color.lilac.primary;
   const stateStyle = variantStyles[internalState] || variantStyles.enabled;
   
   const iconColor = variant === "primary" 

@@ -1,7 +1,6 @@
 import {
   Bed,
   Calendar,
-  Plane,
   ShoppingCart,
   Train,
 } from "lucide-react";

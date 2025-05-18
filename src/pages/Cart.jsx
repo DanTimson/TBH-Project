@@ -1,9 +1,8 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ShoppingCart, ChevronLeft, CreditCard, Package } from 'lucide-react';
+import { ChevronLeft, CreditCard, Package, Search as SearchIcon } from 'lucide-react';
 import NavbarDesktop from "../components/ui/NavbarDesktop";
 import Button from "../components/ui/Button";
-import { Search as SearchIcon} from "lucide-react";
 
 const CartPage = () => {
   const navigate = useNavigate();
