@@ -4,6 +4,7 @@ import NavbarDesktop from "../components/ui/NavbarDesktop";
 import { useNavigate } from 'react-router-dom';
 import Button from "../components/ui/Button";
 import { ChevronLeft, Search as SearchIcon} from "lucide-react";
+import Search from "../components/ui/Search";
 
 export default function HotelPage() {
   const navigate = useNavigate();
@@ -45,6 +46,12 @@ export default function HotelPage() {
           </div>
         </div>
       </header>
+
+      <search className="flex flex-col items-center gap-6 px-32 py-8 w-full grow bg-white overflow-y-auto">
+        {/* Search Section */}
+          <Search />
+      </search>
+
       <main className="mt-8">
         {/* Карточка отеля */}
         <div className="bg-white p-6 rounded-lg shadow-md mb-6">
