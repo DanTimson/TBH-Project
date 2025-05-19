@@ -4,6 +4,7 @@ import { Train, ChevronLeft, ChevronDown, Clock, ArrowRight, User, ArrowUpDown }
 import NavbarDesktop from "../components/ui/NavbarDesktop";
 import Button from "../components/ui/Button";
 import { Search as SearchIcon} from "lucide-react";
+import Search from "../components/ui/Search";
 
 const TrainSearchPage = () => {
   const navigate = useNavigate();
@@ -68,6 +69,11 @@ const TrainSearchPage = () => {
           </div>
         </div>
       </header>
+      
+      <search className="flex flex-col items-center gap-6 px-32 py-8 w-full grow bg-white overflow-y-auto">
+        {/* Search Section */}
+          <Search />
+      </search>
 
       {/* Фильтры и сортировка */}
       <div className="max-w-6xl mx-auto bg-white rounded-lg shadow-md p-4 mb-6 flex flex-wrap items-center justify-between gap-4">
