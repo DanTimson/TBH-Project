@@ -18,13 +18,19 @@ const cities = [
   "San Jose"
 ];
 
-const Search = ({ mode = "search" }) => {
+const Search = ({ 
+  mode = "search",
+  initialDeparture = "",
+  initialDestination = "",
+  initialStartDate = null,
+  initialEndDate = null
+}) => {
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useState({
-    departure: '',
-    destination: '',
-    startDate: null,
-    endDate: null
+    departure: initialDeparture,
+    destination: initialDestination,
+    startDate: initialStartDate,
+    endDate: initialEndDate
   });
   const [showDepartureCities, setShowDepartureCities] = useState(false);
   const [showDestinationCities, setShowDestinationCities] = useState(false);
@@ -52,7 +58,7 @@ const Search = ({ mode = "search" }) => {
   const inputsConfig = {
     search: [
       { 
-        label: "Departure",
+        label: "Откуда",
         type: "city",
         field: "departure",
         showDropdown: showDepartureCities,
@@ -60,7 +66,7 @@ const Search = ({ mode = "search" }) => {
         filteredCities: filteredDepartureCities
       },
       { 
-        label: "Destination",
+        label: "Куда",
         type: "city",
         field: "destination",
         showDropdown: showDestinationCities,
@@ -68,19 +74,19 @@ const Search = ({ mode = "search" }) => {
         filteredCities: filteredDestinationCities
       },
       { 
-        label: "Start Date",
+        label: "Туда",
         type: "date",
         field: "startDate"
       },
       { 
-        label: "End Date",
+        label: "Обратно",
         type: "date",
         field: "endDate"
       },
     ],
-    skip: [
+    skip_start: [
       { 
-        label: "Departure",
+        label: "Откуда",
         type: "city",
         field: "departure",
         showDropdown: showDepartureCities,
@@ -88,7 +94,7 @@ const Search = ({ mode = "search" }) => {
         filteredCities: filteredDepartureCities
       },
       { 
-        label: "Destination",
+        label: "Куда",
         type: "city",
         field: "destination",
         showDropdown: showDestinationCities,
@@ -96,31 +102,76 @@ const Search = ({ mode = "search" }) => {
         filteredCities: filteredDestinationCities
       },
       { 
-        label: "Start Date",
+        label: "Туда",
         type: "date",
         field: "startDate"
+      },
+    ],
+    skip_end: [
+      { 
+        label: "Откуда",
+        type: "city",
+        field: "departure",
+        showDropdown: showDepartureCities,
+        setShowDropdown: setShowDepartureCities,
+        filteredCities: filteredDepartureCities
+      },
+      { 
+        label: "Куда",
+        type: "city",
+        field: "destination",
+        showDropdown: showDestinationCities,
+        setShowDropdown: setShowDestinationCities,
+        filteredCities: filteredDestinationCities
+      },
+      { 
+        label: "Обратно",
+        type: "date",
+        field: "endDate"
+      },
+    ],  
+    skip_hotel: [
+      { 
+        label: "Куда",
+        type: "city",
+        field: "destination",
+        showDropdown: showDestinationCities,
+        setShowDropdown: setShowDestinationCities,
+        filteredCities: filteredDestinationCities
+      },
+      { 
+        label: "Туда",
+        type: "date",
+        field: "startDate"
+      },
+      { 
+        label: "Обратно",
+        type: "date",
+        field: "endDate"
       },
     ],
   };
 
   const buttonsConfig = {
-    search: [{ text: "Find", color: "bg-[#6d81d8]", path: "/train1"}],
+    search: [{ text: "Найти", color: "bg-indigo-500", path: "/train1"}],
     skip: [
-      { text: "Найти", color: "bg-[#6d81d8]", path: "/train1"},
-      { text: "Пропустить", color: "bg-[#369672]", icon: true },
+      { text: "Найти", color: "bg-indigo-500", path: "/train1"},
+      { text: "Пропустить", color: "bg-emerald-600", icon: true },
     ],
   };
 
   const inputs = inputsConfig[mode];
-  const buttons = buttonsConfig[mode];
+  const buttons = buttonsConfig[mode === "search" ? "search" : "skip"];
 
   return (
-    <section className="w-full max-w-[1440px] rounded-[5px] p-5">
-      <div className="flex flex-wrap items-center gap-3 mb-5">
-        <div className="flex flex-wrap items-center gap-3">
+    <section className="w-full max-w-screen-xl rounded-md bg-white p-5 shadow-md">
+      <div className="flex flex-col md:flex-row md:items-end gap-4 mb-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 flex-grow">
           {inputs.map((input, index) => (
             <div key={index} className="relative">
-              <label className="block text-sm font-medium mb-1">{input.label}</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                {input.label}
+              </label>
               
               {input.type === "city" ? (
                 <div className="relative">
@@ -130,15 +181,15 @@ const Search = ({ mode = "search" }) => {
                     onChange={(e) => handleInputChange(input.field, e.target.value)}
                     onFocus={() => input.setShowDropdown(true)}
                     onBlur={() => setTimeout(() => input.setShowDropdown(false), 200)}
-                    className="h-[52px] px-4 py-2 border rounded italic w-full"
-                    placeholder={`Enter ${input.label.toLowerCase()}`}
+                    className="w-full h-12 px-4 py-2 border border-gray-300 rounded-md italic placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                    placeholder={`Ввести ${input.label.toLowerCase()}`}
                   />
                   {input.showDropdown && (
                     <div className="absolute z-10 mt-1 w-full bg-white border border-gray-300 rounded-md shadow-lg max-h-60 overflow-auto">
                       {input.filteredCities.map((city, idx) => (
                         <div
                           key={idx}
-                          className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                          className="px-4 py-2 hover:bg-gray-100 cursor-pointer transition-colors"
                           onClick={() => {
                             handleInputChange(input.field, city);
                             input.setShowDropdown(false);
@@ -155,23 +206,25 @@ const Search = ({ mode = "search" }) => {
                   selected={searchParams[input.field]}
                   onChange={(date) => handleInputChange(input.field, date)}
                   minDate={input.field === 'endDate' ? searchParams.startDate : new Date()}
-                  className="h-[52px] px-4 py-2 border rounded italic w-full"
-                  placeholderText={`Select ${input.label.toLowerCase()}`}
+                  className="w-full h-12 px-4 py-2 border border-gray-300 rounded-md italic placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                  placeholderText={`Выбрать дату ${input.label.toLowerCase()}`}
                 />
               )}
             </div>
           ))}
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex flex-col sm:flex-row gap-3">
           {buttons.map((button, index) => (
             <Button
               key={index}
               onClick={() => handleNavigation(button.path)}
-              className={`search-button h-[52px] px-6 py-2 ${button.color} text-base-0 font-body-m-regular`}
+              className={`h-12 px-6 rounded-md text-white font-medium transition-colors ${button.color} hover:${button.color.replace('bg-', 'bg-').replace('-500', '-600').replace('-600', '-700')} focus:outline-none focus:ring-2 focus:ring-offset-2 focus:${button.color.replace('bg-', 'ring-')}`}
             >
-              {button.text}
-              {button.icon && <ChevronRight className="w-6 h-6 ml-2" />}
+              <div className="flex items-center justify-center">
+                {button.text}
+                {button.icon && <ChevronRight className="w-5 h-5 ml-2" />}
+              </div>
             </Button>
           ))}
         </div>
