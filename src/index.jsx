@@ -18,7 +18,19 @@ export default function InputPageExample() {
     { id: 2, text: "Новость 2: Consectetur adipiscing elit" },
     { id: 3, text: "Новость 3: Sed do eiusmod tempor" },
     { id: 4, text: "Новость 4: Incididunt ut labore et dolore" },
+    { id: 5, text: "Новость 5: Magna aliqua ut enim ad minim" },
+    { id: 6, text: "Новость 6: Quis nostrud exercitation" },
+    { id: 7, text: "Новость 7: Ullamco laboris nisi ut" },
+    { id: 8, text: "Новость 8: Aliquip ex ea commodo" },
   ];
+
+  const cardHeaders = [
+    "Latest Updates", 
+    "Breaking News", 
+    "Trending Stories", 
+    "Editor's Picks"
+  ];
+
 
   return (
     <div className="flex flex-col min-h-screen items-center justify-center relative bg-red-5-duplicate">
@@ -66,15 +78,15 @@ export default function InputPageExample() {
 
         {/* News Card Grid */}
         <div className="flex flex-col w-[1178px] items-start gap-6">
-          {[0, 2].map((start) => (
+          {[0, 2].map((start, rowIndex) => (
             <div key={start} className="flex justify-between w-full">
               {/* Create 2 cards, each with all news items */}
               {[1, 2].map((cardIndex) => (
                 <NewsCard 
                   key={cardIndex} 
-                  headerText={`Заголовок ${cardIndex}`}
+                  headerText={cardHeaders[rowIndex * 2 + cardIndex-1]}
                   newsItems={cardData.map(item => item.text)}
-                  itemsCount={4} // Show all 4 items
+                  itemsCount={6} // Show all 4 items
                 />
               ))}
             </div>

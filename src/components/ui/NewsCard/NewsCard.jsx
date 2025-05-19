@@ -35,4 +35,3 @@ export default function NewsCard({ headerText = "Заголовок", itemsCount
     </div>
   );
 }
-

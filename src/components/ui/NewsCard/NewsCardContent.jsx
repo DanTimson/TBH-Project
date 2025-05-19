@@ -14,6 +14,3 @@ export default function NewsCardContent({ text }) {
 NewsCardContent.propTypes = {
   text: PropTypes.string.isRequired
 };
-
-
-

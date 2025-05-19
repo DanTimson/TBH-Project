@@ -115,7 +115,7 @@ const Search = ({ mode = "search" }) => {
   const buttons = buttonsConfig[mode];
 
   return (
-    <section className="w-full max-w-[1440px] rounded-[5px] border border-dashed border-[#9747ff] p-5">
+    <section className="w-full max-w-[1440px] rounded-[5px] p-5">
       <div className="flex flex-wrap items-center gap-3 mb-5">
         <div className="flex flex-wrap items-center gap-3">
           {inputs.map((input, index) => (
