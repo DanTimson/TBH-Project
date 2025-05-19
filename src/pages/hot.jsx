@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import NavbarDesktop from "../components/ui/NavbarDesktop";
 import { useNavigate } from 'react-router-dom';
 import Button from "../components/ui/Button";
+import HotelCard from "../components/ui/HotelCard/HotelCard";
 import { ChevronLeft, Search as SearchIcon} from "lucide-react";
 import Search from "../components/ui/Search";
 
@@ -54,28 +55,8 @@ export default function HotelPage() {
 
       <main className="mt-8">
         {/* Карточка отеля */}
-        <div className="bg-white p-6 rounded-lg shadow-md mb-6">
-          <div className="flex items-start justify-between">
-            <div>
-              <h2 className="text-xl font-semibold mb-4">Отель "Премиум"</h2>
-              <p className="text-gray-500">ул. Центральная, 15</p>
-              <p className="text-gray-500">500 м до центра</p>
-            </div>
-            <div>
-              <button className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition">
-                Выбрать номер
-              </button>
-            </div>
-          </div>
-          <div className="mt-4">
-            <p>Бесплатная отмена</p>
-            <p>Оплата на месте</p>
-          </div>
-          <div className="mt-4 flex justify-between">
-            <p className="font-bold text-lg">Цена: 5 000 ₽ / ночь</p>
-            <p>2 ночи, 2 гостя</p>
-          </div>
-        </div>
+        <HotelCard>          
+        </HotelCard>
 
         {/* Другие карточки */}
         {/* ... */}
