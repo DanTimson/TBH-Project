@@ -10,6 +10,40 @@ import Search from "../components/ui/Search";
 export default function HotelPage() {
   const navigate = useNavigate();
 
+ const hotels = [
+    {
+      id: 1,
+      name: "Гранд Отель",
+      address: "ул. Центральная, 1",
+      distanceToCenter: "1 км до центра",
+      roomType: "Стандартный двухместный номер",
+      breakfast: "Континентальный завтрак включён",
+      price: "12 500 ₽",
+      stayInfo: "2 ночи, 2 гостя",
+      badges: [
+        { id: 1, text: "Бесплатная отмена" },
+        { id: 2, text: "Оплата на месте" },
+      ],
+    },
+    {
+      id: 2,
+      name: "Президент Отель",
+      address: "ул. Набережная, 5",
+      distanceToCenter: "0.5 км до центра",
+      roomType: "Люкс с видом на море",
+      breakfast: "Шведский стол включён",
+      price: "24 300 ₽",
+      stayInfo: "3 ночи, 2 гостя",
+      badges: [
+        { id: 1, text: "Бесплатная отмена" },
+        { id: 2, text: "Оплата на месте" },
+        { id: 3, text: "Бесплатный Wi-Fi" },
+      ],
+    },
+    // Add more hotels as needed
+  ];
+
+
   return (
     <div className="min-h-screen bg-gray-50 p-8">
       <header className="flex w-full h-[140px] bg-gray-50 items-center justify-center gap-5 p-5 relative bg-base-0">
@@ -55,8 +89,20 @@ export default function HotelPage() {
 
       <main className="mt-8">
         {/* Карточка отеля */}
-        <HotelCard>          
-        </HotelCard>
+
+        {hotels.map(hotel => (
+          <HotelCard 
+            key={hotel.id}
+            name={hotel.name}
+            address={hotel.address}
+            distanceToCenter={hotel.distanceToCenter}
+            roomType={hotel.roomType}
+            breakfast={hotel.breakfast}
+            price={hotel.price}
+            stayInfo={hotel.stayInfo}
+            badges={hotel.badges}
+          />
+        ))}
 
         {/* Другие карточки */}
         {/* ... */}

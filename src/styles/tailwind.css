@@ -751,12 +751,13 @@
   width: 572px;
   height: 332px;
   position: relative;
-  background-color: rgb(var(--base-0));
+  background-color: var(--base-0);
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  border-radius: 24px;
   gap: 12;
-  padding: 0px;
+  padding: 12px;
 }
 
 .news-card-header {
@@ -770,7 +771,7 @@
   flex: none;
   order: 0;
   flex-grow: 1;
-  margin: 0px;
+  margin: 4px 12px;
 
 }
 
@@ -1003,7 +1004,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 24px;
+  padding: 8px 24px 24px 24px;
   isolation: isolate;
   position: relative;
   width: 100%;
@@ -1295,10 +1296,9 @@
   /* Gradient */
 
   position: absolute;
-  width: 1440px;
+  width: 100%;
   height: 104px;
-  left: calc(50% - 1440px/2);
-  bottom: 0px;
+  bottom: 132px;
 
   background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.35) 100%);
 
@@ -1403,7 +1403,6 @@ input, .react-datepicker-wrapper {
 
 .hotel-page-example {
   align-items: center;
-  background-color: var(--red-5-duplicate);
   display: flex;
   flex-direction: column;
   justify-content: center;

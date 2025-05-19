@@ -2,12 +2,16 @@ import CustomArrow from "../CustomArrow";
 import { Bed, Monitor, Utensils } from "lucide-react";
 import React from "react";
 
-const TrainDetails = ({ cabinClasses = [
-    // Default test data
-    { type: "Luxury", seats: "4", price: "₽15,000" },
-    { type: "First Class", seats: "8", price: "₽10,000" },
-    { type: "Standard", seats: "12", price: "₽7,500" }
-  ] }) => {
+const TrainDetails = ({
+  departureTime = "00:00",
+  arrivalTime = "00:00",
+  duration = "00 д 00 ч 00 мин",
+  departureStation = "Вокзал отправления",
+  arrivalStation = "Вокзал прибытия",
+  departureCity = "Город и станция отправления",
+  arrivalCity = "Город и станция прибытия",
+  cabinClasses = [],
+}) => {
   const serviceIcons = [
     { icon: <Utensils className="service-icon" />, label: "Food service" },
     { icon: <Bed className="service-icon" />, label: "Sleeping accommodations" },
@@ -18,7 +22,7 @@ const TrainDetails = ({ cabinClasses = [
     <div className="train-details-container">
       <div className="train-journey-section">
         <div className="train-time-section">
-          <div className="train-time">00:00</div>
+          <div className="train-time">{departureTime}</div>
           <div className="train-duration-container">
               <CustomArrow 
                 width={300} 
@@ -26,19 +30,19 @@ const TrainDetails = ({ cabinClasses = [
                 strokeWidth={2}
                 className="custom-arrow-line" 
               />
-            <div className="train-duration-text">00 д 00 ч 00 мин</div>
+            <div className="train-duration-text">{duration}</div>
           </div>
-          <div className="train-time">00:00</div>
+          <div className="train-time">{arrivalTime}</div>
         </div>
 
         <div className="train-station-info">
-          <div className="train-station-text">Вокзал отправления</div>
-          <div className="train-station-text">Вокзал прибытия</div>
+          <div className="train-station-text">{departureStation}</div>
+          <div className="train-station-text">{arrivalStation}</div>
         </div>
 
         <div className="train-city-info">
-          <div className="train-city-text">Город и станция отправления</div>
-          <div className="train-city-text">Город и станция прибытия</div>
+          <div className="train-city-text">{departureCity}</div>
+          <div className="train-city-text">{arrivalCity}</div>
         </div>
 
         <div className="train-service-icons">

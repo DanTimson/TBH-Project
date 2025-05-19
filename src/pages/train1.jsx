@@ -12,24 +12,70 @@ const TrainSearchPage = () => {
   const [sortBy, setSortBy] = useState('price');
   
   // Пример данных поездов
-  const trains = [
-    {
-      id: 1,
-      name: 'Сапсан №123',
-      carrier: 'РЖД',
-      from: 'Москва (Курский вокзал)',
-      to: 'Санкт-Петербург (Главный)',
-      departure: '08:00',
-      arrival: '12:40',
-      duration: '4ч 40м',
-      carClass: 'Купе',
-      seats: 24,
-      price: 3500,
-      isDoubleDecker: true,
-      isHighSpeed: true
-    },
-    // ... другие поезда
-  ];
+const trains = [
+  {
+    id: 1,
+    trainTags: ["Фирменный", "Скоростной"],
+    trainNumber: "025А Москва-Санкт-Петербург",
+    carrier: "РЖД",
+    departurePoint: "Москва (Курский вокзал)",
+    arrivalPoint: "Санкт-Петербург (Главный)",
+    route: "Москва → Тверь → Санкт-Петербург",
+    departureTime: "23:55",
+    arrivalTime: "06:55",
+    duration: "07 ч 00 мин",
+    departureStation: "Курский вокзал",
+    arrivalStation: "Главный вокзал",
+    departureCity: "Москва",
+    arrivalCity: "Санкт-Петербург",
+    cabinClasses: [
+      { type: "Люкс", seats: "4", price: "₽15,000" },
+      { type: "Купе", seats: "8", price: "₽10,000" },
+      { type: "Плацкарт", seats: "12", price: "₽7,500" }
+    ]
+  },
+  {
+    id: 2,
+    trainTags: ["Двухэтажный"],
+    trainNumber: "104Й Москва-Сочи",
+    carrier: "РЖД Премиум",
+    departurePoint: "Москва (Павелецкий вокзал)",
+    arrivalPoint: "Сочи (Железнодорожный вокзал)",
+    route: "Москва → Рязань → Сочи",
+    departureTime: "22:30",
+    arrivalTime: "12:45",
+    duration: "14 ч 15 мин",
+    departureStation: "Павелецкий вокзал",
+    arrivalStation: "Сочи ЖД вокзал",
+    departureCity: "Москва",
+    arrivalCity: "Сочи",
+    cabinClasses: [
+      { type: "СВ", seats: "6", price: "₽18,000" },
+      { type: "Купе", seats: "10", price: "₽12,000" }
+    ]
+  },
+  {
+    id: 3,
+    trainTags: ["Скорый", "Ночной"],
+    trainNumber: "015А Москва-Казань",
+    carrier: "РЖД",
+    departurePoint: "Москва (Казанский вокзал)",
+    arrivalPoint: "Казань (Центральный)",
+    route: "Москва → Владимир → Казань",
+    departureTime: "21:15",
+    arrivalTime: "06:30",
+    duration: "09 ч 15 мин",
+    departureStation: "Казанский вокзал",
+    arrivalStation: "Центральный вокзал",
+    departureCity: "Москва",
+    arrivalCity: "Казань",
+    cabinClasses: [
+      { type: "Люкс", seats: "4", price: "₽14,000" },
+      { type: "Купе", seats: "8", price: "₽9,000" },
+      { type: "Плацкарт", seats: "12", price: "₽6,000" }
+    ]
+  }
+];
 
   return (
     <div className="min-h-screen bg-gray-50 p-6">
@@ -104,9 +150,23 @@ const TrainSearchPage = () => {
       {/* Список поездов */}
       <div className="max-w-6xl mx-auto space-y-6">
         {trains.map(train => (
-          <TrainCard key={train.id}>
-            
-          </TrainCard>
+          <TrainCard
+            key={train.id}
+            trainTags={train.trainTags}
+            trainNumber={train.trainNumber}
+            carrier={train.carrier}
+            departurePoint={train.departurePoint}
+            arrivalPoint={train.arrivalPoint}
+            route={train.route}
+            departureTime={train.departureTime}
+            arrivalTime={train.arrivalTime}
+            duration={train.duration}
+            departureStation={train.departureStation}
+            arrivalStation={train.arrivalStation}
+            departureCity={train.departureCity}
+            arrivalCity={train.arrivalCity}
+            cabinClasses={train.cabinClasses}
+          />
         ))}
       </div>
       

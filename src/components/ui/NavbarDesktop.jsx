@@ -28,7 +28,7 @@ export default function NavbarDesktop() {
   };
 
   return (
-    <div className="w-full max-w-[1480px] p-5 rounded-[5px] overflow-hidden border border-dashed border-[#9747ff]">
+    <div className="w-full max-w-[1480px] rounded-[5px] overflow-hidden">
       <nav className="flex items-center justify-center w-full bg-base-0">
         {/* Left Side - Calendar */}
         <div className="flex w-60 items-center justify-center p-5">
