@@ -897,14 +897,45 @@
 }
 
 .hotel-info-section {
-  position: static;
   display: flex;
   flex-direction: column;
+  align-items: stretch;
+  justify-content: space-between;
+  padding: 24px;
+  gap: 12px;
   width: 562px;
   height: 347px;
-  align-items: flex-start;
+}
+
+.hotel-title {
+  width: 100%;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 29px;
+  color: #393939;
+  margin: 0;
+}
+
+.hotel-data-rows {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
   gap: 8px;
-  padding: 24px;
+}
+
+.hotel-info-text {
+  width: 100%;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+  color: #393939;
+  margin: 0;
+}
+
+.hotel-content-spacer {
+  flex-grow: 1;
+  min-height: 16px;
 }
 
 .hotel-badges-container {
@@ -979,11 +1010,13 @@
   background: var(--base-0);
 }
 
+
 .train-card-content {
   display: flex;
   flex-direction: column;
   padding: 24px;
 }
+
 
 .train-header-container {
   display: flex;
@@ -1067,20 +1100,23 @@
   line-height: 1.5;
 }
 
-.train-details-card {
-  width: 100%;
-  border: 0;
-  box-shadow: none;
-}
-
-.train-details-content {
-  padding: 0;
-}
-
 .train-details-container {
+  /* Auto layout */
   display: flex;
+  flex-direction: row;
   align-items: center;
-  width: 100%;
+  padding: 0px;
+
+  width: 1132px;
+  height: 148px;
+
+
+  /* Inside auto layout */
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+  z-index: 1;
 }
 
 .train-journey-section {
@@ -1250,12 +1286,10 @@
   color: var(--base-70);
 }
 
-.duration-arrow {
+.custom-arrow-line {
   width: 100%;
-  height: 16px;
-  color: var(--base-70);
+  height: 100%;
 }
-
 
 .bottom-gradient {
   /* Gradient */

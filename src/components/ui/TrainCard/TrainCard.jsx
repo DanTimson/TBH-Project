@@ -7,8 +7,8 @@ export default function TrainCard() {
   return (
     <Card className="train-card">
       <CardContent className="train-card-content">
-        <TrainDetails />
         <TrainHeader />
+        <TrainDetails />
       </CardContent>
     </Card>
   );

@@ -11,8 +11,8 @@ export default function HotelPage() {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-white p-8">
-      <header className="flex w-full h-[140px] items-center justify-center gap-5 p-5 relative bg-base-0">
+    <div className="min-h-screen bg-gray-50 p-8">
+      <header className="flex w-full h-[140px] bg-gray-50 items-center justify-center gap-5 p-5 relative bg-base-0">
         <Button 
             variant="ghost"
             className="w-[52px] h-[52px] p-0"
@@ -48,7 +48,7 @@ export default function HotelPage() {
         </div>
       </header>
 
-      <search className="flex flex-col items-center gap-6 px-32 py-8 w-full grow bg-white overflow-y-auto">
+      <search className="flex flex-col items-center gap-6 px-32 py-8 w-full grow bg-gray-50 overflow-y-auto">
         {/* Search Section */}
           <Search />
       </search>

@@ -70,7 +70,7 @@ const TrainSearchPage = () => {
         </div>
       </header>
       
-      <search className="flex flex-col items-center gap-6 px-32 py-8 w-full grow bg-white overflow-y-auto">
+      <search className="flex flex-col items-center gap-6 px-32 py-8 w-full grow bg-gray-50 overflow-y-auto">
         {/* Search Section */}
           <Search />
       </search>

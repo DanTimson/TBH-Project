@@ -32,12 +32,13 @@ const HotelCard = () => {
         <div className="hotel-info-section">
           <h4 className="hotel-title">{hotelData.name}</h4>
 
-          {hotelData.address && <p className="hotel-info-text">{hotelData.address}</p>}
-          {hotelData.distanceToCenter && <p className="hotel-info-text">{hotelData.distanceToCenter}</p>}
-          {hotelData.roomType && <p className="hotel-info-text">{hotelData.roomType}</p>}
-          {hotelData.breakfast && <p className="hotel-info-text">{hotelData.breakfast}</p>}
+          <div className="hotel-data-rows">
+            {hotelData.address && <p className="hotel-info-text">{hotelData.address}</p>}
+            {hotelData.distanceToCenter && <p className="hotel-info-text">{hotelData.distanceToCenter}</p>}
+            {hotelData.roomType && <p className="hotel-info-text">{hotelData.roomType}</p>}
+            {hotelData.breakfast && <p className="hotel-info-text">{hotelData.breakfast}</p>}
+          </div>
 
-          {/* Badges Section */}
           <div className="hotel-badges-container">
             {hotelData.badges.map((badge) => (
               <Badge key={badge.id} className="hotel-badge">
