@@ -1,14 +1,14 @@
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent } from "../Card";
 import React from "react";
-import { TrainCardDetailsSection } from "./TrainCardDetailsSection";
-import { TrainCardHeaderSection } from "./TrainCardHeaderSection";
+import TrainDetails from "./TrainDetails";
+import TrainHeader from "./TrainHeader";
 
 export default function TrainCard() {
   return (
-    <Card className="w-full max-w-[1180px] bg-base-0" data-model-id="199:1145">
-      <CardContent className="flex flex-col p-6">
-        <TrainCardDetailsSection />
-        <TrainCardHeaderSection />
+    <Card className="train-card">
+      <CardContent className="train-card-content">
+        <TrainDetails />
+        <TrainHeader />
       </CardContent>
     </Card>
   );

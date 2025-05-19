@@ -22,6 +22,9 @@
     --base-70: #5E5E5E;
     --base-80: #4B4B4B;
     --base-90: #393939;
+    
+    --primary: #369672;
+    --primary-dark: #2a795a;
 
     --blue-5: #F2F3FF;
     --blue-10: #D8DAFE;
@@ -824,6 +827,384 @@
   align-self: stretch;
   flex-grow: 1;
   margin: 12px 0px;
+}
+
+/* Card Component Styles */
+.card-root {
+  position: static;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 4px 8px 4px 8px;
+  flex: none;
+  order: 1;
+  align-self: stretch;
+  flex-grow: 1;
+  margin: 12px 0px;
+  border-radius: 12px;
+  border: 1px solid #F5F5F5;
+  background: #FFFFFF;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.card-content-wrapper {
+  position: static;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 4px 8px 4px 8px;
+  flex: none;
+  order: 1;
+  align-self: stretch;
+  flex-grow: 1;
+  margin: 12px 0px;
+}
+
+/* HotelCard Component Styles */
+.hotel-card {
+  position: static;
+  display: flex;
+  width: 100%;
+  max-width: 1180px;
+  height: 347px;
+  border: 1px solid #F5F5F5;
+  background: #FFFFFF;
+}
+
+.hotel-card-content {
+  position: static;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0px;
+  width: 100%;
+}
+
+.hotel-image-container {
+  position: static;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 117px 153px;
+}
+
+.hotel-info-section {
+  position: static;
+  display: flex;
+  flex-direction: column;
+  width: 562px;
+  height: 347px;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 24px;
+}
+
+.hotel-badges-container {
+  position: static;
+  display: flex;
+  height: 69px;
+  align-items: center;
+  gap: 8px;
+  align-self: stretch;
+  width: 100%;
+  background: #FFFFFF;
+  border-top: 1px solid #F5F5F5;
+  margin-top: auto;
+}
+
+.hotel-price-section {
+  position: static;
+  display: flex;
+  flex-direction: column;
+  width: 279px;
+  height: 100%;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 8px;
+  padding: 24px;
+  border-left: 1px solid #F5F5F5;
+}
+
+/* Train Card Styles */
+/* Train Card Components */
+.train-card {
+  width: 100%;
+  max-width: 1180px;
+  background: var(--base-0);
+}
+
+.train-card-content {
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+}
+
+.train-header-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 8px;
+  width: 100%;
+}
+
+.train-tags-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  background: var(--base-0);
+}
+
+.train-tag-badge {
+  height: 35px;
+  padding: 8px 12px;
+  background: var(--primary);
+  color: var(--base-0);
+  border-radius: 4px;
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.train-header-content {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 8px;
+  width: 100%;
+}
+
+.train-city-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+  width: 100%;
+}
+
+/* Text specific classes */
+.train-header-main {
+  color: var(--base-90);
+}
+
+.train-header-secondary {
+  color: var(--base-70);
+}
+
+.train-header-divider {
+  color: var(--primary);
+}
+
+.train-header-arrow {
+  color: var(--primary);
+}
+
+.train-header-route {
+  color: var(--primary);
+  font-weight: 500;
+}
+
+.train-header-text {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  flex: 1;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.train-details-card {
+  width: 100%;
+  border: 0;
+  box-shadow: none;
+}
+
+.train-details-content {
+  padding: 0;
+}
+
+.train-details-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.train-journey-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 148px;
+  padding: 8px;
+  background: var(--base-0);
+  border-right: 2px solid var(--base-50);
+}
+
+.train-time-section {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px;
+  flex: 1;
+}
+
+.train-time {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--base-90);
+  white-space: nowrap;
+}
+
+.train-duration-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 16px;
+  flex: 1;
+}
+
+.train-duration-line {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.train-duration-text {
+  font-size: 12px;
+  color: var(--base-70);
+  white-space: nowrap;
+}
+
+.train-station-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 10px;
+  width: 100%;
+}
+
+.train-station-text {
+  font-size: 12px;
+  color: var(--base-70);
+  white-space: nowrap;
+}
+
+.train-city-text {
+  font-size: 14px;
+  color: var(--base-80);
+}
+
+.train-service-icons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  width: 100%;
+}
+
+.train-cabin-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 148px;
+  gap: 8px;
+  padding: 8px;
+  background: var(--base-0);
+}
+
+.train-cabin-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 16px;
+  width: 100%;
+}
+
+.train-cabin-type {
+  flex: 1;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--base-90);
+}
+
+.train-cabin-seats {
+  flex: 1;
+  text-align: right;
+  font-size: 14px;
+  color: var(--base-70);
+}
+
+.train-cabin-price {
+  flex: 1;
+  text-align: right;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--primary);
+}
+
+.train-class-header {
+  display: flex;
+  width: 100%;
+  max-width: 550px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+}
+
+.train-class-header-item {
+  flex: 1;
+  margin-top: -1px;
+  font-size: 14px;
+}
+
+/* Dynamic classes for cabin classes */
+.train-class-header {
+  display: flex;
+  width: 100%;
+  max-width: 550px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+}
+
+.train-tag-badge {
+  height: 35px;
+  padding: 8px 12px;
+  background: var(--primary);
+  color: var(--base-0);
+  border-radius: 4px;
+  font-weight: 400;
+  transition: background 0.2s ease;
+}
+
+.train-tag-badge:hover {
+  background: var(--primary-dark);
+}
+
+.train-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.service-icon {
+  width: 24px;
+  height: 24px;
+  color: var(--base-70);
+}
+
+.duration-arrow {
+  width: 100%;
+  height: 16px;
+  color: var(--base-70);
 }
 
 

@@ -16,7 +16,11 @@
     "react": "^19.0.0",
     "react-datepicker": "^8.3.0",
     "react-dom": "^19.0.0",
-    "react-router-dom": "^7.6.0"
+    "react-router-dom": "^7.6.0",
+    "tailwind-merge": "2.5.4",
+    "class-variance-authority": "^0.7.0",
+    "@radix-ui/react-separator": "^1.1.0",
+    "@radix-ui/react-slot": "^1.1.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.22.0",
