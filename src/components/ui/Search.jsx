@@ -168,7 +168,7 @@ const Search = ({ mode = "search" }) => {
             <Button
               key={index}
               onClick={() => handleNavigation(button.path)}
-              className={`h-[52px] px-6 py-2 ${button.color} text-base-0 font-body-m-regular`}
+              className={`search-button h-[52px] px-6 py-2 ${button.color} text-base-0 font-body-m-regular`}
             >
               {button.text}
               {button.icon && <ChevronRight className="w-6 h-6 ml-2" />}

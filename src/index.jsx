@@ -68,10 +68,14 @@ export default function InputPageExample() {
         <div className="flex flex-col w-[1178px] items-start gap-6">
           {[0, 2].map((start) => (
             <div key={start} className="flex justify-between w-full">
-              {cardData.slice(start, start + 2).map((card) => (
-                <NewsCard key={card.id}>
-                  <NewsCardContent text={card.text} />
-                </NewsCard>
+              {/* Create 2 cards, each with all news items */}
+              {[1, 2].map((cardIndex) => (
+                <NewsCard 
+                  key={cardIndex} 
+                  headerText={`Заголовок ${cardIndex}`}
+                  newsItems={cardData.map(item => item.text)}
+                  itemsCount={4} // Show all 4 items
+                />
               ))}
             </div>
           ))}
