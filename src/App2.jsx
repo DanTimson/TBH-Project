@@ -4,6 +4,7 @@ import HotelPage from './pages/hot'; // создай этот файл
 import TrainPage2 from './pages/train2';   // и этот тоже
 import InputPageExample from './index.jsx'
 import CartPage from './pages/Cart';
+import TrainDetailsPage from './pages/TrainDetails_1';
 
 export default function App2() {
   return (
@@ -13,6 +14,7 @@ export default function App2() {
         <Route path="/hotel" element={<HotelPage />} />
         <Route path="/train2" element={<TrainPage2 />} />
         <Route path="/cart" element={<CartPage />} />
+        <Route path="/train1/:id" element={<TrainDetailsPage />} />
     </Routes>
   );
 }

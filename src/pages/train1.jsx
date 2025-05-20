@@ -77,8 +77,12 @@ const trains = [
   }
 ];
 
+  const handleTrainCardClick = (trainId) => {
+    navigate(`/train1/${trainId}`); // Переход на страницу деталей с ID поезда
+  };
+
   return (
-    <div className="min-h-screen bg-gray-50 pb-[100px]">
+    <div className="min-h-screen bg-gray-50 pb-[110px]">
       {/* Шапка */}
       <header className="page-header p-6">
         <Button 
@@ -150,23 +154,29 @@ const trains = [
       {/* Список поездов */}
       <div className="max-w-6xl mx-auto space-y-6">
         {trains.map(train => (
-          <TrainCard
+          <div 
             key={train.id}
-            trainTags={train.trainTags}
-            trainNumber={train.trainNumber}
-            carrier={train.carrier}
-            departurePoint={train.departurePoint}
-            arrivalPoint={train.arrivalPoint}
-            route={train.route}
-            departureTime={train.departureTime}
-            arrivalTime={train.arrivalTime}
-            duration={train.duration}
-            departureStation={train.departureStation}
-            arrivalStation={train.arrivalStation}
-            departureCity={train.departureCity}
-            arrivalCity={train.arrivalCity}
-            cabinClasses={train.cabinClasses}
-          />
+            onClick={() => handleTrainCardClick(train.id)} // Добавляем обработчик клика
+            className="cursor-pointer hover:shadow-lg transition-shadow" // Добавляем стили для интерактивности
+          >
+            <TrainCard
+              key={train.id}
+              trainTags={train.trainTags}
+              trainNumber={train.trainNumber}
+              carrier={train.carrier}
+              departurePoint={train.departurePoint}
+              arrivalPoint={train.arrivalPoint}
+              route={train.route}
+              departureTime={train.departureTime}
+              arrivalTime={train.arrivalTime}
+              duration={train.duration}
+              departureStation={train.departureStation}
+              arrivalStation={train.arrivalStation}
+              departureCity={train.departureCity}
+              arrivalCity={train.arrivalCity}
+              cabinClasses={train.cabinClasses}
+            />
+          </div>
         ))}
       </div>
       

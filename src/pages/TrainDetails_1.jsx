@@ -1,79 +1,157 @@
-import React from "react";
-import { ArrowLeftDropOutline } from "./ArrowLeftDropOutline";
-import { BedOutline } from "./BedOutline";
-import { BookingCancellationWrapper } from "./BookingCancellationWrapper";
-import { CalendarBlankOutline } from "./CalendarBlankOutline";
-import { CartOutline } from "./CartOutline";
-import { Gradient } from "./Gradient";
-import { NavbarDesktop } from "./NavbarDesktop";
-import { Search } from "./Search";
-import { Topbar } from "./Topbar";
-import { Train } from "./Train";
-import "./tailwind.css";
+import React, { useEffect, useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { ArrowLeft, ChevronRight, Train, ChevronLeft} from 'lucide-react';
+import NavbarDesktop from "../components/ui/NavbarDesktop";
+import Button from "../components/ui/Button";
+import { Search as SearchIcon} from "lucide-react";
+import TrainCard from "../components/ui/TrainCard/TrainCard";
 
-export const TrainDetailsPage = () => {
+const TrainDetailsPage = () => {
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const [train, setTrain] = useState(null);
+
+  // Mock data - в реальном приложении это будет запрос к API
+  useEffect(() => {
+    const mockTrain = {
+      id: 1,
+      trainNumber: "025А",
+      class: "00A",
+      carrier: "РЖД",
+      wagons: ["01", "02", "03", "04", "05", "06"],
+      seats: [
+        { number: "01", class: "00A", price: "₽5,200" },
+        { number: "02", class: "00A", price: "₽5,200" },
+        { number: "03", class: "00A", price: "₽5,200" },
+        { number: "04", class: "00A", price: "₽5,200" },
+        { number: "05", class: "00A", price: "₽5,200" },
+        { number: "06", class: "00A", price: "₽5,200" }
+      ],
+      seatTypes: [
+        "Нижнее место у окна",
+        "Верхнее место у окна",
+        "Нижнее место у прохода",
+        "Верхнее место у прохода",
+        "Место в купе"
+      ]
+    };
+    setTrain(mockTrain);
+  }, [id]);
+
+  if (!train) return <div className="p-6">Загрузка...</div>;
+
   return (
-    <div className="train-details-page">
-      <Topbar
-        iconButton={
-          <ArrowLeftDropOutline
-            className="arrow-left-drop-outline"
-            color="#6D81D8"
-          />
-        }
-        input={<Search className="search-instance" color="#9B9B9B" />}
-      />
-      <div className="content">
-        <div className="content-blocks">
-          <div className="row">
-            <BookingCancellationWrapper
-              bookingCancellation="default"
-              className="train-details-card-instance"
-              showLabelV20={false}
-              showLabelV203={false}
-              showLabelV204={false}
-              showLabelV205={false}
-              text="063В"
-              text1=" Москва ВК Восточный "
-              text2=" Нижний Новгород (Стригино): отпр. 01:26, 1 апр., вт&nbsp;&nbsp; "
-              text3="Вагон 03"
-              text4=" Купе 2Ф "
-              text5="ФПК&nbsp;&nbsp; "
-              visible={false}
-              visible1={false}
-              visible2={false}
-              visible3={false}
-              visible4={false}
-              visible5={false}
-              visible6={false}
-              visible7={false}
-              visible8={false}
-              visible9={false}
-            />
+    <div className="min-h-screen bg-gray-50">
+      {/* Шапка */}
+      <header className="fixed top-0 left-0 right-0 z-50 bg-white shadow-sm p-6">
+        <div className="flex items-center justify-between">
+          {/* Кнопка назад */}
+          <Button 
+            variant="ghost"
+            className="w-[52px] h-[52px] p-0"
+            onClick={() => navigate(-1)}
+            text="Назад"
+          >
+            <ChevronLeft className="w-8 h-8 text-[#6D81D8]" />
+          </Button>
+
+          {/* Поле поиска с отступами */}
+          <div className="flex-1 mx-6">
+            <div className="flex h-16 items-center gap-2 px-3 py-1.5 self-stretch w-full bg-base-0 rounded overflow-hidden border border-solid border-[#8796e8] mt-5">
+              <div className="flex items-center gap-2 w-full">
+                <input
+                  type="text"
+                  placeholder="Поиск"
+                  className="w-full px-2 py-1.5 border-none focus:outline-none bg-transparent italic"
+                />
+                <button
+                  type="button"
+                  className="bg-transparent hover:bg-[#8796e8] p-1 rounded"
+                >
+                  <SearchIcon className="relative w-6 h-6" />
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* Иконка профиля */}
+          <div className="relative w-[72px] h-[72px] bg-base-5 rounded-full overflow-hidden">
+            <div className="inline-flex flex-col items-center gap-[3px] relative top-[18px] left-3">
+              <div className="w-6 h-6 rounded-xl bg-base-30" />
+              <div className="w-12 h-12 rounded-3xl bg-base-30" />
+            </div>
+          </div>
+        </div>
+      </header>
+      
+      <main className="pt-[180px] pb-[120px] px-6">
+        <div className="text-center mb-6">
+            <h1 className="text-lg font-bold">Вагон {train.wagons[0]} • Класс вагона {train.class}</h1>
+            <p className="text-sm text-gray-500">{train.carrier}</p>
+          </div>
+        {/* Список вагонов */}
+        <div className="bg-white rounded-lg shadow-sm p-4 mb-4">
+          <h2 className="font-semibold mb-3">Выберите вагон</h2>
+          <div className="space-y-2">
+            {train.wagons.map((wagon, index) => (
+              <div 
+                key={index} 
+                className="flex justify-between items-center p-3 border-b border-gray-100 last:border-0"
+              >
+                <span className="font-medium">{wagon}</span>
+                <ChevronRight size={18} className="text-gray-400" />
+              </div>
+            ))}
           </div>
         </div>
 
-        <Gradient className="gradient-2" />
-      </div>
+        {/* Список мест */}
+        <div className="bg-white rounded-lg shadow-sm p-4 mb-4">
+          <h2 className="font-semibold mb-3">Место {train.seats[0].number} [{train.seats[0].class}]</h2>
+          <p className="text-lg font-bold text-[#6D81D8] mb-4">{train.seats[0].price}</p>
+          
+          <div className="space-y-3">
+            {train.seats.map((seat, index) => (
+              <div key={index} className="flex justify-between items-center p-3 border-b border-gray-100 last:border-0">
+                <div>
+                  <p className="font-medium">Место {seat.number} [{seat.class}]</p>
+                </div>
+                <p className="text-[#6D81D8] font-medium">{seat.price}</p>
+              </div>
+            ))}
+          </div>
+        </div>
 
-      <NavbarDesktop
-        activePage="train-1"
-        className="navbar-desktop-acting"
-        navbarCell={
-          <CalendarBlankOutline
-            className="icon-instance-node-3"
-            color="#6D81D8"
-          />
-        }
-        navbarCell1={
-          <BedOutline className="icon-instance-node-3" color="#6D81D8" />
-        }
-        navbarCell2={<Train className="icon-instance-node-3" color="#6D81D8" />}
-        navbarCell3={
-          <CartOutline className="icon-instance-node-3" color="#6D81D8" />
-        }
-        override={<Train className="icon-instance-node-3" color="white" />}
-      />
+        {/* Виды мест */}
+        <div className="bg-white rounded-lg shadow-sm p-4 mb-6">
+          <h2 className="font-semibold mb-3">Вид места</h2>
+          <div className="space-y-3">
+            {train.seatTypes.map((type, index) => (
+              <div key={index} className="flex items-center p-3 border-b border-gray-100 last:border-0">
+                <div className="w-4 h-4 rounded-full border border-gray-300 mr-3"></div>
+                <p>{type}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Кнопка продолжения */}
+        <Button
+          className="w-full py-3 bg-green-500 hover:bg-green-600 text-white rounded-lg font-medium transition-colors"
+          onClick={() => console.log('Продолжить')}
+        >
+          <div className="flex items-center justify-center">
+            Продолжить
+            <ChevronRight className="ml-2" size={18} />
+          </div>
+        </Button>
+      </main>
+      {/* Фиксированный навбар */}
+      <div className="fixed bottom-0 left-0 right-0 z-50">
+        <NavbarDesktop />
+      </div>
     </div>
   );
 };
+
+export default TrainDetailsPage;
