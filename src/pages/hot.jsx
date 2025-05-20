@@ -110,10 +110,6 @@ export default function HotelPage() {
           </div>
         ))}
 
-        {/* Другие карточки */}
-        {/* ... */}
-        {/* Gradient Overlay */}
-        <div className="bottom-gradient" />
       </main>
       <div className="fixed bottom-0 left-0 right-0 z-50">
         <NavbarDesktop />
