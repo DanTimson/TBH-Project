@@ -342,7 +342,7 @@
 
 
 
-
+/* NewsCard */
 /* NewsCardContent.css */
 .news-card-content {
   display: flex;
@@ -378,6 +378,8 @@
   flex-grow: 1;
 }
 
+
+/* Input */
 /* Base Styles */
 .input-container {
   position: relative;
@@ -543,7 +545,7 @@
 }
 
 
-
+/* Button */
 /* Base Button Styles */
 .button {
   display: inline-flex;
@@ -648,8 +650,6 @@
   color: var(--base-60);
 }
 
-/* Add similar variants for green and black colors */
-
 /* Icon Styles */
 .button-icon-left,
 .button-icon-right {
@@ -677,13 +677,12 @@
 }
 
 
-
+/* Navbar */
 /* Base cell styling */
 .navbar-cell {
   width: 96px;
   padding: 20px;
   border-radius: 5px;
-  border: 1px dashed #9747FF;
   display: inline-flex;
   justify-content: center;
   align-items: flex-start;
@@ -830,6 +829,7 @@
   margin: 12px 0px;
 }
 
+/* Card */
 /* Card Component Styles */
 .card-root {
   position: static;
@@ -865,6 +865,7 @@
   margin: 12px 0px;
 }
 
+/* HotelCard */
 /* HotelCard Component Styles */
 .hotel-card {
   position: relative;
@@ -966,7 +967,7 @@
 }
 
 
-
+/* Page */
 /* Page Styles */
 .page-header{
   display: flex;
@@ -1292,6 +1293,7 @@
   height: 100%;
 }
 
+/* Bottom gradient */
 .bottom-gradient {
   /* Gradient */
 
@@ -1310,6 +1312,7 @@
 
 }
 
+/* Search */
 .search-container {
   display: flex;
   flex-wrap: wrap;
@@ -1387,18 +1390,6 @@ input, .react-datepicker-wrapper {
 
 .react-datepicker__input-container {
   width: 100%;
-}
-
-
-
-  * {
-    @apply border-border;
-  }
-
-  body {
-    @apply bg-background text-foreground;
-    font-feature-settings: "rlig" 1, "calt" 1;
-  }
 }
 
 .hotel-page-example {
@@ -1493,3 +1484,14 @@ input, .react-datepicker-wrapper {
   position: relative !important;
   width: 52px !important;
 }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+

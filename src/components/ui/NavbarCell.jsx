@@ -1,39 +1,53 @@
 import React from "react";
+import PropTypes from "prop-types";
 
-const NavbarCell = ({ Icon, isActive, label, inactiveColor = "#6D81D8" }) => {
-  // Convert color props to proper Tailwind classes
-  const getOutlineColor = () => {
-    switch(inactiveColor) {
-      case "#6D81D8": return "outline-blue-500";
-      case "#C6C6C6": return "outline-gray-300";
-      default: return "outline-blue-500";
-    }
-  };
+const colorMap = {
+  "enabled": {
+    outline: "outline-blue-50",
+    text: "text-blue-50",
+  },
+  "disabled": {
+    outline: "outline-base-30",
+    text: "text-base-30",
+  },
+};
 
-  const getTextColor = () => {
-    switch(inactiveColor) {
-      case "#6D81D8": return "text-blue-500";
-      case "#C6C6C6": return "text-gray-300";
-      default: return "text-blue-500";
-    }
-  };
+const DEFAULT_COLOR = "enabled";
 
+const NavbarCell = ({ 
+  Icon, 
+  isActive, 
+  label, 
+  colorVariant = DEFAULT_COLOR,
+  onClick,
+}) => {
+  const colors = colorMap[colorVariant] || colorMap[DEFAULT_COLOR];
+  
   return (
     <button
-      className={`flex items-center justify-center p-6 rounded-[20px] transition-colors ${
+      onClick={onClick}
+      className={`flex items-center justify-center p-6 rounded-[20px] transition-all duration-200 ease-in-out ${
         isActive
-          ? "bg-indigo-500 outline-none"
-          : `bg-white outline outline-4 outline-offset-[-4px] ${getOutlineColor()}`
-      }`}
+          ? "bg-blue-50 shadow-md"
+          : `bg-white outline outline-4 outline-offset-[-4px] ${colors.outline} hover:outline-offset-[-2px]`
+      } hover:scale-105 focus:outline-none focus:ring-2 focus:ring-indigo-300`}
       aria-label={label}
     >
       <Icon 
-        className={`w-8 h-8 ${isActive ? "text-white" : getTextColor()}`} 
+        className={`w-8 h-8 ${isActive ? "text-white" : colors.text}`} 
         aria-hidden="true"
-        strokeWidth={1.5} // Ensures consistent icon weight
+        strokeWidth={1.5}
       />
     </button>
   );
+};
+
+NavbarCell.propTypes = {
+  Icon: PropTypes.elementType.isRequired,
+  isActive: PropTypes.bool,
+  label: PropTypes.string.isRequired,
+  colorVariant: PropTypes.oneOf(Object.keys(colorMap)),
+  onClick: PropTypes.func,
 };
 
 export default NavbarCell;
