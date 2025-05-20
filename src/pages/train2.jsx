@@ -5,6 +5,7 @@ import NavbarDesktop from "../components/ui/NavbarDesktop";
 import Button from "../components/ui/Button";
 import { Search as SearchIcon} from "lucide-react";
 import Search from "../components/ui/Search";
+import TrainCard from "../components/ui/TrainCard/TrainCard";
 
 const TrainSearchPage = () => {
   const navigate = useNavigate();
@@ -12,23 +13,73 @@ const TrainSearchPage = () => {
   
   // Пример данных поездов
   const trains = [
-    {
-      id: 1,
-      name: 'Сапсан №123',
-      carrier: 'РЖД',
-      from: 'Москва (Курский вокзал)',
-      to: 'Санкт-Петербург (Главный)',
-      departure: '08:00',
-      arrival: '12:40',
-      duration: '4ч 40м',
-      carClass: 'Купе',
-      seats: 24,
-      price: 3500,
-      isDoubleDecker: true,
-      isHighSpeed: true
-    },
-    // ... другие поезда
-  ];
+  {
+    id: 1,
+    trainTags: ["Фирменный", "Скоростной"],
+    trainNumber: "025А Москва-Санкт-Петербург",
+    carrier: "РЖД",
+    departurePoint: "Москва (Курский вокзал)",
+    arrivalPoint: "Санкт-Петербург (Главный)",
+    route: "Москва → Тверь → Санкт-Петербург",
+    departureTime: "23:55",
+    arrivalTime: "06:55",
+    duration: "07 ч 00 мин",
+    departureStation: "Курский вокзал",
+    arrivalStation: "Главный вокзал",
+    departureCity: "Москва",
+    arrivalCity: "Санкт-Петербург",
+    cabinClasses: [
+      { type: "Люкс", seats: "4", price: "₽15,000" },
+      { type: "Купе", seats: "8", price: "₽10,000" },
+      { type: "Плацкарт", seats: "12", price: "₽7,500" }
+    ]
+  },
+  {
+    id: 2,
+    trainTags: ["Двухэтажный"],
+    trainNumber: "104Й Москва-Сочи",
+    carrier: "РЖД Премиум",
+    departurePoint: "Москва (Павелецкий вокзал)",
+    arrivalPoint: "Сочи (Железнодорожный вокзал)",
+    route: "Москва → Рязань → Сочи",
+    departureTime: "22:30",
+    arrivalTime: "12:45",
+    duration: "14 ч 15 мин",
+    departureStation: "Павелецкий вокзал",
+    arrivalStation: "Сочи ЖД вокзал",
+    departureCity: "Москва",
+    arrivalCity: "Сочи",
+    cabinClasses: [
+      { type: "СВ", seats: "6", price: "₽18,000" },
+      { type: "Купе", seats: "10", price: "₽12,000" }
+    ]
+  },
+  {
+    id: 3,
+    trainTags: ["Скорый", "Ночной"],
+    trainNumber: "015А Москва-Казань",
+    carrier: "РЖД",
+    departurePoint: "Москва (Казанский вокзал)",
+    arrivalPoint: "Казань (Центральный)",
+    route: "Москва → Владимир → Казань",
+    departureTime: "21:15",
+    arrivalTime: "06:30",
+    duration: "09 ч 15 мин",
+    departureStation: "Казанский вокзал",
+    arrivalStation: "Центральный вокзал",
+    departureCity: "Москва",
+    arrivalCity: "Казань",
+    cabinClasses: [
+      { type: "Люкс", seats: "4", price: "₽14,000" },
+      { type: "Купе", seats: "8", price: "₽9,000" },
+      { type: "Плацкарт", seats: "12", price: "₽6,000" }
+    ]
+  }
+];
+  
+  const handleTrainCardClick = (trainId) => {
+    navigate(`/train1/${trainId}`); // Переход на страницу деталей с ID поезда
+  };
 
   return (
     <div className="min-h-screen bg-gray-50 pb-[120px]">
@@ -103,76 +154,33 @@ const TrainSearchPage = () => {
       </div>
 
       {/* Список поездов */}
-      <div className="max-w-6xl mx-auto space-y-6">
-        {trains.map(train => (
-          <div key={train.id} className="bg-white rounded-lg shadow-md overflow-hidden">
-            {/* Шапка карточки */}
-            <div className="p-4 border-b flex justify-between items-center">
-              <div>
-                <h2 className="font-bold text-lg flex items-center">
-                  {train.name}
-                  {train.isHighSpeed && (
-                    <span className="ml-2 px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">
-                      Скоростной
-                    </span>
-                  )}
-                  {train.isDoubleDecker && (
-                    <span className="ml-2 px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded-full">
-                      Двухэтажный
-                    </span>
-                  )}
-                </h2>
-                <p className="text-sm text-gray-500">
-                  {train.carrier} • {train.from} → {train.to}
-                </p>
-              </div>
-              <div className="text-lg font-semibold">
-                от {train.price.toLocaleString()} ₽
-              </div>
+        <div className="max-w-6xl mx-auto space-y-6">
+          {trains.map(train => (
+            <div 
+              key={train.id}
+              onClick={() => handleTrainCardClick(train.id)} // Добавляем обработчик клика
+              className="cursor-pointer hover:shadow-lg transition-shadow" // Добавляем стили для интерактивности
+            >
+              <TrainCard
+                key={train.id}
+                trainTags={train.trainTags}
+                trainNumber={train.trainNumber}
+                carrier={train.carrier}
+                departurePoint={train.departurePoint}
+                arrivalPoint={train.arrivalPoint}
+                route={train.route}
+                departureTime={train.departureTime}
+                arrivalTime={train.arrivalTime}
+                duration={train.duration}
+                departureStation={train.departureStation}
+                arrivalStation={train.arrivalStation}
+                departureCity={train.departureCity}
+                arrivalCity={train.arrivalCity}
+                cabinClasses={train.cabinClasses}
+              />
             </div>
-            
-            {/* Детали рейса */}
-            <div className="p-4 grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="flex items-center">
-                <Clock className="w-5 h-5 text-gray-400 mr-2" />
-                <div>
-                  <p className="font-medium">{train.departure}</p>
-                  <p className="text-sm text-gray-500">{train.from}</p>
-                </div>
-              </div>
-              
-              <div className="flex flex-col items-center justify-center text-sm text-gray-500">
-                <p>{train.duration}</p>
-                <ArrowRight className="w-4 h-4 my-1" />
-              </div>
-              
-              <div className="flex items-center">
-                <div>
-                  <p className="font-medium">{train.arrival}</p>
-                  <p className="text-sm text-gray-500">{train.to}</p>
-                </div>
-              </div>
-            </div>
-            
-            {/* Класс и места */}
-            <div className="p-4 bg-gray-50 flex justify-between items-center">
-              <div className="flex items-center">
-                <User className="w-5 h-5 text-gray-400 mr-2" />
-                <span className="font-medium">{train.carClass}</span>
-                <span className="mx-2 text-gray-300">|</span>
-                <span className="text-gray-500">Осталось {train.seats} мест</span>
-              </div>
-              
-              <button 
-                onClick={() => navigate(`/train/${train.id}`)}
-                className="px-6 py-2 bg-[#6D81D8] hover:bg-[#5A6DC2] text-white rounded-lg transition-colors"
-              >
-                Выбрать места
-              </button>
-            </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
       <div className="fixed bottom-0 left-0 right-0 z-50">
         <NavbarDesktop />
       </div>  
