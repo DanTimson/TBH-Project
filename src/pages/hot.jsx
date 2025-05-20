@@ -43,6 +43,9 @@ export default function HotelPage() {
     // Add more hotels as needed
   ];
 
+  const handleHotelClick = (hotelId) => {
+    navigate(`/room-details/${hotelId}`);
+  };
 
   return (
     <div className="min-h-screen bg-gray-50 pb-[100px]">
@@ -87,25 +90,25 @@ export default function HotelPage() {
           <Search />
       </search>
 
-      <main className="mt-8">
-        {/* Карточка отеля */}
-
+      <main className="mt-8 px-4">
         {hotels.map(hotel => (
-          <HotelCard 
+          <div 
             key={hotel.id}
-            name={hotel.name}
-            address={hotel.address}
-            distanceToCenter={hotel.distanceToCenter}
-            roomType={hotel.roomType}
-            breakfast={hotel.breakfast}
-            price={hotel.price}
-            stayInfo={hotel.stayInfo}
-            badges={hotel.badges}
-          />
+            onClick={() => handleHotelClick(hotel.id)}
+            className="mb-6 cursor-pointer hover:shadow-md transition-shadow"
+          >
+            <HotelCard 
+              name={hotel.name}
+              address={hotel.address}
+              distanceToCenter={hotel.distanceToCenter}
+              roomType={hotel.roomType}
+              breakfast={hotel.breakfast}
+              price={hotel.price}
+              stayInfo={hotel.stayInfo}
+              badges={hotel.badges}
+            />
+          </div>
         ))}
-
-        {/* Другие карточки */}
-        {/* ... */}
       </main>
       <div className="fixed bottom-0 left-0 right-0 z-50">
         <NavbarDesktop />
