@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Query
-from datetime import date
+from datetime import date, datetime
 from pydantic import BaseModel
 from typing import List
 
@@ -10,35 +10,89 @@ class Station(BaseModel):
     name: str
     city: str
 
+class TrainClass(BaseModel):
+    name: str  # "Люкс", "Купе" и т.д.
+    available_seats: int
+    price: float  # RUB
+
 class TrainSearchResult(BaseModel):
     id: int
-    departure_station: Station
-    arrival_station: Station
-    departure_time: str  # ISO format
-    duration_minutes: int
+    trainNumber: str
+    carrier: str
+    departureStation: Station
+    arrivalStation: Station
+    departureTime: datetime
+    durationMinutes: int
+    classes: List[TrainClass]
+    trainTags: List[str] = []
 
 @router.get("/trains", response_model=List[TrainSearchResult])
 async def search_trains(
-    departureCity: str = Query(..., min_length=3),
-    arrivalCity: str = Query(..., min_length=3),
-    departureDate: date = Query(...)
+    departureCity: str = Query(..., min_length=3, example="Москва"),
+    arrivalCity: str = Query(..., min_length=3, example="Санкт-Петербург"),
+    departureDate: date = Query(..., example="2024-12-25")
 ):
-    # Mock data - replace with actual database/Sirena-Travel API integration
+    """Search for Russian railway trains (РЖД, Сапсан, etc.)"""
     return [
         {
             "id": 1,
-            "departure_station": {
+            "trainNumber": "025А",
+            "carrier": "РЖД",
+            "departureStation": {
                 "id": 1,
                 "name": "Казанский вокзал",
                 "city": "Москва"
             },
-            "arrival_station": {
+            "arrivalStation": {
                 "id": 2,
                 "name": "Московский вокзал",
                 "city": "Санкт-Петербург"
             },
-            "departure_time": "2024-12-25T08:00:00",
-            "duration_minutes": 240
+            "departureTime": "2024-12-25T23:55:00",
+            "durationMinutes": 420,
+            "classes": [
+                {
+                    "name": "Люкс",
+                    "available_seats": 4,
+                    "price": 15000.00
+                },
+                {
+                    "name": "Купе",
+                    "available_seats": 8,
+                    "price": 10000.00
+                }
+            ],
+            "trainTags": ["Фирменный", "Скоростной"]
+        },
+        {
+            "id": 1,
+            "trainNumber": "025А",
+            "carrier": "РЖД",
+            "departureStation": {
+                "id": 1,
+                "name": "Казанский вокзал",
+                "city": "Москва"
+            },
+            "arrivalStation": {
+                "id": 2,
+                "name": "Московский вокзал",
+                "city": "Санкт-Петербург"
+            },
+            "departureTime": "2024-12-25T23:55:00",
+            "durationMinutes": 420,
+            "classes": [
+                {
+                    "name": "Люкс",
+                    "available_seats": 4,
+                    "price": 15000.00
+                },
+                {
+                    "name": "Купе",
+                    "available_seats": 8,
+                    "price": 10000.00
+                }
+            ],
+            "trainTags": ["Фирменный", "Скоростной"]
         }
     ]
 

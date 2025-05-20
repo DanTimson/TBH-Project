@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Train, ChevronLeft, ChevronDown, Clock, ArrowRight, User, ArrowUpDown } from 'lucide-react';
 import NavbarDesktop from "../components/ui/NavbarDesktop";
@@ -6,13 +6,10 @@ import Button from "../components/ui/Button";
 import TrainCard from "../components/ui/TrainCard/TrainCard";
 import { Search as SearchIcon} from "lucide-react";
 import Search from "../components/ui/Search";
+import { searchTrains } from '../services/searchService'; // Create this service
 
-const TrainSearchPage = () => {
-  const navigate = useNavigate();
-  const [sortBy, setSortBy] = useState('price');
-  
-  // Пример данных поездов
-const trains = [
+// Пример данных поездов
+const trainsExample = [
   {
     id: 1,
     trainTags: ["Фирменный", "Скоростной"],
@@ -77,9 +74,78 @@ const trains = [
   }
 ];
 
+
+const TrainSearchPage = () => {
+  const navigate = useNavigate();
+  const [sortBy, setSortBy] = useState('price');  
+  const [trains, setTrains] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  
+  const searchParams = new URLSearchParams(location.search);
+  const departureCity = searchParams.get('from');
+  const arrivalCity = searchParams.get('to');
+  const departureDate = searchParams.get('date');
+
+  useEffect(() => {
+    const fetchTrains = async () => {
+      try {
+        setLoading(true);
+        const data = await searchTrains(
+          departureCity || 'Москва', // Fallback for demo
+          arrivalCity || 'Санкт-Петербург', 
+          departureDate ? new Date(departureDate) : new Date()
+        );
+        setTrains(data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchTrains();
+  }, [departureCity, arrivalCity, departureDate]);
+
+
   const handleTrainCardClick = (trainId) => {
     navigate(`/train1/${trainId}`); // Переход на страницу деталей с ID поезда
   };
+
+  // Format duration from minutes to "Xч Yм"
+  const formatDuration = (minutes) => {
+    const hours = Math.floor(minutes / 60);
+    const remainingMinutes = minutes % 60;
+    return `${hours}ч ${remainingMinutes.toString().padStart(2, '0')}м`;
+  };
+
+  // Format price in RUB
+  const formatPrice = (price) => {
+    return new Intl.NumberFormat('ru-RU', {
+      style: 'currency',
+      currency: 'RUB',
+      minimumFractionDigits: 0
+    }).format(price);
+  };
+
+  if (loading) return (
+    <div className="text-center py-8 text-gray-600">
+      <div className="animate-spin inline-block w-6 h-6 border-2 border-current border-t-transparent rounded-full mb-2" />
+      <p>Ищем подходящие поезда...</p>
+    </div>
+  );
+
+  if (error) return (
+    <div className="text-center py-8 text-red-600">
+      <p>Ошибка загрузки данных: {error}</p>
+      <Button 
+        className="mt-4"
+        onClick={() => window.location.reload()}
+      >
+        Попробовать снова
+      </Button>
+    </div>
+  );
 
   return (
     <div className="min-h-screen bg-gray-50 pb-[110px]">
@@ -164,17 +230,27 @@ const trains = [
               trainTags={train.trainTags}
               trainNumber={train.trainNumber}
               carrier={train.carrier}
-              departurePoint={train.departurePoint}
-              arrivalPoint={train.arrivalPoint}
+              departurePoint={train.departureStation.name}
+              arrivalPoint={train.arrivalStation.name}
               route={train.route}
-              departureTime={train.departureTime}
-              arrivalTime={train.arrivalTime}
-              duration={train.duration}
-              departureStation={train.departureStation}
-              arrivalStation={train.arrivalStation}
+              departureTime={new Date(train.departureTime)
+                .toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+              arrivalTime={new Date(
+                new Date(train.departureTime).getTime() + train.durationMinutes * 60000
+              ).toLocaleTimeString('ru-RU', {
+                hour: '2-digit',
+                minute: '2-digit'
+              })}
+              duration={`${Math.floor(train.durationMinutes/60)}ч ${train.durationMinutes%60}м`}
+              departureStation={train.departureStation.name}
+              arrivalStation={train.arrivalStation.name}
               departureCity={train.departureCity}
               arrivalCity={train.arrivalCity}
-              cabinClasses={train.cabinClasses}
+              cabinClasses={train.classes.map(c => ({
+                type: c.name,
+                seats: c.available_seats,
+                price: `₽${c.price.toLocaleString('ru-RU')}`
+              }))}
             />
           </div>
         ))}
