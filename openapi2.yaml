@@ -12,13 +12,6 @@ servers:
   - url: https://api.travel-platform.com/v1
     description: Production server
 
-# 🔄 Simplified security schemes
-securitySchemes:
-  bearer_auth:
-    type: http
-    scheme: bearer
-    bearerFormat: JWT
-
 # 🔄 Normalized tags
 tags:
   - name: Authentication
@@ -153,6 +146,11 @@ paths:
                   $ref: "#/components/schemas/HotelSearchResult"
 
 components:
+  securitySchemes:  # Moved inside components
+    bearer_auth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
   schemas:
     # 🔄 Unified ID formats
     UserResponse:
