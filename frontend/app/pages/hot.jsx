@@ -1,16 +1,13 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import NavbarDesktop from "../components/ui/NavbarDesktop";
-import { useNavigate } from 'react-router-dom';
 import Button from "../components/ui/Button";
 import HotelCard from "../components/ui/HotelCard/HotelCard";
-import { ChevronLeft, Search as SearchIcon} from "lucide-react";
+import { ChevronLeft, Search as SearchIcon } from "lucide-react";
 import Search from "../components/ui/Search";
+import { searchHotels } from '../services/searchService';
 
-export default function HotelPage() {
-  const navigate = useNavigate();
-
- const hotels = [
+const hotelsExample = [
     {
       id: 1,
       name: "Гранд Отель",
@@ -40,16 +37,74 @@ export default function HotelPage() {
         { id: 3, text: "Бесплатный Wi-Fi" },
       ],
     },
-    // Add more hotels as needed
   ];
+
+export default function HotelPage() {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [hotels, setHotels] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  
+// Get search parameters from URL
+  const searchParams = new URLSearchParams(location.search);
+  const city = searchParams.get('city');
+  const checkInDate = searchParams.get('checkInDate');
+
+  useEffect(() => {
+    const fetchHotels = async () => {
+      try {
+        setLoading(true);
+        const data = await searchHotels(
+          city || 'Москва', // Default to Moscow
+          checkInDate ? new Date(checkInDate) : new Date()
+        );
+        setHotels(data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchHotels();
+  }, [city, checkInDate]);
 
   const handleHotelClick = (hotelId) => {
     navigate(`/room-details/${hotelId}`);
   };
 
+  const formatPrice = (price) => {
+    return new Intl.NumberFormat('ru-RU', {
+      style: 'currency',
+      currency: 'RUB',
+      minimumFractionDigits: 0
+    }).format(price);
+  };
+
+  if (loading) return (
+    <div className="text-center py-8 text-gray-600">
+      <div className="animate-spin inline-block w-6 h-6 border-2 border-current border-t-transparent rounded-full mb-2" />
+      <p>Ищем подходящие отели...</p>
+    </div>
+  );
+
+  if (error) return (
+    <div className="text-center py-8 text-red-600">
+      <p>Ошибка загрузки данных: {error}</p>
+      <Button 
+        className="mt-4"
+        onClick={() => window.location.reload()}
+      >
+        Попробовать снова
+      </Button>
+    </div>
+  );
+
   return (
     <div className="min-h-screen bg-gray-50 pb-[100px]">
-      <header className="page-header p-6">
+      {/* Header */}
+      <header className="flex w-full h-[140px] items-center justify-center gap-5 p-5 relative bg-base-0">
         <Button 
             variant="ghost"
             className="w-[52px] h-[52px] p-0"
@@ -85,12 +140,14 @@ export default function HotelPage() {
         </div>
       </header>
 
-      <search className="flex flex-col items-center gap-6 px-32 py-8 w-full grow bg-gray-50 overflow-y-auto">
-        {/* Search Section */}
-          <Search />
-      </search>
+      {/* Main Content */}
+      <main className="flex-1 pb-[110px] overflow-y-auto w-full bg-base-5">
+        
+        <search className="flex flex-col items-center gap-6 px-32 py-8 w-full grow bg-base-5 overflow-y-auto">
+          {/* Search Section */}
+            <Search />
+        </search>
 
-      <main className="mt-8 px-4">
         {hotels.map(hotel => (
           <div 
             key={hotel.id}
@@ -100,18 +157,24 @@ export default function HotelPage() {
             <HotelCard 
               name={hotel.name}
               address={hotel.address}
-              distanceToCenter={hotel.distanceToCenter}
-              roomType={hotel.roomType}
-              breakfast={hotel.breakfast}
-              price={hotel.price}
-              stayInfo={hotel.stayInfo}
-              badges={hotel.badges}
+              distanceToCenter={`${hotel.distance_km} км до центра`}
+              roomType={hotel.room_type}
+              breakfast={hotel.breakfast_included ? "Завтрак включён" : "Без питания"}
+              price={formatPrice(hotel.price)}
+              stayInfo={hotel.stay_info}
+              badges={[
+                ...(hotel.free_cancellation ? [{ id: 1, text: "Бесплатная отмена" }] : []),
+                ...(hotel.pay_at_hotel ? [{ id: 2, text: "Оплата на месте" }] : []),
+                ...(hotel.free_wifi ? [{ id: 3, text: "Бесплатный Wi-Fi" }] : [])
+              ]}
             />
           </div>
         ))}
-
+        
       </main>
       <div className="fixed bottom-0 left-0 right-0 z-50">
+        {/* Gradient Overlay */}
+        {/* <div className="bottom-gradient" /> */}
         <NavbarDesktop />
       </div>
     </div>

@@ -73,11 +73,14 @@ export default function InputPageExample() {
 
       {/* Main Content */}
       <main className="flex-1 pb-[110px] overflow-y-auto w-full bg-base-5">
+        
+        <search className="flex flex-col items-center gap-6 px-32 py-8 w-full grow bg-base-5 overflow-y-auto">
+          {/* Search Section */}
+            <Search />
+        </search>
 
         {/* News Card Grid */}
         <div className="flex flex-col w-[1178px] mx-auto items-start gap-6 py-6">
-          {/* Search Section */}
-          <Search />
           {[0, 2].map((start, rowIndex) => (
             <div key={start} className="flex justify-between w-full">
               {/* Create 2 cards, each with all news items */}

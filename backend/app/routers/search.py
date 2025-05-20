@@ -17,14 +17,14 @@ class TrainClass(BaseModel):
 
 class TrainSearchResult(BaseModel):
     id: int
-    trainNumber: str
+    train_number: str
     carrier: str
-    departureStation: Station
-    arrivalStation: Station
-    departureTime: datetime
-    durationMinutes: int
+    departure_station: Station
+    arrival_station: Station
+    departure_time: datetime
+    duration_minutes: int
     classes: List[TrainClass]
-    trainTags: List[str] = []
+    train_tags: List[str] = []
 
 @router.get("/trains", response_model=List[TrainSearchResult])
 async def search_trains(
@@ -36,20 +36,20 @@ async def search_trains(
     return [
         {
             "id": 1,
-            "trainNumber": "025А",
+            "train_number": "025А",
             "carrier": "РЖД",
-            "departureStation": {
+            "departure_station": {
                 "id": 1,
                 "name": "Казанский вокзал",
                 "city": "Москва"
             },
-            "arrivalStation": {
+            "arrival_station": {
                 "id": 2,
                 "name": "Московский вокзал",
                 "city": "Санкт-Петербург"
             },
-            "departureTime": "2024-12-25T23:55:00",
-            "durationMinutes": 420,
+            "departure_time": "2024-12-25T23:55:00",
+            "duration_minutes": 420,
             "classes": [
                 {
                     "name": "Люкс",
@@ -62,24 +62,24 @@ async def search_trains(
                     "price": 10000.00
                 }
             ],
-            "trainTags": ["Фирменный", "Скоростной"]
+            "train_tags": ["Фирменный", "Скоростной"]
         },
         {
             "id": 1,
-            "trainNumber": "025А",
+            "train_number": "025А",
             "carrier": "РЖД",
-            "departureStation": {
+            "departure_station": {
                 "id": 1,
                 "name": "Казанский вокзал",
                 "city": "Москва"
             },
-            "arrivalStation": {
+            "arrival_station": {
                 "id": 2,
                 "name": "Московский вокзал",
                 "city": "Санкт-Петербург"
             },
-            "departureTime": "2024-12-25T23:55:00",
-            "durationMinutes": 420,
+            "departure_time": "2024-12-25T23:55:00",
+            "duration_minutes": 420,
             "classes": [
                 {
                     "name": "Люкс",
@@ -92,15 +92,23 @@ async def search_trains(
                     "price": 10000.00
                 }
             ],
-            "trainTags": ["Фирменный", "Скоростной"]
+            "train_tags": ["Фирменный", "Скоростной"]
         }
     ]
 
 class HotelSearchResult(BaseModel):
     id: int
     name: str
+    address: str
+    distance_km: float
+    room_type: str
+    breakfast_included: bool
+    price: float  # RUB
+    stay_info: str
+    free_cancellation: bool
+    pay_at_hotel: bool
+    free_wifi: bool
     rating: float
-    min_price: float
 
 @router.get("/hotels", response_model=List[HotelSearchResult])
 async def search_hotels(
@@ -109,10 +117,18 @@ async def search_hotels(
 ):
     # Mock data - replace with Ostrovok.ru API integration
     return [
-        {
-            "id": 1,
-            "name": "Гостиница Космос",
-            "rating": 4.5,
-            "min_price": 4500.00
-        }
+    {
+        "id": 1,
+        "name": "Гранд Отель",
+        "address": "ул. Центральная, 1",
+        "distance_km": 1.2,
+        "room_type": "Стандартный двухместный номер",
+        "breakfast_included": True,
+        "price": 12500.00,
+        "stay_info": "2 ночи, 2 гостя",
+        "free_cancellation": True,
+        "pay_at_hotel": True,
+        "free_wifi": True,
+        "rating": 4.5
+    }
     ]

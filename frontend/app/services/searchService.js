@@ -28,11 +28,11 @@ export const searchTrains = async (departureCity, arrivalCity, date) => {
 };
 
 export const searchHotels = async (city, checkInDate) => {
+  console.log('Searching hotels in:', city);
   const params = new URLSearchParams({
     city,
     checkInDate: checkInDate.toISOString().split('T')[0]
   });
-
   try {
     console.log('Sending hotel search request:', params.toString());
     const response = await fetch(`${API_BASE}/search/hotels?${params}`);
