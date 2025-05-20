@@ -78,9 +78,9 @@ const trains = [
 ];
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6">
+    <div className="min-h-screen bg-gray-50 pb-[100px]">
       {/* Шапка */}
-      <header className="page-header">
+      <header className="page-header p-6">
         <Button 
             variant="ghost"
             className="w-[52px] h-[52px] p-0"
@@ -170,7 +170,9 @@ const trains = [
         ))}
       </div>
       
-      <NavbarDesktop />
+      <div className="fixed bottom-0 left-0 right-0 z-50">
+        <NavbarDesktop />
+      </div>
     </div>
   );
 };

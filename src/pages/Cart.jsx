@@ -17,9 +17,9 @@ const CartPage = () => {
   const subtotal = cartItems.reduce((sum, item) => sum + item.price, 0);
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6">
+    <div className="min-h-screen bg-gray-50 pb-[120px]">
       {/* Шапка */}
-      <header className="flex w-full h-[140px] items-center justify-center gap-5 p-5 relative bg-base-0">
+      <header className="page-header p-6">
           <Button 
               variant="ghost"
               className="w-[52px] h-[52px] p-0"
@@ -132,7 +132,9 @@ const CartPage = () => {
           </p>
         </div>
       </main>
-      <NavbarDesktop />
+      <div className="fixed bottom-0 left-0 right-0 z-50">
+        <NavbarDesktop />
+      </div>
     </div>
   );
 };

@@ -45,8 +45,8 @@ export default function HotelPage() {
 
 
   return (
-    <div className="min-h-screen bg-gray-50 p-8">
-      <header className="flex w-full h-[140px] bg-gray-50 items-center justify-center gap-5 p-5 relative bg-base-0">
+    <div className="min-h-screen bg-gray-50 pb-[100px]">
+      <header className="page-header p-6">
         <Button 
             variant="ghost"
             className="w-[52px] h-[52px] p-0"
@@ -107,7 +107,9 @@ export default function HotelPage() {
         {/* Другие карточки */}
         {/* ... */}
       </main>
-      <NavbarDesktop />
+      <div className="fixed bottom-0 left-0 right-0 z-50">
+        <NavbarDesktop />
+      </div>
     </div>
   );
 }

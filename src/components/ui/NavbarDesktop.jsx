@@ -28,10 +28,10 @@ export default function NavbarDesktop() {
   };
 
   return (
-    <div className="w-full max-w-[1480px] rounded-[5px] overflow-hidden">
+    <div className="w-full bg-base-0 shadow-lg">
       <nav className="flex items-center justify-center w-full bg-base-0">
         {/* Left Side - Calendar */}
-        <div className="flex w-60 items-center justify-center p-5">
+        <div className="flex w-60 items-center justify-center p-4">
           <button onClick={() => handleNavigation("/ ")}
             className="relative z-10"
             >
@@ -78,7 +78,7 @@ export default function NavbarDesktop() {
         </div>
 
         {/* Right Side - Cart */}
-        <div className="flex w-60 items-center justify-center p-5">
+        <div className="flex w-60 items-center justify-center p-4">
           <button onClick={() => handleNavigation("/cart")}
             className="relative z-10">
               <NavbarCell
