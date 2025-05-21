@@ -1,49 +1,57 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, Heart, Tv, Wifi, Search as SearchIcon } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { Bed, Wifi, Tv, Utensils, Clock } from 'lucide-react';
 import NavbarDesktop from "../components/ui/NavbarDesktop";
 import Search from "../components/ui/Search";
 import Button from "../components/ui/Button";
+import { fetchHotelDetails } from '../services/hotelService';
 
-const HotelRoomPage = () => {
+const amenityIcons = {
+  'Бесплатный Wi-Fi': <Wifi className="w-5 h-5" />,
+  'Телевизор': <Tv className="w-5 h-5" />,
+  'Ресторан': <Utensils className="w-5 h-5" />,
+  'Кондиционер': <Bed className="w-5 h-5" />
+};
+
+export default function HotelRoomPage() {
+  const { hotelId } = useParams();
   const navigate = useNavigate();
+  const [hotel, setHotel] = useState(null);
+  const [rooms, setRooms] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  // Mock данные - в реальном приложении будет запрос к API
-  const roomTypes = [
-    {
-      id: 1,
-      type: "Стандартный номер",
-      area: "20 м²",
-      beds: "1 двуспальная кровать",
-      amenities: [
-        { icon: <Heart size={18} />, text: "Кондиционер" },
-        { icon: <Tv size={18} />, text: "Телевизор" },
-        { icon: <Wifi size={18} />, text: "Wi-Fi" }
-      ],
-      cancellation: "Бесплатная отмена",
-      payment: "Оплата на месте",
-      nights: "2 ночи",
-      guests: "2 гостя",
-      price: "12 500 ₽"
-    },
-    {
-      id: 2,
-      type: "Люкс",
-      area: "35 м²",
-      beds: "1 двуспальная кровать + диван",
-      amenities: [
-        { icon: <Heart size={18} />, text: "Кондиционер" },
-        { icon: <Tv size={18} />, text: "Телевизор" },
-        { icon: <Wifi size={18} />, text: "Wi-Fi" },
-        { icon: <Heart size={18} />, text: "Мини-бар" }
-      ],
-      cancellation: "Бесплатная отмена",
-      payment: "Оплата картой",
-      nights: "2 ночи",
-      guests: "2 гостя",
-      price: "24 300 ₽"
-    }
-  ];
+  useEffect(() => {
+    const loadHotelData = async () => {
+      try {
+        const data = await fetchHotelDetails(hotelId);
+        setHotel(data);
+        setRooms(data.rooms.map(room => ({
+          ...room,
+          badges: [
+            { id: 1, text: "Бесплатная отмена" },
+            { id: 2, text: "Оплата на месте" }
+          ],
+          amenities: room.amenities.map(name => ({
+            icon: amenityIcons[name] || <Clock className="w-5 h-5" />,
+            text: name
+          }))
+        })));
+      } catch (error) {
+        console.error('Ошибка загрузки:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadHotelData();
+  }, [hotelId]);
+  
+  if (loading) return (
+    <div className="text-center py-8">
+      <div className="animate-spin inline-block w-8 h-8 border-4 border-current border-t-transparent rounded-full"></div>
+    </div>
+  );
+  if (error) return <div className="text-red-500 text-center py-8">{error}</div>;
 
   return (
     <div className="min-h-screen bg-gray-50 pb-[120px]">
@@ -67,10 +75,11 @@ const HotelRoomPage = () => {
         </search>
         </div>
 
-        <div className="relative w-[72px] h-[72px] bg-base-5 rounded-full overflow-hidden">
-          <div className="inline-flex flex-col items-center gap-[3px] relative top-[18px] left-3">
-            <div className="w-6 h-6 rounded-xl bg-base-30" />
-            <div className="w-12 h-12 rounded-3xl bg-base-30" />
+        <div className="flex items-center gap-4 mt-5">
+          <h1 className="text-2xl font-bold">{hotel?.name}</h1>
+          <div className="flex items-center">
+            <span className="text-yellow-500">★</span>
+            <span className="ml-1">{hotel?.rating}</span>
           </div>
         </div>
       </header>
@@ -130,5 +139,3 @@ const HotelRoomPage = () => {
     </div>
   );
 };
-
-export default HotelRoomPage;

@@ -1,20 +1,18 @@
 -- Enable UUID extension
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
-DROP DATABASE travel_db
-
-CREATE DATABASE travel_db 
-    TEMPLATE template0 
-    ENCODING 'UTF8' 
-    LC_COLLATE 'ru_RU.UTF-8' 
-    LC_CTYPE 'ru_RU.UTF-8';
+-- CREATE DATABASE travel_db 
+--     TEMPLATE template0 
+--     ENCODING 'UTF8' 
+--     LC_COLLATE 'ru_RU.UTF-8' 
+--     LC_CTYPE 'ru_RU.UTF-8';
 
 \connect travel_db
 
 -- 1. Cities
 CREATE TABLE cities (
     city_id SERIAL PRIMARY KEY,
-    name TEXT NOT NULL COLLATE "ru_RU.UTF-8",
+    name TEXT NOT NULL,
     timezone VARCHAR(50) NOT NULL DEFAULT 'Europe/Moscow'
 );
 
@@ -132,20 +130,19 @@ CREATE TABLE audit_log (
 CREATE INDEX idx_users_email ON users(email);
 CREATE INDEX idx_train_departures ON train_bookings(departure_time);
 CREATE INDEX idx_hotel_checkins ON hotel_bookings(check_in_date);
-CREATE INDEX idx_hotel_name_ru ON hotels USING gin (name gin_trgm_ops);
 
 -- Enable PostGIS for geographic queries
-CREATE EXTENSION postgis;
+-- CREATE EXTENSION postgis;
 
 -- Add geographic coordinates to cities
-ALTER TABLE cities ADD COLUMN coordinates GEOMETRY(POINT, 4326);
-CREATE INDEX idx_cities_geo ON cities USING GIST (coordinates);
+-- ALTER TABLE cities ADD COLUMN coordinates GEOMETRY(POINT, 4326);
+-- CREATE INDEX idx_cities_geo ON cities USING GIST (coordinates);
 
 -- Sample data for testing
-INSERT INTO cities (name, coordinates) VALUES
-    ('Москва', ST_GeomFromText('POINT(55.7558 37.6176)', 4326)),
-    ('Санкт-Петербург', ST_GeomFromText('POINT(59.9343 30.3351)', 4326)),
-    ('Казань', ST_GeomFromText('POINT(55.7961 49.1064)', 4326));
+INSERT INTO cities (name) VALUES
+    ('Москва'),
+    ('Санкт-Петербург'),
+    ('Казань');
 
 INSERT INTO stations (city_id, name, code) VALUES
     (1, 'Казанский вокзал', 'МСК'),

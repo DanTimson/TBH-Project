@@ -9,7 +9,7 @@ export const searchTrains = async (departureCity, arrivalCity, date) => {
 
   try {
     console.log('Sending train search request:', params.toString());
-    const response = await fetch(`${API_BASE}/search/trains?${params}`);
+    const response = await fetch(`/search/trains?${params}`);
     
     console.log('Received response:', response.status);
     if (!response.ok) {
@@ -35,7 +35,7 @@ export const searchHotels = async (city, checkInDate) => {
   });
   try {
     console.log('Sending hotel search request:', params.toString());
-    const response = await fetch(`${API_BASE}/search/hotels?${params}`);
+    const response = await fetch(`/search/hotels?${params}`);
     
     if (!response.ok) {
       const errorData = await response.json();
