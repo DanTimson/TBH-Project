@@ -39,20 +39,11 @@ export default function InputPageExample() {
   return (
     <div className="flex flex-col min-h-screen items-center justify-center relative bg-red-5-duplicate">
       {/* Header */}
-      <header className="flex w-full h-[152px] items-center justify-center gap-5 p-5 relative bg-base-0">
-        <Button 
-            variant="ghost"
-            className="w-[52px] h-[52px] p-0"
-            onClick={() => {
-            console.log('Navigating back'); 
-            navigate(-1);
-            }}
-            text="Назад"
-        >
-        </Button>
+      <header className="flex w-full items-center justify-center gap-5 p-5 relative bg-base-0">
+        <div className="w-[72px] h-[72px]"></div>
 
-        <div className="flex items-center gap-2 px-3 py-1.5 relative self-stretch w-full bg-base-0 rounded mt-5">
-        <search className="flex flex-col items-center gap-6 w-full grow bg-base-5">
+        <div className="flex items-center gap-2 relative self-stretch w-full bg-base-0 rounded mt-5">
+        <search className="flex flex-col items-center gap-6 w-full grow bg-base-0">
           {/* Search Section */}
             <Search />
         </search>
@@ -88,11 +79,11 @@ export default function InputPageExample() {
           ))}
         </div>
 
-        {/* Gradient Overlay */}
-        <div className="bottom-gradient" />
+
       </main>
 
-
+        {/* Gradient Overlay */}
+        <div className="bottom-gradient" />
 
       {/* Footer Navigation */}
       <div className="fixed bottom-0 left-0 right-0 z-50 h-[110px]">

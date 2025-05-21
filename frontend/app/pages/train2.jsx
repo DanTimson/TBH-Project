@@ -131,7 +131,7 @@ const TrainSearchPage = () => {
   if (loading) return (
     <div className="min-h-screen bg-gray-50 pb-[110px]">
       {/* Header */}
-      <header className="flex w-full h-[140px] items-center justify-center gap-5 p-5 relative bg-base-0">
+      <header className="flex w-full items-center justify-center gap-5 p-5 relative bg-base-0">
         <Button 
             variant="ghost"
             className="w-[52px] h-[52px] p-0"
@@ -143,20 +143,11 @@ const TrainSearchPage = () => {
         >
         </Button>
 
-        <div className="flex h-16 items-center gap-2 px-3 py-1.5 relative self-stretch w-full bg-base-0 rounded overflow-hidden border border-solid border-[#8796e8] mt-5">
-          <div className="flex items-center gap-2 w-full">
-            <input
-              type="text"
-              placeholder="Поиск"
-              className="w-full px-2 py-1.5 border-none focus:outline-none bg-transparent italic"
-            />
-            <button
-              type="button"
-              className="bg-transparent hover:bg-[#8796e8] p-1 rounded"
-            >
-              <SearchIcon className="relative w-6 h-6" />
-            </button>
-          </div>
+        <div className="flex items-center gap-2 relative self-stretch w-full bg-base-0 rounded mt-5">
+        <search className="flex flex-col items-center gap-6 w-full grow bg-base-0">
+          {/* Search Section */}
+            <Search />
+        </search>
         </div>
 
         <div className="relative w-[72px] h-[72px] bg-base-5 rounded-full overflow-hidden">
@@ -169,21 +160,17 @@ const TrainSearchPage = () => {
 
       {/* Main Content */}
       <main className="flex-1 pb-[110px] overflow-y-auto w-full bg-base-5">
-      
-        <search className="flex flex-col items-center gap-6 px-32 py-8 w-full grow bg-base-5 overflow-y-auto">
-          {/* Search Section */}
-            <Search />
-        </search>
         <div className="text-center py-8 text-gray-600">
           <div className="animate-spin inline-block w-6 h-6 border-2 border-current border-t-transparent rounded-full mb-2" />
           <p>Ищем подходящие поезда...</p>
         </div>
+        
       </main>
 
-      
-      <div className="fixed bottom-0 left-0 right-0 z-50">
-        {/* Gradient Overlay */}
-        {/* <div className="bottom-gradient" /> */}
+      <div className="bottom-gradient" />
+
+      {/* Footer Navigation */}
+      <div className="fixed bottom-0 left-0 right-0 z-50 h-[110px]">
         <NavbarDesktop />
       </div>
     </div>
@@ -192,7 +179,7 @@ const TrainSearchPage = () => {
   if (error) return (
     <div className="min-h-screen bg-gray-50 pb-[110px]">
       {/* Header */}
-      <header className="flex w-full h-[140px] items-center justify-center gap-5 p-5 relative bg-base-0">
+      <header className="flex w-full items-center justify-center gap-5 p-5 relative bg-base-0">
         <Button 
             variant="ghost"
             className="w-[52px] h-[52px] p-0"
@@ -204,20 +191,11 @@ const TrainSearchPage = () => {
         >
         </Button>
 
-        <div className="flex h-16 items-center gap-2 px-3 py-1.5 relative self-stretch w-full bg-base-0 rounded overflow-hidden border border-solid border-[#8796e8] mt-5">
-          <div className="flex items-center gap-2 w-full">
-            <input
-              type="text"
-              placeholder="Поиск"
-              className="w-full px-2 py-1.5 border-none focus:outline-none bg-transparent italic"
-            />
-            <button
-              type="button"
-              className="bg-transparent hover:bg-[#8796e8] p-1 rounded"
-            >
-              <SearchIcon className="relative w-6 h-6" />
-            </button>
-          </div>
+        <div className="flex items-center gap-2 relative self-stretch w-full bg-base-0 rounded mt-5">
+        <search className="flex flex-col items-center gap-6 w-full grow bg-base-0">
+          {/* Search Section */}
+            <Search />
+        </search>
         </div>
 
         <div className="relative w-[72px] h-[72px] bg-base-5 rounded-full overflow-hidden">
@@ -230,11 +208,6 @@ const TrainSearchPage = () => {
 
       {/* Main Content */}
       <main className="flex-1 pb-[110px] overflow-y-auto w-full bg-base-5">
-      
-        <search className="flex flex-col items-center gap-6 px-32 py-8 w-full grow bg-base-5 overflow-y-auto">
-          {/* Search Section */}
-            <Search />
-        </search>
         <div className="text-center py-8 text-red-600">
           <p>Ошибка загрузки данных: {error}</p>
           <Button 
@@ -244,12 +217,14 @@ const TrainSearchPage = () => {
             Попробовать снова
           </Button>
         </div>
+
       </main>
 
-      
-      <div className="fixed bottom-0 left-0 right-0 z-50">
         {/* Gradient Overlay */}
-        {/* <div className="bottom-gradient" /> */}
+        <div className="bottom-gradient" />
+
+      {/* Footer Navigation */}
+      <div className="fixed bottom-0 left-0 right-0 z-50 h-[110px]">
         <NavbarDesktop />
       </div>
     </div>
@@ -258,7 +233,7 @@ const TrainSearchPage = () => {
   return (
     <div className="min-h-screen bg-gray-50 pb-[110px]">
       {/* Header */}
-      <header className="flex w-full h-[140px] items-center justify-center gap-5 p-5 relative bg-base-0">
+      <header className="flex w-full items-center justify-center gap-5 p-5 relative bg-base-0">
         <Button 
             variant="ghost"
             className="w-[52px] h-[52px] p-0"
@@ -270,20 +245,11 @@ const TrainSearchPage = () => {
         >
         </Button>
 
-        <div className="flex h-16 items-center gap-2 px-3 py-1.5 relative self-stretch w-full bg-base-0 rounded overflow-hidden border border-solid border-[#8796e8] mt-5">
-          <div className="flex items-center gap-2 w-full">
-            <input
-              type="text"
-              placeholder="Поиск"
-              className="w-full px-2 py-1.5 border-none focus:outline-none bg-transparent italic"
-            />
-            <button
-              type="button"
-              className="bg-transparent hover:bg-[#8796e8] p-1 rounded"
-            >
-              <SearchIcon className="relative w-6 h-6" />
-            </button>
-          </div>
+        <div className="flex items-center gap-2 relative self-stretch w-full bg-base-0 rounded mt-5">
+        <search className="flex flex-col items-center gap-6 w-full grow bg-base-0">
+          {/* Search Section */}
+            <Search />
+        </search>
         </div>
 
         <div className="relative w-[72px] h-[72px] bg-base-5 rounded-full overflow-hidden">
@@ -297,10 +263,6 @@ const TrainSearchPage = () => {
       {/* Main Content */}
       <main className="flex-1 pb-[110px] overflow-y-auto w-full bg-base-5">
       
-        <search className="flex flex-col items-center gap-6 px-32 py-8 w-full grow bg-base-5 overflow-y-auto">
-          {/* Search Section */}
-            <Search />
-        </search>
         {/* Фильтры и сортировка */}
         <div className="max-w-6xl mx-auto bg-white rounded-lg shadow-md p-4 mb-6 flex flex-wrap items-center justify-between gap-4">
           <div className="flex items-center space-x-4">
@@ -368,12 +330,14 @@ const TrainSearchPage = () => {
           
         </div>
 
+        
       </main>
 
-      
-      <div className="fixed bottom-0 left-0 right-0 z-50">
         {/* Gradient Overlay */}
-        {/* <div className="bottom-gradient" /> */}
+        <div className="bottom-gradient" />
+
+      {/* Footer Navigation */}
+      <div className="fixed bottom-0 left-0 right-0 z-50 h-[110px]">
         <NavbarDesktop />
       </div>
     </div>

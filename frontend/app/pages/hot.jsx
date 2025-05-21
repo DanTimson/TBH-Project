@@ -104,32 +104,22 @@ export default function HotelPage() {
   return (
     <div className="min-h-screen bg-gray-50 pb-[100px]">
       {/* Header */}
-      <header className="flex w-full h-[140px] items-center justify-center gap-5 p-5 relative bg-base-0">
+      <header className="flex w-full items-center justify-center gap-5 p-5 relative bg-base-0">
         <Button 
             variant="ghost"
             className="w-[52px] h-[52px] p-0"
             onClick={() => {
-            console.log('Navigating back'); 
             navigate(-1);
             }}
             text="Назад"
         >
         </Button>
 
-        <div className="flex h-16 items-center gap-2 px-3 py-1.5 relative self-stretch w-full bg-base-0 rounded overflow-hidden border border-solid border-[#8796e8] mt-5">
-          <div className="flex items-center gap-2 w-full">
-            <input
-              type="text"
-              placeholder="Поиск"
-              className="w-full px-2 py-1.5 border-none focus:outline-none bg-transparent italic"
-            />
-            <button
-              type="button"
-              className="bg-transparent hover:bg-[#8796e8] p-1 rounded"
-            >
-              <SearchIcon className="relative w-6 h-6" />
-            </button>
-          </div>
+        <div className="flex items-center gap-2 relative self-stretch w-full bg-base-0 rounded mt-5">
+        <search className="flex flex-col items-center gap-6 w-full grow bg-base-0">
+          {/* Search Section */}
+            <Search />
+        </search>
         </div>
 
         <div className="relative w-[72px] h-[72px] bg-base-5 rounded-full overflow-hidden">
@@ -143,10 +133,7 @@ export default function HotelPage() {
       {/* Main Content */}
       <main className="flex-1 pb-[110px] overflow-y-auto w-full bg-base-5">
         
-        <search className="flex flex-col items-center gap-6 px-32 py-8 w-full grow bg-base-5 overflow-y-auto">
-          {/* Search Section */}
-            <Search />
-        </search>
+        
 
         {hotels.map(hotel => (
           <div 
@@ -171,12 +158,16 @@ export default function HotelPage() {
           </div>
         ))}
         
+        
       </main>
-      <div className="fixed bottom-0 left-0 right-0 z-50">
+      
         {/* Gradient Overlay */}
-        {/* <div className="bottom-gradient" /> */}
-        <NavbarDesktop />
-      </div>
+        <div className="bottom-gradient" />
+      
+            {/* Footer Navigation */}
+          <div className="fixed bottom-0 left-0 right-0 z-50 h-[110px]">
+            <NavbarDesktop />
+          </div>
     </div>
   );
 }

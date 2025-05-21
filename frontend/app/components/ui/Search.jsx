@@ -164,7 +164,7 @@ const Search = ({
   const buttons = buttonsConfig[mode === "search" ? "search" : "skip"];
 
   return (
-    <section className="w-full max-w-screen-xl rounded-md bg-white p-5 ">
+    <section className="w-full max-w-screen-xl items-center justify-center rounded-md bg-white p-5 ">
       <div className="flex flex-col md:flex-row md:items-end gap-4 mb-4">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 flex-grow">
           {inputs.map((input, index) => (
