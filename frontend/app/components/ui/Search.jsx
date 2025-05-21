@@ -164,7 +164,7 @@ const Search = ({
   const buttons = buttonsConfig[mode === "search" ? "search" : "skip"];
 
   return (
-    <section className="w-full max-w-screen-xl rounded-md bg-white p-5 shadow-md">
+    <section className="w-full max-w-screen-xl rounded-md bg-white p-5 ">
       <div className="flex flex-col md:flex-row md:items-end gap-4 mb-4">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 flex-grow">
           {inputs.map((input, index) => (
@@ -185,7 +185,7 @@ const Search = ({
                     placeholder={`Ввести ${input.label.toLowerCase()}`}
                   />
                   {input.showDropdown && (
-                    <div className="absolute z-10 mt-1 w-full bg-white border border-gray-300 rounded-md shadow-lg max-h-60 overflow-auto">
+                    <div className="absolute z-50 mt-1 w-full bg-white border border-gray-300 rounded-md shadow-lg max-h-60 overflow-auto">
                       {input.filteredCities.map((city, idx) => (
                         <div
                           key={idx}
@@ -208,6 +208,9 @@ const Search = ({
                   minDate={input.field === 'endDate' ? searchParams.startDate : new Date()}
                   className="w-full h-12 px-4 py-2 border border-gray-300 rounded-md italic placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                   placeholderText={`Выбрать дату ${input.label.toLowerCase()}`}
+                  popperClassName="z-50" // This ensures the calendar appears above other content
+                  popperPlacement="bottom-start" // This makes it open downward
+                  showPopperArrow={false}
                 />
               )}
             </div>
