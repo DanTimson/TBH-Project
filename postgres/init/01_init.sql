@@ -37,6 +37,7 @@ CREATE TABLE cities_distances (
 -- 4. Hotels
 CREATE TABLE hotels (
     hotel_id SERIAL PRIMARY KEY,
+    city_id INTEGER REFERENCES cities(city_id),
     name TEXT NOT NULL,
     legal_address TEXT NOT NULL,
     inn VARCHAR(12) NOT NULL CHECK (inn ~ '^\d{10,12}$'),

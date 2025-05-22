@@ -1,15 +1,11 @@
 import React from "react";
 import Button from "./components/ui/Button";
-import { ChevronLeft, Search as SearchIcon, Calendar, ChevronDown } from "lucide-react";
-
+import avatar from './assets/14.jpg'
 import Search from "./components/ui/Search";
 import NewsCard from "./components/ui/NewsCard/NewsCard";
 import NewsCardContent from "./components/ui/NewsCard/NewsCardContent";
 import NavbarDesktop from "./components/ui/NavbarDesktop";
 import { useNavigate } from 'react-router-dom';
-import RadioBox from "./components/ui/RadioBox";
-import CheckBox from "./components/ui/CheckBox";
-import TextField from "./components/ui/TextField";
 
 export default function InputPageExample() {
   const navigate = useNavigate();
@@ -45,11 +41,14 @@ export default function InputPageExample() {
         </search>
         </div>
 
-        <div className="relative w-[72px] h-[72px] bg-base-5 rounded-full overflow-hidden">
-          <div className="inline-flex flex-col items-center gap-[3px] relative top-[18px] left-3">
-            <div className="w-6 h-6 rounded-xl bg-base-30" />
-            <div className="w-12 h-12 rounded-3xl bg-base-30" />
-          </div>
+        <div className="relative w-[72px] h-[72px] bg-base-5 rounded-full overflow-hidden cursor-pointer"
+         onClick={() => navigate('/user-profile')}
+        >
+          <img
+            src={avatar}
+            alt="Аватар пользователя"
+            className="w-full h-full rounded-full object-cover border-2 border-base-5"
+          />
         </div>
       </header>
 
