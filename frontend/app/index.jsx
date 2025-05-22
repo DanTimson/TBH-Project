@@ -10,30 +10,19 @@ import { useNavigate } from 'react-router-dom';
 export default function InputPageExample() {
   const navigate = useNavigate();
   const cardData = [
-    { id: 1, card_id: 1, text: "Центр содействия мобильности ОАО «РЖД»" },
-    { id: 2, card_id: 1, text: "Оформление билетов" },
-    { id: 3, card_id: 1, text: "Инструкции по оформлению билетов" },
-    { id: 4, card_id: 1, text: "Рекомендации по поездкам в турпоездах" },
-    { id: 5, card_id: 2, text: "«Жемчужина Кавказа»"},
-    { id: 6, card_id: 2, text: "«Вдоль Оки»" },
-    { id: 7, card_id: 2, text: "«Байкальская сказка»" },
-    { id: 8, card_id: 2, text: "«Гастротур»" },
-    { id: 9, card_id: 2, text: "«Жигулевские выходные»" },
-    { id: 10, card_id: 3, text: "Деловые проездные"},
-    { id: 11, card_id: 3, text: "Подарочные карты" },
-    { id: 12, card_id: 3, text: "Скидочные карты" },
-    { id: 13, card_id: 4, text: "Льгота «Скидка детям – 50%»" },
-    { id: 14, card_id: 4, text: "«Путешествуй с детьми»" },
-    { id: 15, card_id: 4, text: "«Для пассажиров 60+»"},
-    { id: 16, card_id: 4, text: "«В День рождения лучше поездом!»" },
-    { id: 17, card_id: 4, text: "«Клуб путешественников»" },
+    { id: 1, card_id: 1, text: "Деловые проездные"},
+    { id: 2, card_id: 1, text: "Подарочные карты" },
+    { id: 3, card_id: 1, text: "Скидочные карты" },
+    { id: 4, card_id: 2, text: "Льгота «Скидка детям – 50%»" },
+    { id: 5, card_id: 2, text: "«Путешествуй с детьми»" },
+    { id: 6, card_id: 2, text: "«Для пассажиров 60+»"},
+    { id: 7, card_id: 2, text: "«В День рождения лучше поездом!»" },
+    { id: 8, card_id: 2, text: "«Клуб путешественников»" },
   ];
 
   const cardHeaders = [
-    { id: 1, title: "Маломобильные пассажиры" }, 
-    { id: 2, title: "Путешествуй с РЖД" }, 
-    { id: 3, title: "Проездные и подарочные карты" }, 
-    { id: 4, title: "Акции и скидки" },
+    { id: 1, title: "Проездные и подарочные карты" }, 
+    { id: 2, title: "Акции и скидки" },
   ];
 
   return (
