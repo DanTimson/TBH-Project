@@ -10,23 +10,31 @@ import { useNavigate } from 'react-router-dom';
 export default function InputPageExample() {
   const navigate = useNavigate();
   const cardData = [
-    { id: 1, text: "Новость 1: Lorem ipsum dolor sit amet" },
-    { id: 2, text: "Новость 2: Consectetur adipiscing elit" },
-    { id: 3, text: "Новость 3: Sed do eiusmod tempor" },
-    { id: 4, text: "Новость 4: Incididunt ut labore et dolore" },
-    { id: 5, text: "Новость 5: Magna aliqua ut enim ad minim" },
-    { id: 6, text: "Новость 6: Quis nostrud exercitation" },
-    { id: 7, text: "Новость 7: Ullamco laboris nisi ut" },
-    { id: 8, text: "Новость 8: Aliquip ex ea commodo" },
+    { id: 1, card_id: 1, text: "Центр содействия мобильности ОАО «РЖД»" },
+    { id: 2, card_id: 1, text: "Оформление билетов" },
+    { id: 3, card_id: 1, text: "Инструкции по оформлению билетов" },
+    { id: 4, card_id: 1, text: "Рекомендации по поездкам в турпоездах" },
+    { id: 5, card_id: 2, text: "«Жемчужина Кавказа»"},
+    { id: 6, card_id: 2, text: "«Вдоль Оки»" },
+    { id: 7, card_id: 2, text: "«Байкальская сказка»" },
+    { id: 8, card_id: 2, text: "«Гастротур»" },
+    { id: 9, card_id: 2, text: "«Жигулевские выходные»" },
+    { id: 10, card_id: 3, text: "Деловые проездные"},
+    { id: 11, card_id: 3, text: "Подарочные карты" },
+    { id: 12, card_id: 3, text: "Скидочные карты" },
+    { id: 13, card_id: 4, text: "Льгота «Скидка детям – 50%»" },
+    { id: 14, card_id: 4, text: "«Путешествуй с детьми»" },
+    { id: 15, card_id: 4, text: "«Для пассажиров 60+»"},
+    { id: 16, card_id: 4, text: "«В День рождения лучше поездом!»" },
+    { id: 17, card_id: 4, text: "«Клуб путешественников»" },
   ];
 
   const cardHeaders = [
-    "Latest Updates", 
-    "Breaking News", 
-    "Trending Stories", 
-    "Editor's Picks",
+    { id: 1, title: "Маломобильные пассажиры" }, 
+    { id: 2, title: "Путешествуй с РЖД" }, 
+    { id: 3, title: "Проездные и подарочные карты" }, 
+    { id: 4, title: "Акции и скидки" },
   ];
-
 
   return (
     <div className="flex flex-col min-h-screen items-center justify-center relative bg-red-5-duplicate">
@@ -54,31 +62,36 @@ export default function InputPageExample() {
 
       {/* Main Content */}
       <main className="flex-1 pb-[110px] overflow-y-auto w-full bg-base-5">
-        
-
-
         {/* News Card Grid */}
         <div className="flex flex-col w-[1178px] mx-auto items-start gap-6 py-6">
           {[...Array(Math.ceil(cardHeaders.length / 2))].map((_, rowIndex) => (
             <div key={rowIndex} className="flex justify-between w-full">
-              {/* Create 2 cards, each with all news items */}
-              {[1, 2].map((cardIndex) => (
-                <NewsCard 
-                  key={cardIndex} 
-                  headerText={cardHeaders[rowIndex * 2 + cardIndex-1]}
-                  newsItems={cardData.map(item => item.text)}
-                  itemsCount={6} // Show all 6 items
-                />
-              ))}
+              {/* Create 2 cards per row */}
+              {[0, 1].map((colIndex) => {
+                const cardHeaderIndex = rowIndex * 2 + colIndex;
+                if (cardHeaderIndex >= cardHeaders.length) return null;
+                
+                const header = cardHeaders[cardHeaderIndex];
+                const filteredItems = cardData
+                  .filter(item => item.card_id === header.id)
+                  .map(item => item.text);
+                
+                return (
+                  <NewsCard 
+                    key={header.id} 
+                    headerText={header.title}
+                    newsItems={filteredItems}
+                    itemsCount={filteredItems.length}
+                  />
+                );
+              })}
             </div>
           ))}
         </div>
-
-
       </main>
 
-        {/* Gradient Overlay */}
-        <div className="bottom-gradient" />
+      {/* Gradient Overlay */}
+      <div className="bottom-gradient" />
 
       {/* Footer Navigation */}
       <div className="fixed bottom-0 left-0 right-0 z-50 h-[110px]">
