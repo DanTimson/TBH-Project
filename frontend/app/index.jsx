@@ -29,10 +29,6 @@ export default function InputPageExample() {
     "Breaking News", 
     "Trending Stories", 
     "Editor's Picks",
-    "Latest Updates", 
-    "Breaking News", 
-    "Trending Stories", 
-    "Editor's Picks"
   ];
 
 
