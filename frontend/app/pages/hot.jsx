@@ -11,7 +11,7 @@ import avatar from '../assets/14.jpg'
 const hotelsExample = [
     {
       id: 1,
-      name: "Гранд Отель",
+      name: "Best Western Zoom Hotel",
       address: "ул. Центральная, 1",
       distanceToCenter: "1 км до центра",
       roomType: "Стандартный двухместный номер",
