@@ -11,7 +11,7 @@ import avatar from '../assets/14.jpg'
 const hotelsExample = [
     {
       id: 1,
-      name: "Гранд Отель",
+      name: "Best Western Zoom Hotel",
       address: "ул. Центральная, 1",
       distanceToCenter: "1 км до центра",
       roomType: "Стандартный двухместный номер",
@@ -95,9 +95,9 @@ export default function HotelPage() {
       <p>Ошибка загрузки данных: {error}</p>
       <Button 
         className="mt-4"
+        // text = "Попробовать снова"
         onClick={() => window.location.reload()}
       >
-        Попробовать снова
       </Button>
     </div>
   );

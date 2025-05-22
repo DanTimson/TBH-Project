@@ -330,8 +330,8 @@ const TrainSearchPage = () => {
                 duration={`${Math.floor(train.duration_minutes/60)}ч ${train.duration_minutes%60}м`}
                 departureStation={train.departure_station.name}
                 arrivalStation={train.arrival_station.name}
-                departureCity={train.departure_city}
-                arrivalCity={train.arrival_city}
+                departureCity={train.departure_station.city}
+                arrivalCity={train.arrival_station.city}
                 cabinClasses={train.classes.map(c => ({
                   type: c.name,
                   seats: c.available_seats,

@@ -6,16 +6,19 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
 const cities = [
-  "New York",
-  "Los Angeles",
-  "Chicago",
-  "Houston",
-  "Phoenix",
-  "Philadelphia",
-  "San Antonio",
-  "San Diego",
-  "Dallas",
-  "San Jose"
+  "Москва",
+  "Санкт-Петербург",
+  "Нижний Новгород",
+  "Ярославль",
+  "Тула",
+  "Калуга",
+  "Рязань",
+  "Брянск",
+  "Тверь",
+  "Иваново",
+  "Владимир",
+  "Кострома",
+  "Орел"
 ];
 
 const Search = ({ 

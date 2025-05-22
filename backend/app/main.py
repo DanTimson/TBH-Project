@@ -6,7 +6,7 @@ from typing import List, Optional
 import uuid
 from datetime import datetime, date
 
-from routers import search, bookings
+from .routers import search, bookings
 
 app = FastAPI()
 app.include_router(search.router)
