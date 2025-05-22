@@ -1,11 +1,12 @@
 import { Routes, Route } from 'react-router-dom';
-import TrainPage from './pages/train1'; // твоя страница поездов
-import HotelPage from './pages/hot'; // создай этот файл
-import TrainPage2 from './pages/train2';   // и этот тоже
+import TrainPage from './pages/train1'; 
+import HotelPage from './pages/hot'; 
+import TrainPage2 from './pages/train2';   
 import InputPageExample from './index.jsx'
 import CartPage from './pages/Cart';
 import TrainDetailsPage from './pages/TrainDetails_1';
 import RoomDetailsPage from './pages/HotelRoomPage';
+import UserProfile from './pages/UserProfile';
 
 export default function App2() {
   return (
@@ -17,6 +18,7 @@ export default function App2() {
         <Route path="/cart" element={<CartPage />} />
         <Route path="/train1/:id" element={<TrainDetailsPage />} />
         <Route path="/room-details/:id" element={<RoomDetailsPage />} />
+        <Route path="/user-profile" element={<UserProfile />} />
     </Routes>
   );
 }
