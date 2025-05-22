@@ -38,11 +38,11 @@ async def search_trains(
     return [
         {
             "id": 1,
-            "train_number": "025А",
-            "carrier": "РЖД",
+            "train_number": "064*Й",
+            "carrier": "ФПК",
             "departure_station": {
                 "id": 1,
-                "name": "Казанский вокзал",
+                "name": "Восточный вокзал",
                 "city": "Москва"
             },
             "arrival_station": {
@@ -50,52 +50,52 @@ async def search_trains(
                 "name": "Московский вокзал",
                 "city": "Санкт-Петербург"
             },
-            "departure_time": "2024-12-25T23:55:00",
-            "duration_minutes": 420,
+            "departure_time": "2025-05-22T14:54:00",
+            "duration_minutes": 376,
             "classes": [
                 {
-                    "name": "Люкс",
-                    "available_seats": 4,
-                    "price": 15000.00
+                    "name": "СВ",
+                    "available_seats": 13,
+                    "price": 16219.00
                 },
                 {
                     "name": "Купе",
-                    "available_seats": 8,
-                    "price": 10000.00
+                    "available_seats": 53,
+                    "price": 4511.00
                 }
             ],
-            "train_tags": ["Фирменный", "Скоростной"]
-        },
-        {
-            "id": 1,
-            "train_number": "025А",
-            "carrier": "РЖД",
-            "departure_station": {
-                "id": 1,
-                "name": "Казанский вокзал",
-                "city": "Москва"
-            },
-            "arrival_station": {
-                "id": 2,
-                "name": "Московский вокзал",
-                "city": "Санкт-Петербург"
-            },
-            "departure_time": "2024-12-25T23:55:00",
-            "duration_minutes": 420,
-            "classes": [
-                {
-                    "name": "Люкс",
-                    "available_seats": 4,
-                    "price": 15000.00
-                },
-                {
-                    "name": "Купе",
-                    "available_seats": 8,
-                    "price": 10000.00
-                }
-            ],
-            "train_tags": ["Фирменный", "Скоростной"]
+            "train_tags": ["Фирменный", "Двухэтажный"]
         }
+        # {
+        #     "id": 2,
+        #     "train_number": "021А",
+        #     "carrier": "ФПК",
+        #     "departure_station": {
+        #         "id": 2,
+        #         "name": "Московский вокзал",
+        #         "city": "Санкт-Петербург"
+        #     },
+        #     "arrival_station": {
+        #         "id": 1,
+        #         "name": "Восточный вокзал",
+        #         "city": "Москва"
+        #     },
+        #     "departure_time": "2025-05-31T01:15:00",
+        #     "duration_minutes": 637,
+        #     "classes": [
+        #         {
+        #             "name": "Люкс",
+        #             "available_seats": 4,
+        #             "price": 10151.00
+        #         },
+        #         {
+        #             "name": "Купе",
+        #             "available_seats": 137,
+        #             "price": 2973.00
+        #         }
+        #     ],
+        #     "train_tags": ["Фирменный", "Двухэтажный"]
+        # }
     ]
 
 class HotelSearchResult(BaseModel):
