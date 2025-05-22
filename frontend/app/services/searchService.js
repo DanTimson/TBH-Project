@@ -1,53 +1,53 @@
-const API_BASE = import.meta.env.VITE_API_BASE_URL || '';
+const API_BASE = '';
+
+const handleResponse = async (response) => {
+  const contentType = response.headers.get('content-type');
+  
+  // if (!contentType?.includes('application/json')) {
+  //   const text = await response.text();
+  //   console.error('Non-JSON response:', text);
+  //   throw new Error('Некорректный ответ сервера');
+  // }
+
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(error.detail || `Ошибка ${response.status}`);
+  }
+
+  return response.json();
+};
 
 export const searchTrains = async (departureCity, arrivalCity, date) => {
   const params = new URLSearchParams({
-    departureCity,
-    arrivalCity,
+    departureCity: encodeURIComponent(departureCity),
+    arrivalCity: encodeURIComponent(arrivalCity),
     departureDate: date.toISOString().split('T')[0]
   });
 
   try {
-    console.log('Sending train search request:', params.toString());
-    const response = await fetch(`/search/trains?${params}`);
-    
-    console.log('Received response:', response.status);
-    if (!response.ok) {
-      const errorData = await response.json();
-      console.error('Search error details:', errorData);
-      throw new Error(errorData.detail || 'Ошибка поиска поездов');
-    }
-
-    const data = await response.json();
-    console.log('Received train data:', data);
-    return data;
+    const response = await fetch(`${API_BASE}/search/trains?${params}`, {
+      headers: { 'Accept': 'application/json' }
+    });
+    return await handleResponse(response);
   } catch (error) {
     console.error('Train search failed:', error);
-    throw error;
+    throw new Error(`Ошибка поиска поездов: ${error.message}`);
   }
 };
 
 export const searchHotels = async (city, checkInDate) => {
-  console.log('Searching hotels in:', city);
   const params = new URLSearchParams({
-    city,
+    city: encodeURIComponent(city),
     checkInDate: checkInDate.toISOString().split('T')[0]
   });
-  try {
-    console.log('Sending hotel search request:', params.toString());
-    const response = await fetch(`/search/hotels?${params}`);
-    
-    if (!response.ok) {
-      const errorData = await response.json();
-      console.error('Hotel search error:', errorData);
-      throw new Error(errorData.detail || 'Ошибка поиска отелей');
-    }
 
-    const data = await response.json();
-    console.log('Received hotel data:', data);
-    return data;
+  try {
+    const response = await fetch(`${API_BASE}/search/hotels?${params}`, {
+      headers: { 'Accept': 'application/json' }
+    });
+    return await handleResponse(response);
   } catch (error) {
     console.error('Hotel search failed:', error);
-    throw error;
+    throw new Error(`Ошибка поиска отелей: ${error.message}`);
   }
 };

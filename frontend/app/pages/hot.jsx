@@ -95,9 +95,9 @@ export default function HotelPage() {
       <p>Ошибка загрузки данных: {error}</p>
       <Button 
         className="mt-4"
+        // text = "Попробовать снова"
         onClick={() => window.location.reload()}
       >
-        Попробовать снова
       </Button>
     </div>
   );
