@@ -205,11 +205,14 @@ const TrainSearchPage = () => {
         </search>
         </div>
 
-        <div className="relative w-[72px] h-[72px] bg-base-5 rounded-full overflow-hidden">
-          <div className="inline-flex flex-col items-center gap-[3px] relative top-[18px] left-3">
-            <div className="w-6 h-6 rounded-xl bg-base-30" />
-            <div className="w-12 h-12 rounded-3xl bg-base-30" />
-          </div>
+        <div className="relative w-[72px] h-[72px] bg-base-5 rounded-full overflow-hidden cursor-pointer"
+          onClick={() => navigate('/user-profile')}
+        >
+          <img
+            src={avatar}
+            alt="Аватар пользователя"
+            className="w-full h-full rounded-full object-cover border-2 border-base-5"
+          />
         </div>
       </header>
 
@@ -260,11 +263,14 @@ const TrainSearchPage = () => {
         </search>
         </div>
 
-        <div className="relative w-[72px] h-[72px] bg-base-5 rounded-full overflow-hidden">
-          <div className="inline-flex flex-col items-center gap-[3px] relative top-[18px] left-3">
-            <div className="w-6 h-6 rounded-xl bg-base-30" />
-            <div className="w-12 h-12 rounded-3xl bg-base-30" />
-          </div>
+        <div className="relative w-[72px] h-[72px] bg-base-5 rounded-full overflow-hidden cursor-pointer"
+          onClick={() => navigate('/user-profile')}
+        >
+          <img
+            src={avatar}
+            alt="Аватар пользователя"
+            className="w-full h-full rounded-full object-cover border-2 border-base-5"
+          />
         </div>
       </header>
 
