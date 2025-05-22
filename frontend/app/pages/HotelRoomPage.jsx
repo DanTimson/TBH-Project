@@ -119,9 +119,9 @@ export default function HotelRoomPage() {
               </div>
               <Button
                 className="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg"
+                text="Забронировать"
                 onClick={() => console.log('Бронируем номер', room.id)}
               >
-                Забронировать
               </Button>
             </div>
           </div>
