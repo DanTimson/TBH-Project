@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ChevronLeft, CreditCard, Package, Search as SearchIcon, RotateCcw } from 'lucide-react';
+import {CreditCard, Package, Search as SearchIcon, RotateCcw } from 'lucide-react';
 import NavbarDesktop from "../components/ui/NavbarDesktop";
 import Button from "../components/ui/Button";
 import Search from "../components/ui/Search";
@@ -66,7 +66,9 @@ const CartPage = () => {
           </search>
         </div>
 
-        <div className="relative w-[72px] h-[72px] bg-base-5 rounded-full overflow-hidden">
+        <div className="relative w-[72px] h-[72px] bg-base-5 rounded-full overflow-hidden cursor-pointer"
+         onClick={() => navigate('/user-profile')}
+        >
           <img
             src={avatar}
             alt="Аватар пользователя"
