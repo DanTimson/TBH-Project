@@ -6,38 +6,59 @@ import Search from "../components/ui/Search";
 import Button from "../components/ui/Button";
 import { fetchHotelDetails } from '../services/hotelService';
 
-const amenityIcons = {
-  'Бесплатный Wi-Fi': <Wifi className="w-5 h-5" />,
-  'Телевизор': <Tv className="w-5 h-5" />,
-  'Ресторан': <Utensils className="w-5 h-5" />,
-  'Кондиционер': <Bed className="w-5 h-5" />
+const amenityTranslation = {
+  'Бесплатный Wi-Fi': 'wifi',
+  'Телевизор': 'tv',
+  'Ресторан': 'dining',
+  'Кондиционер': 'bed',
+  'Доступ для инвалидов': 'wheelchair'
 };
 
 export default function HotelRoomPage() {
   const { hotelId } = useParams();
+  const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const [hotel, setHotel] = useState(null);
   const [rooms, setRooms] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  // Get dates from URL query parameters
+  const checkInDate = searchParams.get('checkInDate');
+  const checkOutDate = searchParams.get('checkOutDate');
 
   useEffect(() => {
     const loadHotelData = async () => {
       try {
-        const data = await fetchHotelDetails(hotelId);
-        setHotel(data);
-        setRooms(data.rooms.map(room => ({
+        // Fetch hotel data using native fetch
+        const response = await fetch(`/api/hotels/${hotelId}`);
+        if (!response.ok) throw new Error('Ошибка загрузки');
+        
+        const data = await response.json();
+        
+        // Process rooms data
+        const processedRooms = data.rooms.map(room => ({
           ...room,
-          badges: [
-            { id: 1, text: "Бесплатная отмена" },
-            { id: 2, text: "Оплата на месте" }
-          ],
+          room_type_id: room.room_type_id,
+          name: room.name,
+          max_occupancy: room.max_occupancy,
+          price_per_night: room.price_per_night,
           amenities: room.amenities.map(name => ({
-            icon: amenityIcons[name] || <Clock className="w-5 h-5" />,
-            text: name
-          }))
-        })));
-      } catch (error) {
-        console.error('Ошибка загрузки:', error);
+            icon: amenityTranslation[name] || 'bed',
+            name
+          })),
+          free_cancellation: data.free_cancellation,
+          payment_options: [
+            ...(data.pay_at_hotel ? ['Оплата в отеле'] : []),
+            ...(data.free_cancellation ? ['Бесплатная отмена'] : [])
+          ]
+        }));
+
+        setHotel(data);
+        setRooms(processedRooms);
+        setError(null);
+      } catch (err) {
+        setError(err.message);
       } finally {
         setLoading(false);
       }
@@ -45,13 +66,34 @@ export default function HotelRoomPage() {
 
     loadHotelData();
   }, [hotelId]);
+
+  const handleBookRoom = (roomTypeId) => {
+    navigate(`/booking/hotel/${hotelId}`, {
+      state: {
+        roomTypeId,
+        checkInDate,
+        checkOutDate
+      }
+    });
+  };
+
   
   if (loading) return (
     <div className="text-center py-8">
       <div className="animate-spin inline-block w-8 h-8 border-4 border-current border-t-transparent rounded-full"></div>
     </div>
   );
-  if (error) return <div className="text-red-500 text-center py-8">{error}</div>;
+  if (error) return (
+    <div className="text-red-500 text-center py-8">
+      Ошибка: {error}
+      <Button 
+        className="mt-4"
+        onClick={() => window.location.reload()}
+      >
+        Попробовать снова
+      </Button>
+    </div>
+  );
 
   return (
     <div className="min-h-screen bg-gray-50 pb-[120px]">
@@ -86,47 +128,11 @@ export default function HotelRoomPage() {
 
       {/* Основной контент */}
       <main className="p-6">
-        {roomTypes.map((room) => (
-          <div key={room.id} className="bg-white rounded-lg shadow-md p-6 mb-6">
-            {/* Тип номера */}
-            <div className="mb-4">
-              <h1 className="text-xl font-bold mb-2">{room.type}</h1>
-              <p className="text-gray-600">{room.area}, {room.beds}</p>
-              
-              {/* Удобства */}
-              <div className="flex items-center mt-3 space-x-4">
-                {room.amenities.map((item, index) => (
-                  <div key={index} className="flex items-center">
-                    <span className="mr-1 text-gray-500">{item.icon}</span>
-                    <span className="text-sm">{item.text}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Условия */}
-            <div className="border-t border-gray-100 pt-4 mb-4">
-              <p className="text-sm">{room.cancellation}</p>
-              <p className="text-sm">{room.payment}</p>
-              <p className="text-sm">{room.nights}, {room.guests}</p>
-            </div>
-
-            {/* Цена и кнопка */}
-            <div className="flex justify-between items-center border-t border-gray-100 pt-4">
-              <div>
-                <p className="text-lg font-bold text-[#6D81D8]">{room.price}</p>
-                <p className="text-sm text-gray-500">за весь период</p>
-              </div>
-              <Button
-                className="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg"
-                text="Забронировать"
-                onClick={() => console.log('Бронируем номер', room.id)}
-              >
-              </Button>
-            </div>
-          </div>
-        ))}
-
+        <HotelRoomDetails 
+          rooms={rooms}
+          onBook={handleBookRoom}
+          hotelId={hotelId}
+        />
       </main>
 
         {/* Gradient Overlay */}

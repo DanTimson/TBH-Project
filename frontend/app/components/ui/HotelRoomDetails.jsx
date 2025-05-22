@@ -2,14 +2,8 @@ import React from 'react';
 import { Button } from "@/components/ui/Button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Bed, Utensils, Wheelchair, Wifi, Tv } from "lucide-react";
+import { amenityIcons } from '../utils/amenityMapping';
 
-const amenityIcons = {
-  wifi: <Wifi className="w-5 h-5" />,
-  tv: <Tv className="w-5 h-5" />,
-  wheelchair: <Wheelchair className="w-5 h-5" />,
-  dining: <Utensils className="w-5 h-5" />,
-  bed: <Bed className="w-5 h-5" />
-};
 
 const HotelRoomDetails = ({ rooms, onBook, hotelId }) => {
   const formatPrice = (price) => 
