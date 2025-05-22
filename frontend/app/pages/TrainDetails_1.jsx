@@ -79,13 +79,14 @@ const TrainDetailsPage = () => {
           <h2 className="font-semibold mb-3">Выберите вагон</h2>
           <div className="space-y-2">
             {train.wagons.map((wagon, index) => (
-              <div 
-                key={index} 
-                className="flex justify-between items-center p-3 border-b border-gray-100 last:border-0"
+              <button
+                key={index}
+                className="flex justify-between items-center w-full p-3 border-b border-gray-100 last:border-0 text-left hover:bg-gray-50"
+                onClick={() => console.log('Выбран вагон:', wagon)}
               >
                 <span className="font-medium">{wagon}</span>
                 <ChevronRight size={18} className="text-gray-400" />
-              </div>
+              </button>
             ))}
           </div>
         </div>
@@ -97,12 +98,14 @@ const TrainDetailsPage = () => {
           
           <div className="space-y-3">
             {train.seats.map((seat, index) => (
-              <div key={index} className="flex justify-between items-center p-3 border-b border-gray-100 last:border-0">
-                <div>
-                  <p className="font-medium">Место {seat.number} [{seat.class}]</p>
-                </div>
+              <button
+                key={index}
+                className="flex justify-between items-center w-full p-3 border-b border-gray-100 last:border-0 hover:bg-gray-50"
+                onClick={() => console.log('Выбрано место:', seat)}
+              >
+                <p className="font-medium">Место {seat.number} [{seat.class}]</p>
                 <p className="text-[#6D81D8] font-medium">{seat.price}</p>
-              </div>
+              </button>
             ))}
           </div>
         </div>
@@ -112,10 +115,14 @@ const TrainDetailsPage = () => {
           <h2 className="font-semibold mb-3">Вид места</h2>
           <div className="space-y-3">
             {train.seatTypes.map((type, index) => (
-              <div key={index} className="flex items-center p-3 border-b border-gray-100 last:border-0">
+              <button
+                key={index}
+                className="flex items-center w-full p-3 border-b border-gray-100 last:border-0 hover:bg-gray-50"
+                onClick={() => console.log('Тип места:', type)}
+              >
                 <div className="w-4 h-4 rounded-full border border-gray-300 mr-3"></div>
                 <p>{type}</p>
-              </div>
+              </button>
             ))}
           </div>
         </div>
@@ -123,7 +130,7 @@ const TrainDetailsPage = () => {
         {/* Кнопка продолжения */}
         <button
           className="w-full py-3 bg-green-500 hover:bg-green-600 text-white rounded-lg font-medium transition-colors"
-          onClick={() => navigate('/hotels')}
+          onClick={() => navigate('/hotel')}
           text="Продолжить"
         >
           <div className="flex items-center justify-center">
