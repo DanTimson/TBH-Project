@@ -20,19 +20,19 @@ const TrainDetailsPage = () => {
       carrier: "РЖД",
       wagons: ["01", "02", "03", "04", "05", "06"],
       seats: [
-        { number: "01", class: "00A", price: "₽5,200" },
-        { number: "02", class: "00A", price: "₽5,200" },
-        { number: "03", class: "00A", price: "₽5,200" },
-        { number: "04", class: "00A", price: "₽5,200" },
-        { number: "05", class: "00A", price: "₽5,200" },
-        { number: "06", class: "00A", price: "₽5,200" }
+        { number: "01", class: "Плацкарт", price: "₽5,200" },
+        { number: "02", class: "Плацкарт", price: "₽5,200" },
+        { number: "03", class: "Плацкарт", price: "₽5,200" },
+        { number: "04", class: "Плацкарт", price: "₽5,200" },
+        { number: "05", class: "Плацкарт", price: "₽5,200" },
+        { number: "06", class: "Плацкарт", price: "₽5,200" }
       ],
       seatTypes: [
-        "Нижнее место у окна",
-        "Верхнее место у окна",
-        "Нижнее место у прохода",
-        "Верхнее место у прохода",
-        "Место в купе"
+        "Боковое верхнее",
+        "боковое нижнее",
+        "Нижнее купе",
+        "Верхнее купе",
+        "Нижнее купе"
       ]
     };
     setTrain(mockTrain);
@@ -121,15 +121,16 @@ const TrainDetailsPage = () => {
         </div>
 
         {/* Кнопка продолжения */}
-        <Button
+        <button
           className="w-full py-3 bg-green-500 hover:bg-green-600 text-white rounded-lg font-medium transition-colors"
-          onClick={() => console.log('Продолжить')}
+          onClick={() => navigate('/hotels')}
+          text="Продолжить"
         >
           <div className="flex items-center justify-center">
             Продолжить
             <ChevronRight className="ml-2" size={18} />
           </div>
-        </Button>
+        </button>
        
       </main>
 
